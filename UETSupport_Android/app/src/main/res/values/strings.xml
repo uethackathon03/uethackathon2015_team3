@@ -8,4 +8,10 @@
     <string name="dialog_content_server_problem">Server đang tạm thời bị lỗi, bạn thử lại sau.</string>
     <string name="dialog_title_common">Thông báo</string>
     <string name="dialog_title_content_network_problem">Không có kết nối mạng</string>
+
+    <string name="login_tv_logo">UET SUPPORT</string>
+    <string name="login_edt_username_hint">Tài khoản</string>
+    <string name="login_edt_password_hint">Mật khẩu</string>
+    <string name="login_btn">Đăng nhập</string>
+    <string name="login_forgot_password">Quên mật khẩu</string>
 </resources>

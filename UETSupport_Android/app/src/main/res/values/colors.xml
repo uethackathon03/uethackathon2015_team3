@@ -6,4 +6,6 @@
     <color name="colorAccent">#FF4081</color>
     <color name="tabsScrollColor">#8a140e</color>
     <color name="button_color">#12D3FF</color>
+    <color name="bg_login">#04579b</color>
+    <color name="bg_btn_login">#0267ab</color>
 </resources>
