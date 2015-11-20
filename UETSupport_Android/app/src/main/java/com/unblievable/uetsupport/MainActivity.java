@@ -1,16 +1,38 @@
 package com.unblievable.uetsupport;
 
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v4.app.FragmentActivity;
+import android.support.v4.view.ViewPager;
 import android.view.Menu;
 import android.view.MenuItem;
 
-public class MainActivity extends AppCompatActivity {
+import com.unblievable.uetsupport.common.SlidingTabLayout;
+
+public class MainActivity extends FragmentActivity {
+    private ViewPager pagers;
+    private com.unblievable.uetsupport.adapter.PagerAdapter pagerAdapter;
+    private SlidingTabLayout tabs;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        tabs = (SlidingTabLayout) findViewById(R.id.tabs);
+        pagers = (ViewPager) findViewById(R.id.pagers);
+        pagerAdapter = new com.unblievable.uetsupport.adapter.PagerAdapter(getSupportFragmentManager(), this);
+        pagers.setAdapter(pagerAdapter);
+
+        tabs.setDistributeEvenly(true);
+        tabs.setCustomTabColorizer(new SlidingTabLayout.TabColorizer() {
+            @Override
+            public int getIndicatorColor(int position) {
+                return getResources().getColor(R.color.tabsScrollColor);
+            }
+        });
+        tabs.setCustomTabView(R.layout.custom_tab_view,R.id.tabText);
+        tabs.setViewPager(pagers);
+
     }
 
     @Override
