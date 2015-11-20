@@ -1,6 +1,57 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:orientation="vertical" android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:padding="16dp">
 
+    <RadioGroup
+        android:id="@+id/group1"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+        <RadioButton
+            android:id="@+id/btnProfList"
+            android:layout_width="0dp"
+            android:layout_height="36dp"
+            android:layout_weight="1"
+            android:button="@null"
+            android:gravity="center"
+            android:text="GIẢNG VIÊN" />
+
+        <RadioButton
+            android:id="@+id/btnOffiList"
+            android:layout_width="0dp"
+            android:layout_height="36dp"
+            android:layout_weight="1"
+            android:button="@null"
+            android:gravity="center"
+            android:text="PHÒNG BAN" />
+
+        <RadioButton
+            android:id="@+id/btnQA"
+            android:layout_width="0dp"
+            android:layout_height="36dp"
+            android:layout_weight="1"
+            android:button="@null"
+            android:gravity="center"
+            android:text="Q &amp; A" />
+    </RadioGroup>
+
+    <ListView
+        android:id="@+id/listProf"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:divider="#A4C739"
+        android:dividerHeight="0.5dp"
+        android:visibility="visible" />
+
+    <ExpandableListView
+        android:id="@+id/listQA"
+        android:layout_height="match_parent"
+        android:layout_width="match_parent"
+        android:indicatorLeft="?android:attr/expandableListPreferredItemIndicatorLeft"
+        android:divider="#A4C739"
+        android:dividerHeight="0.5dp" />
 </LinearLayout>

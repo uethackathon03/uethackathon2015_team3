@@ -6,6 +6,7 @@ package com.unblievable.uetsupport.objects;
 public class Teacher {
 
     public Long teacherId;
+    public int avatar;
 
     public String fullname;
     public String email;
@@ -15,4 +16,21 @@ public class Teacher {
 
     public String facultyName;
 
+    public Teacher(String fullname, String phone) {
+        this.fullname = fullname;
+        this.phone = phone;
+    }
+
+    public int getAvatar() {
+
+        return avatar;
+    }
+
+    public String getFullname() {
+        return fullname;
+    }
+
+    public String getPhone() {
+        return phone;
+    }
 }
