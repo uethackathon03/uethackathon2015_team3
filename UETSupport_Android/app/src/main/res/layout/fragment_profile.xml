@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:fillViewport="true"
+        >
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical"
+            >
+            <FrameLayout
+                android:layout_width="match_parent"
+                android:layout_height="200dp"
+                android:layout_gravity="bottom"
+                >
+
+                <ImageView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/cover_photo"
+                    android:background="@drawable/cover_photo2"
+                    android:scaleType="centerCrop"
+                    />
+                <ImageView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="@drawable/cover_background"
+                    />
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:padding="10dp"
+                    android:layout_gravity="bottom"
+
+                    >
+                    <com.pkmmte.view.CircularImageView
+                        android:layout_width="120dp"
+                        android:layout_height="120dp"
+                        android:src="@drawable/profile_picture1"
+                        android:id="@+id/profile_picture"
+                        app:border="false"
+                        app:border_color="#EEEEEE"
+                        app:shadow="true" />
+                    <LinearLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical"
+
+                        >
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:id="@+id/tvName"
+                            android:text="Le Vu Huy"
+                            android:textSize="40sp"
+                            android:textColor="#FFFFFF"
+                            android:paddingLeft="5dp"
+                            />
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:id="@+id/tvVNUMail"
+                            android:textColor="#FFFFFF"
+                            android:text="huylv_57@vnu.edu.vn"
+                            android:textSize="20sp"
+                            android:paddingLeft="5dp"
+                            />
+                    </LinearLayout>
+                </LinearLayout>
+            </FrameLayout>
+            <ListView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:id="@+id/profileListView"
+                >
+            </ListView>
+
+        </LinearLayout>
+    </ScrollView>
+</LinearLayout>
