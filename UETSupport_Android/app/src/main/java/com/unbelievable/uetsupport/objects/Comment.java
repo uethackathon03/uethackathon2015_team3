@@ -19,4 +19,15 @@ public class Comment {
 
     public int avatar;
     public String userName;
+
+    public Comment(long commentId, String content, Integer like, Integer dislike, Date createdTime, Date modifiedTime, int avatar, String userName) {
+        this.commentId = commentId;
+        this.content = content;
+        this.like = like;
+        this.dislike = dislike;
+        this.createdTime = createdTime;
+        this.modifiedTime = modifiedTime;
+        this.avatar = avatar;
+        this.userName = userName;
+    }
 }
