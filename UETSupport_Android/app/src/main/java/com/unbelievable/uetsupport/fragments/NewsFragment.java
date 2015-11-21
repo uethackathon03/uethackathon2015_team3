@@ -1,7 +1,6 @@
 package com.unbelievable.uetsupport.fragments;
 
 import android.app.ProgressDialog;
-import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
@@ -12,9 +11,8 @@ import android.widget.Button;
 import android.widget.ListView;
 
 import com.loopj.android.http.TextHttpResponseHandler;
-import com.unbelievable.uetsupport.MainActivity;
 import com.unbelievable.uetsupport.R;
-import com.unbelievable.uetsupport.adapter.AnnouceAdapter;
+import com.unbelievable.uetsupport.adapter.RecuitmentAdapter;
 import com.unbelievable.uetsupport.adapter.NewsAdapter;
 import com.unbelievable.uetsupport.common.CommonUtils;
 import com.unbelievable.uetsupport.common.UETSupportUtils;
@@ -38,10 +36,10 @@ public class NewsFragment extends Fragment implements View.OnClickListener {
     ArrayList<News> newsArrayList;
     ArrayList<News> annouceArrayList;
     NewsAdapter newsArrayAdapter;
-    AnnouceAdapter annouceAdapter;
+    RecuitmentAdapter recuitmentAdapter;
 
     Button btNewsSwitch;
-    Button btAnnouceSwitch;
+    Button btRecuitmentSwitch;
 
     public NewsFragment() {
         /*
@@ -65,15 +63,15 @@ public class NewsFragment extends Fragment implements View.OnClickListener {
         newsArrayList = new ArrayList<>();
         newsListView = (ListView) v.findViewById(R.id.newslist);
         newsArrayAdapter = new NewsAdapter(getActivity(), newsArrayList);
-        annouceAdapter = new AnnouceAdapter(getActivity(), annouceArrayList);
+        recuitmentAdapter = new RecuitmentAdapter(getActivity(), annouceArrayList);
         newsListView.setAdapter(newsArrayAdapter);
         News news = new News();
         newsArrayList.add(news);
 
         btNewsSwitch =(Button) v.findViewById(R.id.btNewsSwitch);
-        btAnnouceSwitch = (Button)v.findViewById(R.id.btAnnouceSwitch);
+        btRecuitmentSwitch = (Button)v.findViewById(R.id.btAnnouceSwitch);
         btNewsSwitch.setOnClickListener(this);
-        btAnnouceSwitch.setOnClickListener(this);
+        btRecuitmentSwitch.setOnClickListener(this);
         parseNewsFromServer();
         return v;
     }
@@ -85,11 +83,11 @@ public class NewsFragment extends Fragment implements View.OnClickListener {
                 newsListView.setAdapter(newsArrayAdapter);
                 break;
             case R.id.btAnnouceSwitch:
-                newsListView.setAdapter(annouceAdapter);
+                newsListView.setAdapter(recuitmentAdapter);
                 break;
         }
     }
-
+    //TODO
     private void parseNewsFromServer() {
         if(!UETSupportUtils.networkConnected(getActivity())) {
             return;

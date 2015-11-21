@@ -1,5 +1,6 @@
 package com.unbelievable.uetsupport.fragments;
 
+import android.app.ProgressDialog;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
@@ -11,14 +12,26 @@ import android.widget.ExpandableListView;
 import android.widget.ListView;
 import android.widget.RadioButton;
 
+import com.loopj.android.http.TextHttpResponseHandler;
 import com.unbelievable.uetsupport.R;
 import com.unbelievable.uetsupport.adapter.ListProfAdapter;
+import com.unbelievable.uetsupport.common.CommonUtils;
+import com.unbelievable.uetsupport.common.UETSupportUtils;
+import com.unbelievable.uetsupport.objects.News;
 import com.unbelievable.uetsupport.objects.Office;
+import com.unbelievable.uetsupport.objects.QuestionAnswer;
 import com.unbelievable.uetsupport.objects.Teacher;
+import com.unbelievable.uetsupport.service.CustomAsyncHttpClient;
+import com.unbelievable.uetsupport.service.Service;
+
+import org.json.JSONArray;
+import org.json.JSONObject;
 
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
+
+import cz.msebera.android.httpclient.Header;
 
 /**
  * Created by Nam on 11/20/2015.
@@ -29,6 +42,7 @@ public class HelpFragment extends Fragment implements View.OnClickListener{
     ListProfAdapter profAdapter;
     ArrayList<Teacher> profs;
     ArrayList<Office> offs;
+
     ExpandableListAdapter listAdapter;
     ExpandableListView expListView;
     List<String> listDataHeader;
@@ -117,4 +131,68 @@ public class HelpFragment extends Fragment implements View.OnClickListener{
             listQA.setVisibility(View.VISIBLE);
         }
     }
+
+
+//    //TODO
+//    private void parseNewsFromServer() {
+//        if(!UETSupportUtils.networkConnected(getActivity())) {
+//            return;
+//        }
+//
+//        CustomAsyncHttpClient client = new CustomAsyncHttpClient(getActivity(), "");
+//        String url = Service.ServerURL + "/data/question-answers";
+//        client.get(url, new TextHttpResponseHandler() {
+//            private ProgressDialog progressBar;
+//
+//            @Override
+//            public void onStart() {
+//                super.onStart();
+//                try {
+//                    progressBar = new ProgressDialog(getActivity());
+//                    progressBar.setCancelable(true);
+//                    progressBar.setMessage("Loading ...");
+//                    progressBar.setProgressStyle(ProgressDialog.STYLE_SPINNER);
+//                    progressBar.show();
+//                } catch (Exception e) {
+//                    e.printStackTrace();
+//                }
+//            }
+//
+//            @Override
+//            public void onSuccess(int statusCode, Header[] headers, String responseString) {
+//                if (statusCode == 200) {
+//                    try {
+//                        JSONObject jObject = new JSONObject(responseString);
+//                        String success = CommonUtils.getValidString(jObject.getString("success"));
+//                        if ("1".equals(success)) {
+//                            JSONArray jarrData = new JSONArray(jObject.getString("data"));
+//                            for (int i = 0; i < jarrData.length(); i++) {
+//                                QuestionAnswer questionAnswer = QuestionAnswer.getQuestionAnswer(jarrData.getJSONObject(i));
+//                                newsArrayList.add(news);
+//                            }
+//
+//                        } else {
+//                            String message = CommonUtils.getValidString(jObject.getString("message"));
+//                            CommonUtils.showOkDialog(getActivity(), getResources().getString(R.string.dialog_title_common), message, null);
+//                        }
+//                    } catch (Exception e) {
+//                        CommonUtils.showOkDialog(getActivity(), getResources().getString(R.string.dialog_title_common), e.getMessage(), null);
+//                    }
+//                }
+//            }
+//
+//            @Override
+//            public void onFailure(int statusCode, Header[] headers, String responseString, Throwable throwable) {
+//                CommonUtils.showOkDialog(getActivity(), getResources().getString(R.string.dialog_title_common), statusCode + "\n" + responseString, null);
+//            }
+//
+//            @Override
+//            public void onFinish() {
+//                super.onFinish();
+//                newsArrayAdapter.notifyDataSetChanged();
+//                progressBar.dismiss();
+//            }
+//        });
+//
+//    }
 }
