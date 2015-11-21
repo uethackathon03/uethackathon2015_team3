@@ -20,9 +20,9 @@ import java.util.List;
 public class ExpandableListAdapter extends BaseExpandableListAdapter {
     private Activity activity;
     private List<String> listQuestion;
-    private HashMap<String,List<String>> listAnswer;
+    private List<String> listAnswer;
 
-    public ExpandableListAdapter(Activity activity, List<String> listQuestion, HashMap<String, List<String>> listAnswer) {
+    public ExpandableListAdapter(Activity activity, List<String> listQuestion,  List<String> listAnswer) {
         this.activity = activity;
         this.listQuestion = listQuestion;
         this.listAnswer = listAnswer;
@@ -30,7 +30,7 @@ public class ExpandableListAdapter extends BaseExpandableListAdapter {
 
     @Override
     public Object getChild(int groupPosition, int childPosition) {
-        return this.listAnswer.get(this.listQuestion.get(groupPosition)).get(childPosition);
+        return this.listAnswer.get(groupPosition);
     }
 
     @Override
@@ -52,7 +52,7 @@ public class ExpandableListAdapter extends BaseExpandableListAdapter {
 
     @Override
     public int getChildrenCount(int groupPosition) {
-        return this.listAnswer.get(this.listQuestion.get(groupPosition)).size();
+        return 1;
     }
 
     @Override
