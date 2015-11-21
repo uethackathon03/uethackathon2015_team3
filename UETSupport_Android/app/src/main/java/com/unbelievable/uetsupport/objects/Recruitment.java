@@ -10,22 +10,33 @@ import org.json.JSONObject;
 public class Recruitment {
     public String title;
     public String content;
-    public String logo;
+    public int logo;
+    public String jobType;
+    public int quantity;
+    public String salary;
     public String createdTime;
 
-    public Recruitment() {}
-
-    public static Recruitment getNews(JSONObject jData) {
-        try {
-            Recruitment recruitment = new Recruitment();
-            recruitment.title = CommonUtils.getValidString(jData.getString("title"));
-            recruitment.content = CommonUtils.getValidString(jData.getString("content"));
-            recruitment.logo = CommonUtils.getValidString(jData.getString("photo"));
-            recruitment.createdTime = CommonUtils.getValidString(jData.getString("createdTime"));
-            return recruitment;
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-        return null;
+    public Recruitment(String title, int logo, String jobType, int quantity, String salary) {
+        this.title = title;
+//        this.content = content;
+        this.logo = logo;
+        this.jobType = jobType;
+        this.quantity = quantity;
+        this.salary = salary;
+//        this.createdTime = createdTime;
     }
+
+    //    public static Recruitment getNews(JSONObject jData) {
+//        try {
+//            Recruitment recruitment = new Recruitment();
+//            recruitment.title = CommonUtils.getValidString(jData.getString("title"));
+//            recruitment.content = CommonUtils.getValidString(jData.getString("content"));
+//            recruitment.logo = CommonUtils.getValidString(jData.getString("photo"));
+//            recruitment.createdTime = CommonUtils.getValidString(jData.getString("createdTime"));
+//            return recruitment;
+//        } catch (Exception e) {
+//            e.printStackTrace();
+//        }
+//        return null;
+//    }
 }

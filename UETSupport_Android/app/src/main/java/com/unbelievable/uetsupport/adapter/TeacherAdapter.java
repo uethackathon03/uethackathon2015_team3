@@ -16,7 +16,7 @@ import java.util.ArrayList;
 /**
  * Created by Nam on 11/21/2015.
  */
-public class ListProfAdapter extends BaseAdapter {
+public class TeacherAdapter extends BaseAdapter {
     final int PROF_MODE = 0;
     final int OFFICE_MODE = 1;
     private Activity activity;
@@ -30,7 +30,7 @@ public class ListProfAdapter extends BaseAdapter {
     TextView tvPhone;
 
 
-    public ListProfAdapter(Activity activity, ArrayList<Teacher> p, ArrayList<Office> o, int mode) {
+    public TeacherAdapter(Activity activity, ArrayList<Teacher> p, ArrayList<Office> o, int mode) {
         this.activity = activity;
         this.p = p;
         this.o = o;

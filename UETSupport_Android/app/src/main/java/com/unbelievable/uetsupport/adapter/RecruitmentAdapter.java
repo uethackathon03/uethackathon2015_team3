@@ -33,7 +33,9 @@ public class RecruitmentAdapter extends ArrayAdapter<Recruitment> {
     ArrayList<Recruitment> recruitmentArrayList;
     private DisplayImageOptions option;
     private CardView card_view;
-    private TextView tvContent;
+    TextView tvRecruitmentJobType;
+    TextView tvRecruitmentQuantity;
+    TextView tvRecruitmentSalary;
 
     public RecruitmentAdapter(Context context, ArrayList<Recruitment> recruitments) {
         super(context,-1,recruitments);
@@ -52,31 +54,35 @@ public class RecruitmentAdapter extends ArrayAdapter<Recruitment> {
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
         LayoutInflater inflater = (LayoutInflater)context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-        View rowView = inflater.inflate(R.layout.list_news_item,parent,false);
-        ImageView ivNews = (ImageView)rowView.findViewById(R.id.imNews);
-        TextView tvNews = (TextView) rowView.findViewById(R.id.tvNews);
-        LinearLayout pageView = (LinearLayout)rowView.findViewById(R.id.pageView);
+        View rowView = inflater.inflate(R.layout.list_recruiment_item,parent,false);
+        ImageView ivNews = (ImageView)rowView.findViewById(R.id.imgCompanyLogo);
+        TextView tvNews = (TextView) rowView.findViewById(R.id.tvRecruitmentTitle);
+//        LinearLayout pageView = (LinearLayout)rowView.findViewById(R.id.pageView);
         card_view = (CardView) rowView.findViewById(R.id.card_view);
-        tvContent = (TextView) rowView.findViewById(R.id.tvContent);
+        tvRecruitmentJobType = (TextView) rowView.findViewById(R.id.tvRecruitmentJobType);
+        tvRecruitmentQuantity = (TextView) rowView.findViewById(R.id.tvRecruitmentQuantity);
+        tvRecruitmentSalary = (TextView) rowView.findViewById(R.id.tvRecruitmentSalary);
 
-        if (position == 0) {
-            card_view.setVisibility(View.GONE);
-            sliderLayoutBanner = new SliderLayout(getContext());
-            pageView.setVisibility(View.VISIBLE);
-            pageView.addView(sliderLayoutBanner);
-            ivNews.setVisibility(View.GONE);
-            tvNews.setVisibility(View.GONE);
-            tvContent.setVisibility(View.GONE);
-            setSliderLayoutBanner();
-        } else {
+//        if (position == 0) {
+//            card_view.setVisibility(View.GONE);
+//            sliderLayoutBanner = new SliderLayout(getContext());
+//            pageView.setVisibility(View.VISIBLE);
+//            pageView.addView(sliderLayoutBanner);
+//            ivNews.setVisibility(View.GONE);
+//            tvNews.setVisibility(View.GONE);
+//            setSliderLayoutBanner();
+//        } else {
             tvNews.setText(recruitmentArrayList.get(position).title);
-            tvContent.setText(recruitmentArrayList.get(position).content);
-            try {
-                ImageLoader.getInstance().displayImage(recruitmentArrayList.get(position).logo, ivNews, option);
-            } catch (Exception e) {
-                e.printStackTrace();
-            }
-        }
+            ivNews.setImageResource(recruitmentArrayList.get(position).logo);
+            tvRecruitmentJobType.setText("Công việc: " + recruitmentArrayList.get(position).jobType);
+            tvRecruitmentQuantity.setText("Số lượng: " + recruitmentArrayList.get(position).quantity);
+            tvRecruitmentSalary.setText("Lương khởi điểm" + recruitmentArrayList.get(position).salary);
+//            try {
+//                ImageLoader.getInstance().displayImage(recruitmentArrayList.get(position).logo, ivNews, option);
+//            } catch (Exception e) {
+//                e.printStackTrace();
+//            }
+//        }
 
         return rowView;
     }

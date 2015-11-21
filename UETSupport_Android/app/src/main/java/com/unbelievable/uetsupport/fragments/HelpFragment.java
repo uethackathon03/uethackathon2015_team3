@@ -1,6 +1,5 @@
 package com.unbelievable.uetsupport.fragments;
 
-import android.app.ProgressDialog;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
@@ -12,26 +11,14 @@ import android.widget.ExpandableListView;
 import android.widget.ListView;
 import android.widget.RadioButton;
 
-import com.loopj.android.http.TextHttpResponseHandler;
 import com.unbelievable.uetsupport.R;
-import com.unbelievable.uetsupport.adapter.ListProfAdapter;
-import com.unbelievable.uetsupport.common.CommonUtils;
-import com.unbelievable.uetsupport.common.UETSupportUtils;
-import com.unbelievable.uetsupport.objects.News;
+import com.unbelievable.uetsupport.adapter.TeacherAdapter;
 import com.unbelievable.uetsupport.objects.Office;
-import com.unbelievable.uetsupport.objects.QuestionAnswer;
 import com.unbelievable.uetsupport.objects.Teacher;
-import com.unbelievable.uetsupport.service.CustomAsyncHttpClient;
-import com.unbelievable.uetsupport.service.Service;
-
-import org.json.JSONArray;
-import org.json.JSONObject;
 
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
-
-import cz.msebera.android.httpclient.Header;
 
 /**
  * Created by Nam on 11/20/2015.
@@ -39,7 +26,7 @@ import cz.msebera.android.httpclient.Header;
 public class HelpFragment extends Fragment implements View.OnClickListener{
     RadioButton btnProf,btnOff,btnQA;
     ListView listProf,listQA;
-    ListProfAdapter profAdapter;
+    TeacherAdapter profAdapter;
     ArrayList<Teacher> profs;
     ArrayList<Office> offs;
 
@@ -72,7 +59,7 @@ public class HelpFragment extends Fragment implements View.OnClickListener{
             profs.add( new Teacher("Mr.X","0138573730"));
             offs.add(new Office("Văn phòng khoa X","1638914729"));
         }
-        profAdapter = new ListProfAdapter(getActivity(),profs,offs,0);
+        profAdapter = new TeacherAdapter(getActivity(),profs,offs,0);
         listProf.setAdapter(profAdapter);
         return v;
     }
@@ -119,12 +106,12 @@ public class HelpFragment extends Fragment implements View.OnClickListener{
         if (v == btnProf){
             listProf.setVisibility(View.VISIBLE);
             listQA.setVisibility(View.GONE);
-            profAdapter = new ListProfAdapter(getActivity(),profs,offs,0);
+            profAdapter = new TeacherAdapter(getActivity(),profs,offs,0);
             listProf.setAdapter(profAdapter);
         }if (v == btnOff){
             listProf.setVisibility(View.VISIBLE);
             listQA.setVisibility(View.GONE);
-            profAdapter = new ListProfAdapter(getActivity(),profs,offs,1);
+            profAdapter = new TeacherAdapter(getActivity(),profs,offs,1);
             listProf.setAdapter(profAdapter);
         }if (v == btnQA){
             listProf.setVisibility(View.GONE);

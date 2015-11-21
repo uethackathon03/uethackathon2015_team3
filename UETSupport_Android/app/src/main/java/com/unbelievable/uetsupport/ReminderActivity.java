@@ -111,7 +111,7 @@ public class ReminderActivity extends AppCompatActivity implements AdapterView.O
     @Override
     public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
         Reminder reminder = reminderArrayList.get(position);
-        ReminderDialog dialog = new ReminderDialog(this.getParent(),reminder);
+        ReminderDialog dialog = new ReminderDialog(ReminderActivity.this,reminder);
         dialog.show();
     }
 }

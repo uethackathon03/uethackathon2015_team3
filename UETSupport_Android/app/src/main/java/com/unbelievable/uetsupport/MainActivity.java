@@ -18,7 +18,6 @@ public class MainActivity extends FragmentActivity {
     private ViewPager pagers;
     private com.unbelievable.uetsupport.adapter.PagerAdapter pagerAdapter;
     private SlidingTabLayout tabs;
-    public ArrayList<Recruitment> recruitmentArrayList;
     public ArrayList<News> newsArrayList;
 
     @Override
@@ -31,7 +30,6 @@ public class MainActivity extends FragmentActivity {
         pagerAdapter = new com.unbelievable.uetsupport.adapter.PagerAdapter(getSupportFragmentManager(), this);
         pagers.setAdapter(pagerAdapter);
         newsArrayList = new ArrayList<>();
-        recruitmentArrayList = new ArrayList<>();
         tabs.setDistributeEvenly(true);
         tabs.setCustomTabColorizer(new SlidingTabLayout.TabColorizer() {
             @Override

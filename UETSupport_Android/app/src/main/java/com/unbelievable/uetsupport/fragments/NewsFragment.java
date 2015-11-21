@@ -18,6 +18,7 @@ import com.unbelievable.uetsupport.adapter.NewsAdapter;
 import com.unbelievable.uetsupport.common.CommonUtils;
 import com.unbelievable.uetsupport.common.UETSupportUtils;
 import com.unbelievable.uetsupport.objects.News;
+import com.unbelievable.uetsupport.objects.Recruitment;
 import com.unbelievable.uetsupport.service.CustomAsyncHttpClient;
 import com.unbelievable.uetsupport.service.Service;
 
@@ -34,7 +35,7 @@ import cz.msebera.android.httpclient.Header;
 public class NewsFragment extends Fragment implements View.OnClickListener {
 
     private ListView newsListView;
-    private ArrayList<News> annouceArrayList;
+    private ArrayList<Recruitment> recruitmentArrayList;
     private NewsAdapter newsArrayAdapter;
     private RecruitmentAdapter recruitmentAdapter;
     private MainActivity mainActivity;
@@ -49,7 +50,8 @@ public class NewsFragment extends Fragment implements View.OnClickListener {
         mainActivity = (MainActivity) getActivity();
         newsListView = (ListView) v.findViewById(R.id.newslist);
         newsArrayAdapter = new NewsAdapter(getActivity(), mainActivity.newsArrayList);
-        recruitmentAdapter = new RecruitmentAdapter(getActivity(), mainActivity.recruitmentArrayList);
+        fakeRecruitmentList();
+        recruitmentAdapter = new RecruitmentAdapter(getActivity(),recruitmentArrayList );
         newsListView.setAdapter(newsArrayAdapter);
 
 
@@ -64,6 +66,16 @@ public class NewsFragment extends Fragment implements View.OnClickListener {
         }
 
         return v;
+    }
+
+    public void fakeRecruitmentList(){
+        recruitmentArrayList = new ArrayList<>();
+        Recruitment recruitment = new Recruitment("Công ty haivl tuyển sinh viên thực tập",R.mipmap.logo_uet,"Thực tập",10,"Không lương");
+        recruitmentArrayList.add(recruitment);
+        recruitment = new Recruitment("Công ty blah blah tuyển nhân viên",R.mipmap.logo_uet,"Web Developer",10,"5-7 triêu/tháng");
+        recruitmentArrayList.add(recruitment);
+        recruitment = new Recruitment("Công ty haivl tuyển nhân viên",R.mipmap.user,"Phá hoại",10,"50k/ngày");
+        recruitmentArrayList.add(recruitment);
     }
 
     @Override
