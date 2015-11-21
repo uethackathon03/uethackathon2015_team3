@@ -1,5 +1,6 @@
 package com.unbelievable.uetsupport.fragments;
 
+import android.app.Dialog;
 import android.app.ProgressDialog;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
@@ -7,10 +8,16 @@ import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.ListView;
+import android.widget.TextView;
 
 import com.loopj.android.http.TextHttpResponseHandler;
+import com.nostra13.universalimageloader.core.DisplayImageOptions;
+import com.nostra13.universalimageloader.core.ImageLoader;
+import com.nostra13.universalimageloader.core.assist.ImageScaleType;
 import com.unbelievable.uetsupport.MainActivity;
 import com.unbelievable.uetsupport.R;
 import com.unbelievable.uetsupport.adapter.RecruitmentAdapter;
@@ -51,12 +58,11 @@ public class NewsFragment extends Fragment implements View.OnClickListener {
         newsListView = (ListView) v.findViewById(R.id.newslist);
         newsArrayAdapter = new NewsAdapter(getActivity(), mainActivity.newsArrayList);
         fakeRecruitmentList();
-        recruitmentAdapter = new RecruitmentAdapter(getActivity(),recruitmentArrayList );
+        recruitmentAdapter = new RecruitmentAdapter(getActivity(), recruitmentArrayList);
         newsListView.setAdapter(newsArrayAdapter);
 
-
-        btNewsSwitch =(Button) v.findViewById(R.id.btNewsSwitch);
-        btRecruitmentSwitch = (Button)v.findViewById(R.id.btAnnouceSwitch);
+        btNewsSwitch = (Button) v.findViewById(R.id.btNewsSwitch);
+        btRecruitmentSwitch = (Button) v.findViewById(R.id.btAnnouceSwitch);
         btNewsSwitch.setOnClickListener(this);
         btRecruitmentSwitch.setOnClickListener(this);
         if (mainActivity.newsArrayList.size() == 0) {
@@ -64,17 +70,18 @@ public class NewsFragment extends Fragment implements View.OnClickListener {
             mainActivity.newsArrayList.add(news);
             parseNewsFromServer();
         }
+        newsListView.setOnItemClickListener(new NewsOnItemClickListener());
 
         return v;
     }
 
-    public void fakeRecruitmentList(){
+    public void fakeRecruitmentList() {
         recruitmentArrayList = new ArrayList<>();
-        Recruitment recruitment = new Recruitment("Công ty haivl tuyển sinh viên thực tập",R.mipmap.logo_uet,"Thực tập",10,"Không lương");
+        Recruitment recruitment = new Recruitment("Công ty haivl tuyển sinh viên thực tập", R.mipmap.logo_uet, "Thực tập", 10, "Không lương");
         recruitmentArrayList.add(recruitment);
-        recruitment = new Recruitment("Công ty blah blah tuyển nhân viên",R.mipmap.logo_uet,"Web Developer",10,"5-7 triêu/tháng");
+        recruitment = new Recruitment("Công ty blah blah tuyển nhân viên", R.mipmap.logo_uet, "Web Developer", 10, "5-7 triêu/tháng");
         recruitmentArrayList.add(recruitment);
-        recruitment = new Recruitment("Công ty haivl tuyển nhân viên",R.mipmap.user,"Phá hoại",10,"50k/ngày");
+        recruitment = new Recruitment("Công ty haivl tuyển nhân viên", R.mipmap.user, "Phá hoại", 10, "50k/ngày");
         recruitmentArrayList.add(recruitment);
     }
 
@@ -89,9 +96,9 @@ public class NewsFragment extends Fragment implements View.OnClickListener {
                 break;
         }
     }
-    //TODO
+
     private void parseNewsFromServer() {
-        if(!UETSupportUtils.networkConnected(getActivity())) {
+        if (!UETSupportUtils.networkConnected(getActivity())) {
             return;
         }
 
@@ -150,5 +157,34 @@ public class NewsFragment extends Fragment implements View.OnClickListener {
             }
         });
 
+    }
+
+    private class NewsOnItemClickListener implements AdapterView.OnItemClickListener {
+        private DisplayImageOptions option;
+
+        @Override
+        public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+            if (position == 0) {
+                view.setEnabled(false);
+            }
+            option = new DisplayImageOptions.Builder()
+                    .showImageForEmptyUri(R.mipmap.ic_launcher)
+                    .showImageOnFail(R.mipmap.ic_launcher)
+                    .showImageOnLoading(R.mipmap.ic_launcher)
+                    .imageScaleType(ImageScaleType.IN_SAMPLE_POWER_OF_2)
+                    .cacheInMemory(true).cacheOnDisk(true).build();
+            Dialog dialog = new Dialog(getActivity());
+            dialog.setContentView(R.layout.news_dialog);
+            dialog.setTitle(mainActivity.newsArrayList.get(position).title);
+            ImageView imvDialogPhoto = (ImageView) dialog.findViewById(R.id.imvDialogPhoto);
+            TextView tvDialogContent = (TextView) dialog.findViewById(R.id.tvDialogContent);
+            try {
+                ImageLoader.getInstance().displayImage(mainActivity.newsArrayList.get(position).photo, imvDialogPhoto, option);
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+            tvDialogContent.setText(mainActivity.newsArrayList.get(position).content);
+            dialog.show();
+        }
     }
 }

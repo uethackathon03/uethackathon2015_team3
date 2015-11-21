@@ -1,7 +1,9 @@
 package com.unbelievable.uetsupport.fragments;
 
+import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
+import android.content.IntentFilter;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
@@ -14,11 +16,15 @@ import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
 
+import com.nostra13.universalimageloader.core.DisplayImageOptions;
+import com.nostra13.universalimageloader.core.ImageLoader;
+import com.nostra13.universalimageloader.core.assist.ImageScaleType;
 import com.pkmmte.view.CircularImageView;
 import com.unbelievable.uetsupport.MainActivity;
 import com.unbelievable.uetsupport.R;
 import com.unbelievable.uetsupport.ReminderActivity;
 import com.unbelievable.uetsupport.ScheduleActivity;
+import com.unbelievable.uetsupport.common.Constant;
 
 import java.util.ArrayList;
 
@@ -27,13 +33,14 @@ import java.util.ArrayList;
  */
 public class ProfileFragment extends Fragment implements AdapterView.OnItemClickListener{
 
-    CircularImageView profilePicture;
-    ImageView coverPhoto;
-    TextView tvName;
-    TextView tvVNUMail;
-    ListView profileListView;
-    ArrayList<String> profileArrayList;
-    ProfileAdapter profileAdapter;
+    private CircularImageView profilePicture;
+    private ImageView coverPhoto;
+    private TextView tvName;
+    private TextView tvVNUMail;
+    private ListView profileListView;
+    private ArrayList<String> profileArrayList;
+    private ProfileAdapter profileAdapter;
+    private DisplayImageOptions option;
 
     public ProfileFragment(){
 
@@ -59,7 +66,37 @@ public class ProfileFragment extends Fragment implements AdapterView.OnItemClick
         profileAdapter = new ProfileAdapter(getContext(),profileArrayList);
         profileListView.setAdapter(profileAdapter);
         profileListView.setOnItemClickListener(this);
+
+        option = new DisplayImageOptions.Builder()
+                .showImageForEmptyUri(R.drawable.cover_photo2)
+                .showImageOnFail(R.drawable.cover_photo2)
+                .showImageOnLoading(R.drawable.cover_photo2)
+                .imageScaleType(ImageScaleType.IN_SAMPLE_POWER_OF_2)
+                .cacheInMemory(true).cacheOnDisk(true).build();
+
+        IntentFilter filter = new IntentFilter("restart");
+        BroadcastReceiver broadcastReceiver = new BroadcastReceiver() {
+
+            @Override
+            public void onReceive(Context context, Intent intent) {
+                onResume();
+            }
+        };
+        getActivity().registerReceiver(broadcastReceiver, filter);
         return v;
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        tvName.setText(getActivity().getSharedPreferences(Constant.nameSharedPreferences, Context.MODE_PRIVATE).getString(Constant.fullname, "Anonymous"));
+        tvVNUMail.setText(getActivity().getSharedPreferences(Constant.nameSharedPreferences, Context.MODE_PRIVATE).getString(Constant.email, ""));
+        try {
+            ImageLoader.getInstance().displayImage(getActivity().getSharedPreferences(Constant.nameSharedPreferences, Context.MODE_PRIVATE).getString(Constant.photo, ""), coverPhoto, option);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
     }
 
     @Override
