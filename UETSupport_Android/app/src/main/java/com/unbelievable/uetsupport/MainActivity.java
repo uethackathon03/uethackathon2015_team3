@@ -6,6 +6,8 @@ import android.support.v4.view.ViewPager;
 import android.view.Menu;
 import android.view.MenuItem;
 
+import com.nostra13.universalimageloader.core.ImageLoader;
+import com.nostra13.universalimageloader.core.ImageLoaderConfiguration;
 import com.unbelievable.uetsupport.common.SlidingTabLayout;
 
 public class MainActivity extends FragmentActivity {
@@ -13,11 +15,10 @@ public class MainActivity extends FragmentActivity {
     private com.unbelievable.uetsupport.adapter.PagerAdapter pagerAdapter;
     private SlidingTabLayout tabs;
 
-
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        ImageLoader.getInstance().init(ImageLoaderConfiguration.createDefault(this));
         setContentView(R.layout.activity_main);
         tabs = (SlidingTabLayout) findViewById(R.id.tabs);
         pagers = (ViewPager) findViewById(R.id.pagers);
@@ -31,7 +32,7 @@ public class MainActivity extends FragmentActivity {
                 return getResources().getColor(R.color.tabsScrollColor);
             }
         });
-        tabs.setCustomTabView(R.layout.custom_tab_view, R.id.tabText);
+        tabs.setCustomTabView(R.layout.custom_tab_view, 0);
         tabs.setViewPager(pagers);
     }
 

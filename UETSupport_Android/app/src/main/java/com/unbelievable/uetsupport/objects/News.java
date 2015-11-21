@@ -1,33 +1,32 @@
 package com.unbelievable.uetsupport.objects;
 
+import com.unbelievable.uetsupport.common.CommonUtils;
+
+import org.json.JSONObject;
+
 /**
  * Created by huylv on 20/11/2015.
  */
 public class News {
-    String imageNews;
-    String contentNews;
+    public String title;
+    public String content;
+    public String photo;
+    public String createdTime;
 
-    public News() {
-    }
+    public News() {}
 
-    public News(String imageNews, String contentNews) {
-        this.imageNews = imageNews;
-        this.contentNews = contentNews;
-    }
+    public static News getNews(JSONObject jData) {
+        try {
+            News news = new News();
+            news.title = CommonUtils.getValidString(jData.getString("title"));
+            news.content = CommonUtils.getValidString(jData.getString("content"));
+            news.photo = CommonUtils.getValidString(jData.getString("photo"));
+            news.createdTime = CommonUtils.getValidString(jData.getString("createdTime"));
 
-    public String getImageNews() {
-        return imageNews;
-    }
-
-    public void setImageNews(String imageNews) {
-        this.imageNews = imageNews;
-    }
-
-    public String getContentNews() {
-        return contentNews;
-    }
-
-    public void setContentNews(String contentNews) {
-        this.contentNews = contentNews;
+            return news;
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return null;
     }
 }
