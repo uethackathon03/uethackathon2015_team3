@@ -113,21 +113,6 @@ public class HelpFragment extends Fragment implements View.OnClickListener{
         CustomAsyncHttpClient client = new CustomAsyncHttpClient(getActivity(), "");
         String url = Service.ServerURL + "/data/teachers";
         client.get(url, new TextHttpResponseHandler() {
-            private ProgressDialog progressBar;
-
-            @Override
-            public void onStart() {
-                super.onStart();
-                try {
-                    progressBar = new ProgressDialog(getActivity());
-                    progressBar.setCancelable(true);
-                    progressBar.setMessage("Loading ...");
-                    progressBar.setProgressStyle(ProgressDialog.STYLE_SPINNER);
-                    progressBar.show();
-                } catch (Exception e) {
-                    e.printStackTrace();
-                }
-            }
             @Override
             public void onFailure(int statusCode, Header[] headers, String responseString, Throwable throwable) {
                 CommonUtils.showOkDialog(getActivity(), getResources().getString(R.string.dialog_title_common), statusCode + "\n" + responseString, null);
@@ -159,7 +144,6 @@ public class HelpFragment extends Fragment implements View.OnClickListener{
             public void onFinish() {
                 super.onFinish();
                 teacherAdapter.notifyDataSetChanged();
-                progressBar.dismiss();
             }
         });
     }
@@ -170,21 +154,7 @@ public class HelpFragment extends Fragment implements View.OnClickListener{
         CustomAsyncHttpClient client = new CustomAsyncHttpClient(getActivity(), "");
         String url = Service.ServerURL + "/data/departments";
         client.get(url, new TextHttpResponseHandler() {
-            private ProgressDialog progressBar;
 
-            @Override
-            public void onStart() {
-                super.onStart();
-                try {
-                    progressBar = new ProgressDialog(getActivity());
-                    progressBar.setCancelable(true);
-                    progressBar.setMessage("Loading ...");
-                    progressBar.setProgressStyle(ProgressDialog.STYLE_SPINNER);
-                    progressBar.show();
-                } catch (Exception e) {
-                    e.printStackTrace();
-                }
-            }
             @Override
             public void onFailure(int statusCode, Header[] headers, String responseString, Throwable throwable) {
                 CommonUtils.showOkDialog(getActivity(), getResources().getString(R.string.dialog_title_common), statusCode + "\n" + responseString, null);
@@ -216,7 +186,6 @@ public class HelpFragment extends Fragment implements View.OnClickListener{
             public void onFinish() {
                 super.onFinish();
                 teacherAdapter.notifyDataSetChanged();
-                progressBar.dismiss();
             }
         });
     }
