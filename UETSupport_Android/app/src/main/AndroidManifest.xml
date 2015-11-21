@@ -23,6 +23,7 @@
         <activity android:name=".ScheduleActivity"/>
         <activity android:name=".CommentsActivity"/>
         <activity android:name=".LoginActivity"/>
+        <activity android:name=".CreateThreadActivity"/>
     </application>
 
 </manifest>

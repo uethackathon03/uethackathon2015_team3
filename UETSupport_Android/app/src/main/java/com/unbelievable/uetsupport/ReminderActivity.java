@@ -10,6 +10,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.BaseAdapter;
+import android.widget.Button;
 import android.widget.CompoundButton;
 import android.widget.ImageView;
 import android.widget.ListView;
@@ -29,12 +30,13 @@ public class ReminderActivity extends AppCompatActivity implements AdapterView.O
     ListView reminderListView;
     ArrayList<Reminder> reminderArrayList;
     ReminderAdapter reminderAdapter;
-
+    private Button btnBackReminder;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_remider);
+        btnBackReminder = (Button) findViewById(R.id.btnBackReminder);
         reminderArrayList = new ArrayList<>();
         reminderArrayList.add(new Reminder(new Long(1), 1000l, 1000l, 3, "title", "note"));
         reminderArrayList.add(new Reminder(new Long(2), 1000l, 1000l, 3, "title", "note"));
