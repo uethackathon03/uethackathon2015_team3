@@ -81,15 +81,15 @@ public class ScheduleActivity extends AppCompatActivity {
 
     void prepareList(){
         scheduleArrayList = new ArrayList<>();
-        scheduleArrayList.add("1. Giải tích 1\t301-G2");
+        scheduleArrayList.add("1. Giải tích 1\t\t\t301-G2");
         scheduleArrayList.add("2. Cầu lông");
-        scheduleArrayList.add("3. Tiếng Anh B1\t304-GĐ2");
-        scheduleArrayList.add("4. Đại số 309-GĐ2");
-        scheduleArrayList.add("5. Tiếng Anh B1\t304-GĐ2");
-        scheduleArrayList.add("6. Đại số BT\t309-GĐ2");
-        scheduleArrayList.add("8. Cơ sở dữ liệu B1\t309-G2");
-        scheduleArrayList.add("9. Cơ sở dữ liệu TH\t201-G2");
-        scheduleArrayList.add("10. Mạng máy tính\t304-GĐ2");
+        scheduleArrayList.add("3. Tiếng Anh B1\t\t\t304-GĐ2");
+        scheduleArrayList.add("4. Đại số\t\t\t309-GĐ2");
+        scheduleArrayList.add("5. Tiếng Anh B1\t\t\t304-GĐ2");
+        scheduleArrayList.add("6. Đại số BT\t\t\t309-GĐ2");
+        scheduleArrayList.add("8. Cơ sở dữ liệu B1\t\t\t309-G2");
+        scheduleArrayList.add("9. Cơ sở dữ liệu TH\t\t\t201-G2");
+        scheduleArrayList.add("10. Mạng máy tính\t\t\t304-GĐ2");
 
     }
 }
