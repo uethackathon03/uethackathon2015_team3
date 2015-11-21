@@ -1,18 +1,28 @@
 package com.unbelievable.uetsupport.fragments;
 
+import android.app.Dialog;
 import android.app.ProgressDialog;
 import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
+import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.Window;
+import android.widget.AdapterView;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.ListView;
+import android.widget.ScrollView;
+import android.widget.TextView;
 
 import com.loopj.android.http.TextHttpResponseHandler;
-import com.unbelievable.uetsupport.MainActivity;
+import com.nostra13.universalimageloader.core.DisplayImageOptions;
+import com.nostra13.universalimageloader.core.ImageLoader;
+import com.nostra13.universalimageloader.core.assist.ImageScaleType;
 import com.unbelievable.uetsupport.R;
 import com.unbelievable.uetsupport.adapter.AnnouceAdapter;
 import com.unbelievable.uetsupport.adapter.NewsAdapter;
@@ -34,14 +44,15 @@ import cz.msebera.android.httpclient.Header;
  */
 public class NewsFragment extends Fragment implements View.OnClickListener {
 
-    ListView newsListView;
-    ArrayList<News> newsArrayList;
-    ArrayList<News> annouceArrayList;
-    NewsAdapter newsArrayAdapter;
-    AnnouceAdapter annouceAdapter;
+    private ListView newsListView;
+    private ArrayList<News> newsArrayList;
+    private ArrayList<News> annouceArrayList;
+    private NewsAdapter newsArrayAdapter;
+    private AnnouceAdapter annouceAdapter;
 
     Button btNewsSwitch;
     Button btAnnouceSwitch;
+    View v;
 
     public NewsFragment() {
         /*
@@ -61,7 +72,7 @@ public class NewsFragment extends Fragment implements View.OnClickListener {
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        View v = inflater.inflate(R.layout.fragment_news, container, false);
+        v = inflater.inflate(R.layout.fragment_news, container, false);
         newsArrayList = new ArrayList<>();
         newsListView = (ListView) v.findViewById(R.id.newslist);
         newsArrayAdapter = new NewsAdapter(getActivity(), newsArrayList);
@@ -75,6 +86,7 @@ public class NewsFragment extends Fragment implements View.OnClickListener {
         btNewsSwitch.setOnClickListener(this);
         btAnnouceSwitch.setOnClickListener(this);
         parseNewsFromServer();
+        newsListView.setOnItemClickListener(new NewOnItemClickListener());
         return v;
     }
 
@@ -149,6 +161,35 @@ public class NewsFragment extends Fragment implements View.OnClickListener {
                 progressBar.dismiss();
             }
         });
+    }
 
+    private class NewOnItemClickListener implements AdapterView.OnItemClickListener {
+        private DisplayImageOptions option;
+        @Override
+        public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+            if (position == 0) {
+                view.setEnabled(false);
+            }
+            option = new DisplayImageOptions.Builder()
+                    .showImageForEmptyUri(R.mipmap.ic_launcher)
+                    .showImageOnFail(R.mipmap.ic_launcher)
+                    .showImageOnLoading(R.mipmap.ic_launcher)
+                    .imageScaleType(ImageScaleType.IN_SAMPLE_POWER_OF_2)
+                    .cacheInMemory(true).cacheOnDisk(true).build();
+
+            Dialog dialog = new Dialog(getActivity());
+            dialog.setContentView(R.layout.news_dialog);
+            dialog.setTitle(newsArrayList.get(position).title);
+            ImageView imvDialogPhoto = (ImageView) dialog.findViewById(R.id.imvDialogPhoto);
+            TextView tvDialogContent = (TextView) dialog.findViewById(R.id.tvDialogContent);
+            try {
+                ImageLoader.getInstance().displayImage(newsArrayList.get(position).photo, imvDialogPhoto, option);
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+            tvDialogContent.setText(newsArrayList.get(position).content);
+            dialog.show();
+
+        }
     }
 }
