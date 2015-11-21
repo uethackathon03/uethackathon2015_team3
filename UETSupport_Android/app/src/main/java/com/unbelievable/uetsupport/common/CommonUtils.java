@@ -371,35 +371,15 @@ public class CommonUtils {
         return builder.create();
     }
 
-    public static Dialog showOkCancelDialog(Context context, String title,
-                                            String message, OnClickListener okClickListener) {
+    public static Dialog showOkCancelDialog(Context context,
+                                            String message,String namePositiveButton,String nameNegativeButton, OnClickListener okClickListener) {
         AlertDialog.Builder builder = new AlertDialog.Builder(context);
-        builder.setTitle(title);
         builder.setMessage(message);
-        builder.setPositiveButton("Ok", okClickListener);
-        builder.setNegativeButton("Cancel", null);
+        builder.setPositiveButton(namePositiveButton, okClickListener);
+        builder.setNegativeButton(nameNegativeButton, okClickListener);
+        builder.setCancelable(false);
         builder.show();
         return builder.create();
-    }
-
-    public static String getEmail(Context context) {
-        AccountManager accountManager = AccountManager.get(context);
-        Account account = getAccount(accountManager);
-
-        if (account == null) {
-            return null;
-        } else {
-            return account.name;
-        }
-    }
-
-    private static Account getAccount(AccountManager accountManager) {
-        Account[] accounts = accountManager.getAccountsByType("com.google");
-        Account account = null;
-        if (accounts.length > 0) {
-            account = accounts[0];
-        }
-        return account;
     }
 
     // Date time

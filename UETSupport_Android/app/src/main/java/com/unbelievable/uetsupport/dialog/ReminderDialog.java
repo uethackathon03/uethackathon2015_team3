@@ -2,7 +2,6 @@ package com.unbelievable.uetsupport.dialog;
 
 import android.app.Activity;
 import android.app.Dialog;
-import android.content.Context;
 import android.os.Bundle;
 import android.view.View;
 import android.view.Window;
@@ -35,7 +34,7 @@ public class ReminderDialog extends Dialog implements View.OnClickListener{
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         requestWindowFeature(Window.FEATURE_NO_TITLE);
-        setContentView(R.layout.reminder_dialog);
+        setContentView(R.layout.dialog_reminder);
         tvDialogReminderTime = (TextView) findViewById(R.id.tvDialogReminderTime);
         tvDialogReminderTitle = (TextView) findViewById(R.id.tvDialogReminderTitle);
         tvDay = (TextView) findViewById(R.id.tvDay);

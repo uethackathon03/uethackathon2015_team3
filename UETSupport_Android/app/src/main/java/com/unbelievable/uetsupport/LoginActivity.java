@@ -8,6 +8,7 @@ import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.provider.Settings;
 import android.support.v4.app.FragmentActivity;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -100,14 +101,15 @@ public class LoginActivity extends FragmentActivity implements View.OnClickListe
                         String success = CommonUtils.getValidString(jObject.getString("success"));
                         if ("1".equals(success)) {
                             JSONObject jData = new JSONObject(jObject.getString("data"));
-                            editor.putString(Constant.token, jData.getString("token"));
-                            JSONObject jStudent = new JSONObject(jObject.getString("student"));
-                            editor.putString(Constant.username, jData.getString("username"));
-                            editor.putString(Constant.fullname, jData.getString("fullname"));
-                            editor.putString(Constant.email, jData.getString("email"));
+                            editor.putString(Constant.token, CommonUtils.getValidString(jData.getString("token")));
+                            JSONObject jStudent = new JSONObject(jData.getString("student"));
+                            editor.putString(Constant.username, CommonUtils.getValidString(jStudent.getString("username")));
+                            editor.putString(Constant.fullname, CommonUtils.getValidString(jStudent.getString("fullname")));
+                            editor.putString(Constant.email, CommonUtils.getValidString(jStudent.getString("email")));
                             editor.commit();
-                            Intent intent = new Intent(activity, MainActivity.class);
-                            startActivity(intent);
+                            Intent intent = new Intent("restart");
+                            getApplication().sendBroadcast(intent);
+                            finish();
                         } else {
                             String message = CommonUtils.getValidString(jObject.getString("message"));
                             CommonUtils.showOkDialog(activity, getResources().getString(R.string.dialog_title_common), message, null);

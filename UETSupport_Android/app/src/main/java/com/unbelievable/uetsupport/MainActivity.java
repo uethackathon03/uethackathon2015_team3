@@ -10,6 +10,7 @@ import com.nostra13.universalimageloader.core.ImageLoader;
 import com.nostra13.universalimageloader.core.ImageLoaderConfiguration;
 import com.unbelievable.uetsupport.common.SlidingTabLayout;
 import com.unbelievable.uetsupport.objects.News;
+import com.unbelievable.uetsupport.objects.Recruitment;
 
 import java.util.ArrayList;
 

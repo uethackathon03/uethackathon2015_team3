@@ -7,169 +7,187 @@
     <include
         android:id="@+id/toolbar"
         layout="@layout/tool_bar" />
-        <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-            android:id="@+id/threadLayout"
+
+    <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        android:id="@+id/threadLayout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/toolbar"
+        android:layout_gravity="center"
+        android:orientation="vertical"
+        android:padding="8dp">
+
+        <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_above="@+id/etComment"
-            android:layout_below="@+id/toolbar"
-            android:layout_gravity="center"
-            android:orientation="vertical"
-            android:padding="8dp">
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="horizontal">
-
-                <ImageView
-                    android:id="@+id/imgAvatar"
-                    android:layout_width="40dp"
-                    android:layout_height="40dp"
-                    android:src="@mipmap/user" />
-
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="40dp"
-                    android:orientation="vertical">
-
-                    <TextView
-                        android:id="@+id/tvUserName"
-                        android:layout_width="match_parent"
-                        android:layout_height="0dp"
-                        android:layout_weight="3"
-                        android:text="Vu Phuong Nam"
-                        android:textColor="@android:color/primary_text_light"
-                        android:textSize="15sp"
-                        android:textStyle="bold" />
-
-                    <TextView
-                        android:id="@+id/tvUploadedTime"
-                        android:layout_width="match_parent"
-                        android:layout_height="0dp"
-                        android:layout_weight="2"
-                        android:text="17:32 20/11/2015"
-                        android:textSize="10sp" />
-                </LinearLayout>
-            </LinearLayout>
-
-            <TextView
-                android:id="@+id/tvContent"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginBottom="10dp"
-                android:text="Có thánh nào biết làm tín hiệu và hệ thống không, giúp mình bài này với" />
+            android:orientation="horizontal">
 
             <ImageView
-                android:id="@+id/photo"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:background="@android:color/holo_green_dark"
-                android:visibility="visible" />
+                android:id="@+id/imgAvatar"
+                android:layout_width="40dp"
+                android:layout_height="40dp"
+                android:src="@mipmap/user" />
 
             <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:gravity="center"
-                android:orientation="horizontal">
+                android:layout_height="40dp"
+                android:orientation="vertical">
 
-                <FrameLayout
-                    android:layout_width="0dip"
-                    android:layout_height="36dp"
-                    android:layout_weight="1">
+                <TextView
+                    android:id="@+id/tvUserName"
+                    android:layout_width="match_parent"
+                    android:layout_height="0dp"
+                    android:layout_weight="3"
+                    android:text="Vu Phuong Nam"
+                    android:textColor="@android:color/primary_text_light"
+                    android:textSize="15sp"
+                    android:textStyle="bold" />
 
-                    <ImageView
-                        android:layout_width="20dp"
-                        android:layout_height="20dp"
-                        android:layout_gravity="center_vertical"
-                        android:layout_marginLeft="20dp"
-                        android:scaleType="fitXY"
-                        android:src="@mipmap/up" />
-
-                    <Button
-                        android:id="@+id/btnLike"
-                        style="?attr/borderlessButtonStyle"
-                        android:layout_width="match_parent"
-                        android:layout_height="match_parent"
-                        android:text="1"
-                        android:textColor="@android:color/black" />
-
-                </FrameLayout>
-
-
-                <FrameLayout
-                    android:layout_width="0dip"
-                    android:layout_height="36dp"
-                    android:layout_weight="1">
-
-                    <ImageView
-                        android:layout_width="20dp"
-                        android:layout_height="20dp"
-                        android:layout_gravity="center_vertical"
-                        android:layout_marginLeft="20dp"
-                        android:scaleType="fitXY"
-                        android:src="@mipmap/down" />
-
-                    <Button
-                        android:id="@+id/btnDislike"
-                        style="?attr/borderlessButtonStyle"
-                        android:layout_width="match_parent"
-                        android:layout_height="match_parent"
-                        android:text="1"
-                        android:textColor="@android:color/black" />
-
-                </FrameLayout>
-
-                <FrameLayout
-                    android:layout_width="0dip"
-                    android:layout_height="36dp"
-                    android:layout_weight="1">
-
-                    <ImageView
-                        android:layout_width="20dp"
-                        android:layout_height="20dp"
-                        android:layout_gravity="center_vertical"
-                        android:layout_marginLeft="20dp"
-                        android:clickable="false"
-                        android:scaleType="fitXY"
-                        android:src="@mipmap/comment" />
-
-                    <Button
-                        android:id="@+id/btnAnswer"
-                        style="?attr/borderlessButtonStyle"
-                        android:layout_width="match_parent"
-                        android:layout_height="match_parent"
-                        android:text="1"
-                        android:textColor="@android:color/black" />
-
-                </FrameLayout>
+                <TextView
+                    android:id="@+id/tvUploadedTime"
+                    android:layout_width="match_parent"
+                    android:layout_height="0dp"
+                    android:layout_weight="2"
+                    android:text="17:32 20/11/2015"
+                    android:textSize="10sp" />
             </LinearLayout>
-
-            <View
-                android:layout_width="match_parent"
-                android:layout_height="0.5dp"
-                android:layout_marginLeft="8dp"
-                android:layout_marginRight="8dp"
-                android:background="@android:color/darker_gray" />
-
-            <ListView
-                android:id="@+id/listComment"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_above="@+id/etComment"
-                android:layout_below="@+id/threadLayout"
-                android:dividerHeight="0.5dp"
-                android:scrollbars="none"></ListView>
         </LinearLayout>
 
+        <TextView
+            android:id="@+id/tvContent"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="10dp"
+            android:text="Có thánh nào biết làm tín hiệu và hệ thống không, giúp mình bài này với" />
 
-    <EditText
-        android:id="@+id/etComment"
+        <ImageView
+            android:id="@+id/photo"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@android:color/holo_green_dark"
+            android:visibility="visible" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:orientation="horizontal">
+
+            <FrameLayout
+                android:layout_width="0dip"
+                android:layout_height="36dp"
+                android:layout_weight="1">
+
+                <ImageView
+                    android:layout_width="20dp"
+                    android:layout_height="20dp"
+                    android:layout_gravity="center_vertical"
+                    android:layout_marginLeft="20dp"
+                    android:scaleType="fitXY"
+                    android:src="@mipmap/up" />
+
+                <Button
+                    android:id="@+id/btnLike"
+                    style="?attr/borderlessButtonStyle"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:text="1"
+                    android:textColor="@android:color/black" />
+
+            </FrameLayout>
+
+
+            <FrameLayout
+                android:layout_width="0dip"
+                android:layout_height="36dp"
+                android:layout_weight="1">
+
+                <ImageView
+                    android:layout_width="20dp"
+                    android:layout_height="20dp"
+                    android:layout_gravity="center_vertical"
+                    android:layout_marginLeft="20dp"
+                    android:scaleType="fitXY"
+                    android:src="@mipmap/down" />
+
+                <Button
+                    android:id="@+id/btnDislike"
+                    style="?attr/borderlessButtonStyle"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:text="1"
+                    android:textColor="@android:color/black" />
+
+            </FrameLayout>
+
+            <FrameLayout
+                android:layout_width="0dip"
+                android:layout_height="36dp"
+                android:layout_weight="1">
+
+                <ImageView
+                    android:layout_width="20dp"
+                    android:layout_height="20dp"
+                    android:layout_gravity="center_vertical"
+                    android:layout_marginLeft="20dp"
+                    android:clickable="false"
+                    android:scaleType="fitXY"
+                    android:src="@mipmap/comment" />
+
+                <Button
+                    android:id="@+id/btnAnswer"
+                    style="?attr/borderlessButtonStyle"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:text="1"
+                    android:textColor="@android:color/black" />
+
+            </FrameLayout>
+        </LinearLayout>
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="0.5dp"
+            android:layout_marginLeft="8dp"
+            android:layout_marginRight="8dp"
+            android:background="@android:color/darker_gray" />
+    </LinearLayout>
+
+    <ListView
+        android:id="@+id/listComment"
         android:layout_width="match_parent"
-        android:layout_height="45dp"
-        android:layout_alignParentBottom="true"
-        android:drawableLeft="@android:drawable/ic_menu_camera"
-        android:drawableRight="@android:drawable/ic_menu_send"
-        android:inputType="text|textMultiLine" />
+        android:layout_height="wrap_content"
+        android:layout_above="@+id/edit_text_layout"
+        android:layout_below="@+id/threadLayout"
+        android:dividerHeight="0.5dp"
+        android:scrollbars="none"></ListView>
+
+    <FrameLayout
+        android:id="@+id/edit_text_layout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true">
+
+        <EditText
+            android:id="@+id/etComment"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:background="@drawable/edit_text_border"
+            android:inputType="text|textMultiLine"
+            android:padding="8dp" />
+        <ImageView
+            android:layout_width="35dp"
+            android:layout_height="35dp"
+            android:layout_marginLeft="8dp"
+            android:layout_gravity="left|center"
+            android:src="@mipmap/ic_camera"/>
+
+        <ImageView
+            android:layout_width="35dp"
+            android:layout_height="35dp"
+            android:layout_marginRight="8dp"
+            android:layout_gravity="right|center"
+            android:src="@mipmap/ic_post"/>
+    </FrameLayout>
 
 </RelativeLayout>
