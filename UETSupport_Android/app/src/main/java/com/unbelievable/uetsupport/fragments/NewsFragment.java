@@ -25,6 +25,7 @@ import com.unbelievable.uetsupport.adapter.NewsAdapter;
 import com.unbelievable.uetsupport.common.CommonUtils;
 import com.unbelievable.uetsupport.common.UETSupportUtils;
 import com.unbelievable.uetsupport.objects.News;
+import com.unbelievable.uetsupport.objects.Recruitment;
 import com.unbelievable.uetsupport.service.CustomAsyncHttpClient;
 import com.unbelievable.uetsupport.service.Service;
 
@@ -41,7 +42,7 @@ import cz.msebera.android.httpclient.Header;
 public class NewsFragment extends Fragment implements View.OnClickListener {
 
     private ListView newsListView;
-    private ArrayList<News> annouceArrayList;
+    private ArrayList<Recruitment> recruitmentArrayList;
     private NewsAdapter newsArrayAdapter;
     private RecruitmentAdapter recruitmentAdapter;
     private MainActivity mainActivity;
@@ -56,7 +57,8 @@ public class NewsFragment extends Fragment implements View.OnClickListener {
         mainActivity = (MainActivity) getActivity();
         newsListView = (ListView) v.findViewById(R.id.newslist);
         newsArrayAdapter = new NewsAdapter(getActivity(), mainActivity.newsArrayList);
-        recruitmentAdapter = new RecruitmentAdapter(getActivity(), annouceArrayList);
+        recruitmentArrayList = new ArrayList<>();
+        recruitmentAdapter = new RecruitmentAdapter(getActivity(),recruitmentArrayList );
         newsListView.setAdapter(newsArrayAdapter);
 
         btNewsSwitch = (Button) v.findViewById(R.id.btNewsSwitch);
