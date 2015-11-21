@@ -13,6 +13,7 @@ import android.widget.ListView;
 import android.widget.RadioButton;
 
 import com.loopj.android.http.TextHttpResponseHandler;
+import com.unbelievable.uetsupport.MainActivity;
 import com.unbelievable.uetsupport.R;
 import com.unbelievable.uetsupport.adapter.DepartmentAdapter;
 import com.unbelievable.uetsupport.adapter.TeacherAdapter;
@@ -45,17 +46,27 @@ public class HelpFragment extends Fragment implements View.OnClickListener{
     ExpandableListAdapter listAdapter;
     ExpandableListView expListView;
     List<String> listDataHeader;
-    ArrayList<String>listDataChild;
     TeacherAdapter teacherAdapter;
     DepartmentAdapter departmentAdapter;
-    ArrayList<Teacher> teacherArrayList;
-    ArrayList<Department> departmentArrayList;
+
+    MainActivity mainActivity;
 
 
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View v = inflater.inflate(R.layout.fragment_help, container, false);
+        mainActivity = (MainActivity) getActivity();
+
+        if (mainActivity.listDataChild.size() == 0) {
+            parseQuestionAnswerFromServer();
+        }
+        if (mainActivity.teacherArrayList.size() == 0) {
+            parseTeacherFromServer();
+        }
+        if (mainActivity.departmentArrayList.size() == 0) {
+            parseDepartmentFromServer();
+        }
         initView(v);
         return v;
     }
@@ -64,18 +75,15 @@ public class HelpFragment extends Fragment implements View.OnClickListener{
         btnTeacher = (RadioButton) v.findViewById(R.id.btnTeacher);
         btnOffice = (RadioButton) v.findViewById(R.id.btnOffice);
         btnQA = (RadioButton) v.findViewById(R.id.btnQA);
-        teacherArrayList = new ArrayList<>();
-        departmentArrayList = new ArrayList<>();
         listDataHeader = new ArrayList<>();
-        listDataChild = new ArrayList<>();
         parseTeacherFromServer();
         parseDepartmentFromServer();
         parseQuestionAnswerFromServer();
         listTeacher = (ListView) v.findViewById(R.id.listTeacher);
         expListView = (ExpandableListView) v.findViewById(R.id.listQA);
-        teacherAdapter = new TeacherAdapter(getContext(),teacherArrayList);
-        listAdapter = new com.unbelievable.uetsupport.adapter.ExpandableListAdapter(getActivity(),listDataHeader,listDataChild);
-        departmentAdapter = new DepartmentAdapter(getContext(),departmentArrayList);
+        teacherAdapter = new TeacherAdapter(getContext(), mainActivity.teacherArrayList);
+        listAdapter = new com.unbelievable.uetsupport.adapter.ExpandableListAdapter(getActivity(),listDataHeader, mainActivity.listDataChild);
+        departmentAdapter = new DepartmentAdapter(getContext(), mainActivity.departmentArrayList);
         btnTeacher.setOnClickListener(this);
         btnOffice.setOnClickListener(this);
         btnQA.setOnClickListener(this);
@@ -135,7 +143,7 @@ public class HelpFragment extends Fragment implements View.OnClickListener{
                             JSONArray jArray = jObject.getJSONArray("data");
                             for (int index = 0;index < jArray.length();index++){
                                 Teacher teacher = Teacher.getTeacher(jArray.getJSONObject(index));
-                                teacherArrayList.add(teacher);
+                                mainActivity.teacherArrayList.add(teacher);
                             }
                         }else {
                             String message = CommonUtils.getValidString(jObject.getString("message"));
@@ -192,7 +200,7 @@ public class HelpFragment extends Fragment implements View.OnClickListener{
                             JSONArray jArray = jObject.getJSONArray("data");
                             for (int index = 0;index < jArray.length();index++){
                                 Department department = Department.getDepartment(jArray.getJSONObject(index));
-                                departmentArrayList.add(department);
+                                mainActivity.departmentArrayList.add(department);
                             }
                         }else {
                             String message = CommonUtils.getValidString(jObject.getString("message"));
@@ -232,7 +240,7 @@ public class HelpFragment extends Fragment implements View.OnClickListener{
                             for (int i = 0; i < jarrData.length(); i++) {
                                 QuestionAnswer questionAnswer = QuestionAnswer.getQuestionAnswer(jarrData.getJSONObject(i));
                                 listDataHeader.add(questionAnswer.question);
-                                listDataChild.add(questionAnswer.answer);
+                                mainActivity.listDataChild.add(questionAnswer.answer);
                             }
 
                         } else {

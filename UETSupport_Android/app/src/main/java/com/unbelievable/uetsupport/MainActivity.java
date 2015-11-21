@@ -9,9 +9,12 @@ import android.view.MenuItem;
 import com.nostra13.universalimageloader.core.ImageLoader;
 import com.nostra13.universalimageloader.core.ImageLoaderConfiguration;
 import com.unbelievable.uetsupport.common.SlidingTabLayout;
+import com.unbelievable.uetsupport.objects.Department;
 import com.unbelievable.uetsupport.objects.News;
 import com.unbelievable.uetsupport.objects.Recruitment;
+import com.unbelievable.uetsupport.objects.Teacher;
 
+import java.lang.reflect.Array;
 import java.util.ArrayList;
 
 public class MainActivity extends FragmentActivity {
@@ -19,6 +22,9 @@ public class MainActivity extends FragmentActivity {
     private com.unbelievable.uetsupport.adapter.PagerAdapter pagerAdapter;
     private SlidingTabLayout tabs;
     public ArrayList<News> newsArrayList;
+    public ArrayList<Teacher> teacherArrayList;
+    public ArrayList<Department> departmentArrayList;
+    public ArrayList<String> listDataChild;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -30,6 +36,10 @@ public class MainActivity extends FragmentActivity {
         pagerAdapter = new com.unbelievable.uetsupport.adapter.PagerAdapter(getSupportFragmentManager(), this);
         pagers.setAdapter(pagerAdapter);
         newsArrayList = new ArrayList<>();
+        teacherArrayList = new ArrayList<>();
+        departmentArrayList = new ArrayList<>();
+        listDataChild = new ArrayList<>();
+
         tabs.setDistributeEvenly(true);
         tabs.setCustomTabColorizer(new SlidingTabLayout.TabColorizer() {
             @Override
