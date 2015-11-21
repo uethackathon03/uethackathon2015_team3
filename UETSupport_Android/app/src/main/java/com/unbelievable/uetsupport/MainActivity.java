@@ -10,6 +10,7 @@ import com.nostra13.universalimageloader.core.ImageLoader;
 import com.nostra13.universalimageloader.core.ImageLoaderConfiguration;
 import com.unbelievable.uetsupport.common.SlidingTabLayout;
 import com.unbelievable.uetsupport.objects.News;
+import com.unbelievable.uetsupport.objects.Recruitment;
 
 import java.util.ArrayList;
 
@@ -17,6 +18,7 @@ public class MainActivity extends FragmentActivity {
     private ViewPager pagers;
     private com.unbelievable.uetsupport.adapter.PagerAdapter pagerAdapter;
     private SlidingTabLayout tabs;
+    public ArrayList<Recruitment> recruitmentArrayList;
     public ArrayList<News> newsArrayList;
 
     @Override
@@ -29,6 +31,7 @@ public class MainActivity extends FragmentActivity {
         pagerAdapter = new com.unbelievable.uetsupport.adapter.PagerAdapter(getSupportFragmentManager(), this);
         pagers.setAdapter(pagerAdapter);
         newsArrayList = new ArrayList<>();
+        recruitmentArrayList = new ArrayList<>();
         tabs.setDistributeEvenly(true);
         tabs.setCustomTabColorizer(new SlidingTabLayout.TabColorizer() {
             @Override

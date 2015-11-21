@@ -13,7 +13,7 @@ import android.widget.ListView;
 import com.loopj.android.http.TextHttpResponseHandler;
 import com.unbelievable.uetsupport.MainActivity;
 import com.unbelievable.uetsupport.R;
-import com.unbelievable.uetsupport.adapter.RecuitmentAdapter;
+import com.unbelievable.uetsupport.adapter.RecruitmentAdapter;
 import com.unbelievable.uetsupport.adapter.NewsAdapter;
 import com.unbelievable.uetsupport.common.CommonUtils;
 import com.unbelievable.uetsupport.common.UETSupportUtils;
@@ -36,11 +36,11 @@ public class NewsFragment extends Fragment implements View.OnClickListener {
     private ListView newsListView;
     private ArrayList<News> annouceArrayList;
     private NewsAdapter newsArrayAdapter;
-    private RecuitmentAdapter recuitmentAdapter;
+    private RecruitmentAdapter recruitmentAdapter;
     private MainActivity mainActivity;
 
     private Button btNewsSwitch;
-    private Button btRecuitmentSwitch;
+    private Button btRecruitmentSwitch;
 
     @Nullable
     @Override
@@ -49,14 +49,14 @@ public class NewsFragment extends Fragment implements View.OnClickListener {
         mainActivity = (MainActivity) getActivity();
         newsListView = (ListView) v.findViewById(R.id.newslist);
         newsArrayAdapter = new NewsAdapter(getActivity(), mainActivity.newsArrayList);
-        recuitmentAdapter = new RecuitmentAdapter(getActivity(), annouceArrayList);
+        recruitmentAdapter = new RecruitmentAdapter(getActivity(), mainActivity.recruitmentArrayList);
         newsListView.setAdapter(newsArrayAdapter);
 
 
         btNewsSwitch =(Button) v.findViewById(R.id.btNewsSwitch);
-        btRecuitmentSwitch = (Button)v.findViewById(R.id.btAnnouceSwitch);
+        btRecruitmentSwitch = (Button)v.findViewById(R.id.btAnnouceSwitch);
         btNewsSwitch.setOnClickListener(this);
-        btRecuitmentSwitch.setOnClickListener(this);
+        btRecruitmentSwitch.setOnClickListener(this);
         if (mainActivity.newsArrayList.size() == 0) {
             News news = new News();
             mainActivity.newsArrayList.add(news);
@@ -73,7 +73,7 @@ public class NewsFragment extends Fragment implements View.OnClickListener {
                 newsListView.setAdapter(newsArrayAdapter);
                 break;
             case R.id.btAnnouceSwitch:
-                newsListView.setAdapter(recuitmentAdapter);
+                newsListView.setAdapter(recruitmentAdapter);
                 break;
         }
     }
