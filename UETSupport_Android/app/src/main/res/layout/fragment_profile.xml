@@ -5,10 +5,43 @@
     android:layout_height="match_parent"
     android:orientation="vertical">
 
-    <ScrollView
+    <RelativeLayout
+        android:id="@+id/rLayoutLogout"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:fillViewport="true">
+        android:visibility="gone">
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:orientation="vertical">
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="10dp"
+                android:src="@mipmap/ic_round" />
+
+            <Button
+                android:id="@+id/btnLogin"
+                android:layout_width="120dp"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
+                style="?android:attr/borderlessButtonStyle"
+                android:text="@string/login_btn"
+                android:textColor="@android:color/background_dark" />
+
+        </LinearLayout>
+
+    </RelativeLayout>
+
+    <ScrollView
+        android:id="@+id/scrollViewProfile"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:fillViewport="true"
+        android:visibility="gone">
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -82,7 +115,6 @@
                 android:id="@+id/profileListView"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"></ListView>
-
         </LinearLayout>
     </ScrollView>
 </LinearLayout>

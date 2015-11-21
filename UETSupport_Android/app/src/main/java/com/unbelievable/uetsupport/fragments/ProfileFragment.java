@@ -12,14 +12,18 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.ListView;
+import android.widget.RelativeLayout;
+import android.widget.ScrollView;
 import android.widget.TextView;
 
 import com.nostra13.universalimageloader.core.DisplayImageOptions;
 import com.nostra13.universalimageloader.core.ImageLoader;
 import com.nostra13.universalimageloader.core.assist.ImageScaleType;
 import com.pkmmte.view.CircularImageView;
+import com.unbelievable.uetsupport.LoginActivity;
 import com.unbelievable.uetsupport.MainActivity;
 import com.unbelievable.uetsupport.R;
 import com.unbelievable.uetsupport.ReminderActivity;
@@ -41,6 +45,9 @@ public class ProfileFragment extends Fragment implements AdapterView.OnItemClick
     private ArrayList<String> profileArrayList;
     private ProfileAdapter profileAdapter;
     private DisplayImageOptions option;
+    private ScrollView scrollViewProfile;
+    private RelativeLayout rLayoutLogout;
+    private Button btnLogin;
 
     public ProfileFragment(){
 
@@ -55,6 +62,18 @@ public class ProfileFragment extends Fragment implements AdapterView.OnItemClick
         tvName = (TextView)v.findViewById(R.id.tvName);
         tvVNUMail =(TextView)v.findViewById(R.id.tvVNUMail);
         profileArrayList = new ArrayList<String>();
+        scrollViewProfile = (ScrollView) v.findViewById(R.id.scrollViewProfile);
+        rLayoutLogout = (RelativeLayout) v.findViewById(R.id.rLayoutLogout);
+        btnLogin = (Button) v.findViewById(R.id.btnLogin);
+
+        btnLogin.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(getActivity(), LoginActivity.class);
+                startActivity(intent);
+            }
+        });
+
         profileArrayList.add("Thời khóa biểu");
         profileArrayList.add("Lịch thi");
         profileArrayList.add("Kết quả học tập");
@@ -73,12 +92,20 @@ public class ProfileFragment extends Fragment implements AdapterView.OnItemClick
                 .showImageOnLoading(R.drawable.cover_photo2)
                 .imageScaleType(ImageScaleType.IN_SAMPLE_POWER_OF_2)
                 .cacheInMemory(true).cacheOnDisk(true).build();
-
+        if (getActivity().getSharedPreferences(Constant.nameSharedPreferences, Context.MODE_PRIVATE).getString(Constant.token, "").equals("")) {
+            scrollViewProfile.setVisibility(View.GONE);
+            rLayoutLogout.setVisibility(View.VISIBLE);
+        } else {
+            scrollViewProfile.setVisibility(View.VISIBLE);
+            rLayoutLogout.setVisibility(View.GONE);
+        }
         IntentFilter filter = new IntentFilter("restart");
         BroadcastReceiver broadcastReceiver = new BroadcastReceiver() {
 
             @Override
             public void onReceive(Context context, Intent intent) {
+                scrollViewProfile.setVisibility(View.VISIBLE);
+                rLayoutLogout.setVisibility(View.GONE);
                 onResume();
             }
         };

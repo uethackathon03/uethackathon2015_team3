@@ -59,7 +59,8 @@ public class LoginActivity extends FragmentActivity implements View.OnClickListe
                     Settings.Secure.ANDROID_ID));
         }
         if (v == tvForgotPassword) {
-            forgotPassword(this, "ducanh54@gmail.com");
+            CommonUtils.showOkDialog(this, getResources().getString(R.string.dialog_title_common), "Chưa cập nhật", null);
+            //forgotPassword(this, "ducanh54@gmail.com");
             //TODO -> I'm using my email for demo
         }
     }

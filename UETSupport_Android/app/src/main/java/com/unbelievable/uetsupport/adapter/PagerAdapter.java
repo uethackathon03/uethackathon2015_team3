@@ -14,7 +14,6 @@ import com.unbelievable.uetsupport.R;
 import com.unbelievable.uetsupport.common.Constant;
 import com.unbelievable.uetsupport.fragments.HelpFragment;
 import com.unbelievable.uetsupport.fragments.NotificationFragment;
-import com.unbelievable.uetsupport.fragments.NoLoginFragment;
 import com.unbelievable.uetsupport.fragments.ProfileFragment;
 import com.unbelievable.uetsupport.fragments.SocialFragment;
 import com.unbelievable.uetsupport.fragments.NewsFragment;
@@ -64,13 +63,8 @@ public class PagerAdapter extends FragmentStatePagerAdapter {
                 HelpFragment help = new HelpFragment();
                 return help;
             case 4:
-                if (activity.getSharedPreferences(Constant.nameSharedPreferences, Context.MODE_PRIVATE).getString(Constant.token, "").equals("")) {
-                    NoLoginFragment loginFragment = new NoLoginFragment();
-                    return loginFragment;
-                } else {
-                    ProfileFragment personal = new ProfileFragment();
-                    return personal;
-                }
+                ProfileFragment personal = new ProfileFragment();
+                return personal;
             default:
                 NotificationFragment menu = new NotificationFragment();
                 return menu;
