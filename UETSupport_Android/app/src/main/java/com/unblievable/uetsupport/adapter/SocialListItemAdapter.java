@@ -67,9 +67,9 @@ public class SocialListItemAdapter extends BaseAdapter {
             photo.setImageResource(thread.getPhotos()[0]);
         }
         else photo.setVisibility(View.GONE);
-        btnLike.setText(thread.getLike());
-        btnDisLike.setText(thread.getDisLike());
-        btnComment.setText(thread.getComment());
+        btnLike.setText(thread.getLike() + "");
+        btnDisLike.setText(thread.getDisLike() + "");
+        btnComment.setText(thread.getComment() + "");
         return view;
     }
 
