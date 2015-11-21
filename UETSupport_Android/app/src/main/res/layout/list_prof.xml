@@ -5,7 +5,7 @@
     android:orientation="horizontal"
     android:padding="8dp">
 
-    <com.unblievable.uetsupport.common.RoundedImageView
+    <com.unbelievable.uetsupport.common.RoundedImageView
         android:id="@+id/imgAva"
         android:layout_width="50dp"
         android:layout_height="50dp"

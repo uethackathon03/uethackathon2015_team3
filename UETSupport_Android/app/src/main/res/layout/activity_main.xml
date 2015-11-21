@@ -6,14 +6,14 @@
     android:orientation="vertical"
     tools:context=".MainActivity">
 
-    <com.unblievable.uetsupport.common.SlidingTabLayout
+    <com.unbelievable.uetsupport.common.SlidingTabLayout
         android:id="@+id/tabs"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:background="@color/colorPrimary"
         android:elevation="2dp">
 
-    </com.unblievable.uetsupport.common.SlidingTabLayout>
+    </com.unbelievable.uetsupport.common.SlidingTabLayout>
 
     <android.support.v4.view.ViewPager
         android:id="@+id/pagers"
