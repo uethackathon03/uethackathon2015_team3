@@ -17,12 +17,12 @@ import java.util.ArrayList;
 /**
  * Created by Nam on 11/21/2015.
  */
-public class SocialListItemAdapter extends BaseAdapter {
+public class SocialListAdapter extends BaseAdapter {
     private Activity activity;
     private int layoutId;
     private ArrayList<com.unbelievable.uetsupport.objects.Thread> threads;
 
-    public SocialListItemAdapter(Activity activity, int layoutId, ArrayList<com.unbelievable.uetsupport.objects.Thread> threads) {
+    public SocialListAdapter(Activity activity, int layoutId, ArrayList<com.unbelievable.uetsupport.objects.Thread> threads) {
         this.activity = activity;
         this.layoutId = layoutId;
         this.threads = threads;

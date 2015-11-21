@@ -26,6 +26,7 @@
         <activity android:name=".ReminderActivity">
 
         </activity>
+        <activity android:name=".CommentsActivity"/>
     </application>
 
 </manifest>
