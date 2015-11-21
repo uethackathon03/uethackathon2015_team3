@@ -44,7 +44,7 @@
             android:textColor="@android:color/white"
             android:gravity="center"
             android:textSize="25dp"
-            android:text="Thông báo" />
+            android:text="Tuyển dụng" />
 
     </RadioGroup>
 
