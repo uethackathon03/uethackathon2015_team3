@@ -11,15 +11,19 @@ import android.graphics.Matrix;
 import android.net.Uri;
 import android.os.Bundle;
 import android.provider.MediaStore;
+import android.support.v4.app.FragmentActivity;
 import android.support.v7.app.AppCompatActivity;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
+import android.widget.Button;
 import android.widget.EditText;
+import android.widget.FrameLayout;
 import android.widget.GridView;
 import android.widget.ImageView;
+import android.widget.RadioGroup;
 
 import com.loopj.android.http.RequestParams;
 import com.loopj.android.http.TextHttpResponseHandler;
@@ -44,7 +48,7 @@ import cz.msebera.android.httpclient.Header;
  * Created by DucAnhZ on 22/11/2015.
  */
 
-public class CreateThreadActivity extends AppCompatActivity implements View.OnClickListener {
+public class CreateThreadActivity extends FragmentActivity implements View.OnClickListener {
     private EditText edtTitle;
     private EditText edtContent;
     private GridView gvImage;
@@ -57,6 +61,10 @@ public class CreateThreadActivity extends AppCompatActivity implements View.OnCl
     private SharedPreferences sharedPreferences;
     private String title = "";
     private String content = "";
+    private FrameLayout btnBackThread;
+    private FrameLayout btnUpload;
+    private RadioGroup rbtnStatus;
+    private Integer status = 1;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -65,11 +73,15 @@ public class CreateThreadActivity extends AppCompatActivity implements View.OnCl
         sharedPreferences = getSharedPreferences(Constant.nameSharedPreferences, Context.MODE_PRIVATE);
         edtContent = (EditText) findViewById(R.id.edtContent);
         edtTitle = (EditText) findViewById(R.id.edtTitle);
-        content = edtContent.getText().toString();
-        title = edtTitle.getText().toString();
+        rbtnStatus = (RadioGroup) findViewById(R.id.rbtnStatus);
+
         arrImage = new ArrayList<Image>();
         arrBitmap = new ArrayList<ChooseBitmap>();
         image = new Image(null, R.mipmap.btn_choose_image, 0, null);
+        btnBackThread = (FrameLayout) findViewById(R.id.btnBackThread);
+        btnUpload = (FrameLayout) findViewById(R.id.btnUpload);
+        btnBackThread.setOnClickListener(this);
+        btnUpload.setOnClickListener(this);
         arrImage.add(image);
         gvImage = (GridView) findViewById(R.id.gvImage);
         imageAdapter = new ImageAdapter(this, R.layout.item_gridview_image, arrImage);
@@ -86,9 +98,6 @@ public class CreateThreadActivity extends AppCompatActivity implements View.OnCl
                             if (which == DialogInterface.BUTTON_POSITIVE) {
                                 if (arrImage.size() == 8 && arrImage.get(arrImage.size() - 1).chooseImage == 1 || arrImage.get(arrImage.size() - 1).chooseImage == 3) {
                                     arrImage.add(new Image(null, R.mipmap.btn_choose_image, 0, null));
-                                }
-                                if (arrImage.get(position).chooseImage == 3) {
-
                                 }
                                 if (arrImage.get(position).chooseImage == 1) {
                                     for (int i = 0; i < arrBitmap.size(); i++) {
@@ -113,17 +122,18 @@ public class CreateThreadActivity extends AppCompatActivity implements View.OnCl
         });
         // ATTENTION: This was auto-generated to implement the App Indexing API.
         // See https://g.co/AppIndexing/AndroidStudio for more information.
+
+        rbtnStatus.setOnCheckedChangeListener(new StatusOnCheckedChange());
     }
 
-    public void postComments() {
-
+    public void postThreads() {
 
         CustomAsyncHttpClient client = new CustomAsyncHttpClient(CreateThreadActivity.this, sharedPreferences.getString(Constant.token, ""));
         String url = Service.ServerURL + "/thread/create";
-
         RequestParams params = new RequestParams();
         params.put("title", title);
         params.put("content", content);
+        params.put("status", status); // 1:show username, 2: anonymous <--- //TODO
         arrFile = new File[arrBitmap.size()];
         Collections.reverse(arrBitmap);
         for (int i = 0; i < arrBitmap.size(); i++) {
@@ -137,16 +147,16 @@ public class CreateThreadActivity extends AppCompatActivity implements View.OnCl
         } catch (FileNotFoundException e) {
             e.printStackTrace();
         }
-        params.setHttpEntityIsRepeatable(true);
-        params.setUseJsonStreamer(false);
+//        params.setHttpEntityIsRepeatable(true);
+//        params.setUseJsonStreamer(false);
         params.setForceMultipartEntityContentType(true);
-        client.post(CreateThreadActivity.this, url, params, new TextHttpResponseHandler() {
+        client.post(url, params, new TextHttpResponseHandler() {
             private ProgressDialog progressBar;
             @Override
             public void onStart() {
                 super.onStart();
                 try {
-                    progressBar = new ProgressDialog(getApplicationContext());
+                    progressBar = new ProgressDialog(CreateThreadActivity.this);
                     progressBar.setCancelable(true);
                     progressBar.setMessage("Loading ...");
                     progressBar.setProgressStyle(ProgressDialog.STYLE_SPINNER);
@@ -158,7 +168,7 @@ public class CreateThreadActivity extends AppCompatActivity implements View.OnCl
 
             @Override
             public void onFailure(int i, Header[] headers, String s, Throwable throwable) {
-                CommonUtils.showOkDialog(CreateThreadActivity.this, getString(R.string.dialog_content_server_problem), null, null);
+                CommonUtils.showOkDialog(CreateThreadActivity.this, getString(R.string.dialog_content_server_problem), s, null);
 
             }
 
@@ -172,7 +182,7 @@ public class CreateThreadActivity extends AppCompatActivity implements View.OnCl
                             finish();
                         } else {
                             String message = CommonUtils.getValidString(jObject.getString("message"));
-                            CommonUtils.showOkDialog(getApplicationContext(), getResources().getString(R.string.dialog_title_common), message, null);
+                            CommonUtils.showOkDialog(getApplication(), getResources().getString(R.string.dialog_title_common), message, null);
                         }
 
                     } catch (Exception e) {
@@ -180,7 +190,7 @@ public class CreateThreadActivity extends AppCompatActivity implements View.OnCl
                     }
 
                 } else {
-                    CommonUtils.showOkDialog(getApplicationContext(), getResources().getString(R.string.dialog_title_common), i + "", null);
+                    CommonUtils.showOkDialog(getApplication(), getResources().getString(R.string.dialog_title_common), i + "", null);
                 }
             }
 
@@ -194,7 +204,14 @@ public class CreateThreadActivity extends AppCompatActivity implements View.OnCl
 
     @Override
     public void onClick(View v) {
-
+        if (v == btnBackThread) {
+            finish();;
+        }
+        if (v == btnUpload) {
+            content = edtContent.getText().toString();
+            title = edtTitle.getText().toString();
+            postThreads();
+        }
     }
 
     private class ImageAdapter extends ArrayAdapter<Image> {
@@ -321,6 +338,25 @@ public class CreateThreadActivity extends AppCompatActivity implements View.OnCl
                 return true;
             default:
                 return super.onOptionsItemSelected(item);
+        }
+    }
+
+    private class StatusOnCheckedChange implements RadioGroup.OnCheckedChangeListener {
+
+        @Override
+        public void onCheckedChanged(RadioGroup group, int checkedId) {
+            switch (checkedId) {
+                case R.id.rbnPublic:
+                    status = 1;
+                    break;
+                case R.id.rbnAnonymous:
+                    status = 0;
+                    break;
+                default:
+                    status = 1;
+                    break;
+            }
+
         }
     }
 

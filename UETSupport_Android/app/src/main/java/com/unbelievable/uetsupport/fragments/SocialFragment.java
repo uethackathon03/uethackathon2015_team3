@@ -30,6 +30,7 @@ public class SocialFragment extends Fragment implements View.OnClickListener  {
     int[] photos = {R.mipmap.logo_uet};
     public static Thread sThread;
     private FloatingActionButton btnCreateThread;
+
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {

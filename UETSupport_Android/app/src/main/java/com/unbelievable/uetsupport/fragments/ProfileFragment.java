@@ -54,7 +54,6 @@ public class ProfileFragment extends Fragment implements AdapterView.OnItemClick
         coverPhoto = (ImageView)v.findViewById(R.id.cover_photo);
         tvName = (TextView)v.findViewById(R.id.tvName);
         tvVNUMail =(TextView)v.findViewById(R.id.tvVNUMail);
-
         profileArrayList = new ArrayList<String>();
         profileArrayList.add("Thời khóa biểu");
         profileArrayList.add("Lịch thi");
@@ -66,6 +65,7 @@ public class ProfileFragment extends Fragment implements AdapterView.OnItemClick
         profileAdapter = new ProfileAdapter(getContext(),profileArrayList);
         profileListView.setAdapter(profileAdapter);
         profileListView.setOnItemClickListener(this);
+        profileListView.setAdapter(profileAdapter);
 
         option = new DisplayImageOptions.Builder()
                 .showImageForEmptyUri(R.drawable.cover_photo2)

@@ -12,14 +12,11 @@
         android:background="@color/colorPrimary">
 
         <FrameLayout
+            android:id="@+id/btnBackThread"
             android:layout_width="50dp"
-            android:layout_height="match_parent">
-
-            <Button
-                android:id="@+id/btnBackReminder"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                style="?android:attr/borderlessButtonStyle" />
+            android:layout_height="match_parent"
+            android:layout_alignParentLeft="true"
+            android:background="@drawable/actionbar_button">
 
             <ImageView
                 android:layout_width="25dp"
@@ -27,6 +24,23 @@
                 android:layout_gravity="center"
                 android:scaleType="fitXY"
                 android:src="@mipmap/ic_back" />
+
+        </FrameLayout>
+
+        <FrameLayout
+            android:id="@+id/btnUpload"
+            android:layout_width="50dp"
+            android:layout_height="match_parent"
+            android:layout_alignParentRight="true"
+            android:background="@drawable/actionbar_button">
+
+
+            <ImageView
+                android:layout_width="25dp"
+                android:layout_height="25dp"
+                android:layout_gravity="center"
+                android:scaleType="fitXY"
+                android:src="@mipmap/ic_upload" />
 
         </FrameLayout>
 
@@ -56,9 +70,9 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="10dp"
-                android:textStyle="bold"
                 android:text="Tiêu đề *"
-                android:textSize="14sp" />
+                android:textSize="14sp"
+                android:textStyle="bold" />
 
 
             <EditText
@@ -84,9 +98,44 @@
             android:inputType="textMultiLine|textCapSentences"
             android:maxLines="4"
             android:padding="10dp"
-            android:textSize="12sp"
-             />
+            android:textSize="12sp" />
 
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:orientation="vertical">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="10dp"
+                android:text="Chế độ *"
+                android:textSize="14sp"
+                android:textStyle="bold" />
+
+            <RadioGroup
+                android:id="@+id/rbtnStatus"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <RadioButton
+                    android:id="@+id/rbnPublic"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginRight="10dp"
+                    android:text="Công khai" />
+
+                <RadioButton
+                    android:id="@+id/rbnAnonymous"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginRight="10dp"
+                    android:text="Ẩn danh" />
+
+            </RadioGroup>
+        </LinearLayout>
     </LinearLayout>
 
 
@@ -110,8 +159,8 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Đăng ảnh"
-                android:textStyle="bold"
-                android:textSize="14sp" />
+                android:textSize="14sp"
+                android:textStyle="bold" />
         </LinearLayout>
 
         <GridView
