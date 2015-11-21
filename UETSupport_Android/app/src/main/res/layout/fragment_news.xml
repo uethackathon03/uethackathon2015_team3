@@ -21,7 +21,10 @@
         android:orientation="horizontal"
         android:background="#DE6A5ACD"
         android:layout_gravity="bottom"
-        android:layout_alignParentBottom="true">
+        android:layout_alignParentBottom="true"
+        android:paddingTop="5dp"
+        android:paddingBottom="5dp"
+        >
 
         <RadioButton
             android:id="@+id/btNewsSwitch"
