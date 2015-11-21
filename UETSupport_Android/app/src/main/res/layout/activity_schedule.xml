@@ -3,44 +3,13 @@
     android:layout_height="match_parent"
     android:orientation="vertical">
 
-    <RelativeLayout
-        android:layout_width="match_parent"
-        android:layout_height="50dp"
-        android:background="@color/colorPrimary">
-
-        <FrameLayout
-            android:layout_width="50dp"
-            android:layout_height="match_parent">
-
-            <Button
-                android:id="@+id/btnBack"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                style="?android:attr/borderlessButtonStyle" />
-
-            <ImageView
-                android:layout_width="25dp"
-                android:layout_height="25dp"
-                android:layout_gravity="center"
-                android:scaleType="fitXY"
-                android:src="@mipmap/ic_back" />
-
-
-        </FrameLayout>
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_centerInParent="true"
-            android:text="Thời khóa biểu"
-            android:textAllCaps="true"
-            android:textColor="@android:color/white"
-            android:textSize="20sp" />
-    </RelativeLayout>
+    <include
+        android:id="@+id/toolbar"
+        layout="@layout/tool_bar" />
 
     <FrameLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="wrap_content">
 
         <HorizontalScrollView
             android:layout_width="match_parent"
@@ -408,4 +377,31 @@
                 android:text="10" />
         </LinearLayout>
     </FrameLayout>
+
+    <LinearLayout
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:padding="5dp"
+        android:gravity="center_horizontal"
+        >
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/tvScheduleTitle"
+            android:text="Chi tiết"
+            android:textSize="30sp"
+
+            />
+        <ListView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/scheduleListView"
+            >
+
+        </ListView>
+
+    </LinearLayout>
+
+
 </LinearLayout>
