@@ -26,7 +26,6 @@ import java.util.ArrayList;
  * Created by huylv on 21/11/2015.
  */
 public class ReminderActivity extends AppCompatActivity implements AdapterView.OnItemClickListener{
-
     ListView reminderListView;
     ArrayList<Reminder> reminderArrayList;
     ReminderAdapter reminderAdapter;
@@ -47,7 +46,7 @@ public class ReminderActivity extends AppCompatActivity implements AdapterView.O
         reminderListView.setOnItemClickListener(this);
 
         setTitle("Reminder");
-        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+//        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
     }
 
     private class ReminderAdapter extends BaseAdapter {
@@ -112,7 +111,7 @@ public class ReminderActivity extends AppCompatActivity implements AdapterView.O
     @Override
     public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
         Reminder reminder = reminderArrayList.get(position);
-        ReminderDialog dialog = new ReminderDialog(ReminderActivity.this,reminder);
+        ReminderDialog dialog = new ReminderDialog(this.getParent(),reminder);
         dialog.show();
     }
 }

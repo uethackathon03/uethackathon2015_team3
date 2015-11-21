@@ -26,7 +26,6 @@ public class CommentListAdapter extends BaseAdapter {
     TextView tvUserName;
     Button btnCommentLike;
     Button btnCommentDislike;
-    Button btnUserRank;
     TextView tvCommentContent;
     TextView tvCommentCreateTime;
     SimpleDateFormat format = new SimpleDateFormat("hh:mm dd/MM/yyyy");
@@ -63,9 +62,8 @@ public class CommentListAdapter extends BaseAdapter {
         Comment comment = comments.get(position);
         imgUserAvatar.setImageResource(comment.avatar);
         tvUserName.setText(comment.userName);
-        btnCommentLike.setText(comment.like + "");
-        btnCommentDislike.setText(comment.dislike + "");
-        btnUserRank.setText(3 + "");
+//        btnCommentLike.setText(comment.like + "");
+//        btnCommentDislike.setText(comment.dislike + "");
         tvCommentContent.setText(comment.content);
         tvCommentCreateTime.setText(format.format(comment.createdTime));
         return convertView;
@@ -74,9 +72,8 @@ public class CommentListAdapter extends BaseAdapter {
     public void initView(View v) {
         imgUserAvatar = (ImageView) v.findViewById(R.id.imgUserAvatar);
         tvUserName = (TextView) v.findViewById(R.id.tvUserName);
-        btnCommentLike = (Button) v.findViewById(R.id.btnCommentLike);
-        btnCommentDislike = (Button) v.findViewById(R.id.btnCommentDislike);
-        btnUserRank = (Button) v.findViewById(R.id.btnUserRank);
+//        btnCommentLike = (Button) v.findViewById(R.id.btnCommentLike);
+//        btnCommentDislike = (Button) v.findViewById(R.id.btnCommentDislike);
         tvCommentContent = (TextView) v.findViewById(R.id.tvCommentContent);
         tvCommentCreateTime = (TextView) v.findViewById(R.id.tvCommentCreateTime);
     }

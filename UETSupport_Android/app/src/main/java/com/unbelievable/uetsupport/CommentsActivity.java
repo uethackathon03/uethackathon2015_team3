@@ -4,8 +4,10 @@ import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.View;
+import android.widget.AbsListView;
 import android.widget.Button;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.TextView;
 
@@ -30,6 +32,7 @@ public class CommentsActivity extends AppCompatActivity implements View.OnClickL
     TextView tvUserName;
     TextView tvCreateTime;
     TextView tvContent;
+    LinearLayout layout;
     ImageView photo;
     Button btnLike;
     Button btnDisLike;
@@ -48,6 +51,7 @@ public class CommentsActivity extends AppCompatActivity implements View.OnClickL
         tvCreateTime = (TextView) findViewById(R.id.tvUploadedTime);
         tvContent = (TextView) findViewById(R.id.tvContent);
         photo = (ImageView) findViewById(R.id.photo);
+        layout = (LinearLayout) findViewById(R.id.threadLayout);
         btnLike = (Button) findViewById(R.id.btnLike);
         btnDisLike = (Button) findViewById(R.id.btnDislike);
         btnComment = (Button) findViewById(R.id.btnAnswer);
@@ -55,6 +59,7 @@ public class CommentsActivity extends AppCompatActivity implements View.OnClickL
         avatar.setImageResource(mainThread.getAvatar());
         tvUserName.setText(mainThread.getUserName());
         tvCreateTime.setText(format.format(mainThread.getCreatedTime()));
+        tvContent.setText(mainThread.getContent());
         btnLike.setText(mainThread.getLike() + "");
         btnDisLike.setText(mainThread.disLike + "");
         btnComment.setText(mainThread.getComment() + "");
