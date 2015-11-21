@@ -1,0 +1,128 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_height="match_parent">
+    <include
+        android:id="@+id/toolbar"
+        layout="@layout/tool_bar"
+        />
+    <LinearLayout
+        android:id="@+id/threadLayout" xmlns:android="http://schemas.android.com/apk/res/android"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:orientation="vertical"
+        android:layout_below="@+id/toolbar"
+        android:padding="0dp">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <ImageView
+                android:id="@+id/imgAvatar"
+                android:layout_width="40dp"
+                android:layout_height="40dp"
+                android:src="@mipmap/user" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="40dp"
+                android:orientation="vertical">
+
+                <TextView
+                    android:id="@+id/tvUserName"
+                    android:layout_width="match_parent"
+                    android:layout_height="0dp"
+                    android:layout_weight="3"
+                    android:text="Vu Phuong Nam"
+                    android:textColor="@android:color/primary_text_light"
+                    android:textSize="15sp"
+                    android:textStyle="bold" />
+
+                <TextView
+                    android:id="@+id/tvUploadedTime"
+                    android:layout_width="match_parent"
+                    android:layout_height="0dp"
+                    android:layout_weight="2"
+                    android:text="17:32 20/11/2015"
+                    android:textSize="10sp" />
+            </LinearLayout>
+        </LinearLayout>
+
+        <TextView
+            android:id="@+id/tvContent"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="10dp"
+            android:text="Có thánh nào biết làm tín hiệu và hệ thống không, giúp mình bài này với" />
+
+        <ImageView
+            android:id="@+id/photo"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@android:color/holo_green_dark"
+            android:visibility="visible" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:orientation="horizontal">
+
+            <Button
+                android:id="@+id/btnLike"
+                style="?attr/borderlessButtonStyle"
+                android:layout_width="0dp"
+                android:layout_height="36dp"
+                android:layout_weight="1"
+                android:drawableLeft="@mipmap/up"
+                android:text="1"
+                android:textColor="@android:color/black" />
+
+            <Button
+                android:id="@+id/btnDislike"
+                style="?attr/borderlessButtonStyle"
+                android:layout_width="0dp"
+                android:layout_height="36dp"
+                android:layout_weight="1"
+                android:drawableLeft="@mipmap/down"
+                android:text="3"
+                android:textColor="@android:color/black" />
+
+            <Button
+                android:id="@+id/btnAnswer"
+                style="?attr/borderlessButtonStyle"
+                android:layout_width="0dp"
+                android:layout_height="36dp"
+                android:layout_weight="1"
+                android:drawableLeft="@mipmap/comment"
+                android:gravity="center"
+                android:text="4"
+                android:textColor="@android:color/black" />
+        </LinearLayout>
+        <View
+            android:layout_marginLeft="8dp"
+            android:layout_marginRight="8dp"
+            android:layout_width="match_parent"
+            android:layout_height="0.5dp"
+            android:background="@android:color/darker_gray"/>
+    </LinearLayout>
+    <ListView
+        android:id="@+id/listComment"
+        android:layout_width="match_parent"
+        android:layout_height="fill_parent"
+        android:layout_below="@+id/threadLayout"
+        android:layout_above="@+id/etComment"
+        android:dividerHeight="0.5dp"></ListView>
+    <EditText
+        android:drawableLeft="@android:drawable/ic_menu_camera"
+        android:drawableRight="@android:drawable/ic_menu_send"
+        android:id="@+id/etComment"
+        android:layout_alignParentBottom="true"
+        android:layout_width="match_parent"
+        android:layout_height="45dp"
+        android:inputType="text|textMultiLine"/>
+
+</RelativeLayout>

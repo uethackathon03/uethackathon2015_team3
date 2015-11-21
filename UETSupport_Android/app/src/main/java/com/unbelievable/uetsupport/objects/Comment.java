@@ -12,6 +12,7 @@ public class Comment {
 
     public String content;
     public Integer like;
+    public Integer dislike;
 
     public Date createdTime;
     public Date modifiedTime;

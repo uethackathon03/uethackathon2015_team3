@@ -22,7 +22,7 @@ public class Thread {
     public Date createdTime;
     public Date modifiedTime;
 
-    public ArrayList<Comment> comments;
+    public ArrayList<Comment> comments = new ArrayList<>();
     public String userName;
     public int avatar;
 
@@ -91,5 +91,9 @@ public class Thread {
     }
     public boolean isAnonimous(){
         return isAnonimous;
+    }
+
+    public ArrayList<Comment> getComments() {
+        return comments;
     }
 }
