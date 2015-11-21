@@ -11,6 +11,7 @@ import android.widget.Button;
 import android.widget.ListView;
 
 import com.loopj.android.http.TextHttpResponseHandler;
+import com.unbelievable.uetsupport.MainActivity;
 import com.unbelievable.uetsupport.R;
 import com.unbelievable.uetsupport.adapter.RecuitmentAdapter;
 import com.unbelievable.uetsupport.adapter.NewsAdapter;
@@ -32,47 +33,36 @@ import cz.msebera.android.httpclient.Header;
  */
 public class NewsFragment extends Fragment implements View.OnClickListener {
 
-    ListView newsListView;
-    ArrayList<News> newsArrayList;
-    ArrayList<News> annouceArrayList;
-    NewsAdapter newsArrayAdapter;
-    RecuitmentAdapter recuitmentAdapter;
+    private ListView newsListView;
+    private ArrayList<News> annouceArrayList;
+    private NewsAdapter newsArrayAdapter;
+    private RecuitmentAdapter recuitmentAdapter;
+    private MainActivity mainActivity;
 
-    Button btNewsSwitch;
-    Button btRecuitmentSwitch;
-
-    public NewsFragment() {
-        /*
-        annouceArrayList = new ArrayList<>();
-        annouceArrayList.add(new News("im1", "Noi dung tin tuc" + annouceArrayList.size()));
-        annouceArrayList.add(new News("im1", "Noi dung tin tuc" + annouceArrayList.size()));
-        annouceArrayList.add(new News("im1", "Noi dung tin tuc" + annouceArrayList.size()));
-        annouceArrayList.add(new News("im1", "Noi dung tin tuc" + annouceArrayList.size()));
-        annouceArrayList.add(new News("im1", "Noi dung tin tuc" + annouceArrayList.size()));
-        annouceArrayList.add(new News("im1", "Noi dung tin tuc" + annouceArrayList.size()));
-        annouceArrayList.add(new News("im1", "Noi dung tin tuc" + annouceArrayList.size()));
-        annouceArrayList.add(new News("im1", "Noi dung tin tuc" + annouceArrayList.size()));
-        */
-
-    }
+    private Button btNewsSwitch;
+    private Button btRecuitmentSwitch;
 
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View v = inflater.inflate(R.layout.fragment_news, container, false);
-        newsArrayList = new ArrayList<>();
+        mainActivity = (MainActivity) getActivity();
         newsListView = (ListView) v.findViewById(R.id.newslist);
-        newsArrayAdapter = new NewsAdapter(getActivity(), newsArrayList);
+        newsArrayAdapter = new NewsAdapter(getActivity(), mainActivity.newsArrayList);
         recuitmentAdapter = new RecuitmentAdapter(getActivity(), annouceArrayList);
         newsListView.setAdapter(newsArrayAdapter);
-        News news = new News();
-        newsArrayList.add(news);
+
 
         btNewsSwitch =(Button) v.findViewById(R.id.btNewsSwitch);
         btRecuitmentSwitch = (Button)v.findViewById(R.id.btAnnouceSwitch);
         btNewsSwitch.setOnClickListener(this);
         btRecuitmentSwitch.setOnClickListener(this);
-        parseNewsFromServer();
+        if (mainActivity.newsArrayList.size() == 0) {
+            News news = new News();
+            mainActivity.newsArrayList.add(news);
+            parseNewsFromServer();
+        }
+
         return v;
     }
 
@@ -122,7 +112,7 @@ public class NewsFragment extends Fragment implements View.OnClickListener {
                             JSONArray jarrData = new JSONArray(jObject.getString("data"));
                             for (int i = 0; i < jarrData.length(); i++) {
                                 News news = News.getNews(jarrData.getJSONObject(i));
-                                newsArrayList.add(news);
+                                mainActivity.newsArrayList.add(news);
                             }
 
                         } else {
