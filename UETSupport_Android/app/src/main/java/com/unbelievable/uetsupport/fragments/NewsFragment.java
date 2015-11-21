@@ -63,6 +63,7 @@ public class NewsFragment extends Fragment implements View.OnClickListener {
         btrecruitmentSwitch = (Button) v.findViewById(R.id.btAnnouceSwitch);
         btNewsSwitch.setOnClickListener(this);
         btrecruitmentSwitch.setOnClickListener(this);
+        newsListView.setOnItemClickListener(new NewsOnItemClickListener());
         if (mainActivity.newsArrayList.size() == 0) {
             News news = new News();
             mainActivity.newsArrayList.add(news);
@@ -147,7 +148,7 @@ public class NewsFragment extends Fragment implements View.OnClickListener {
 
     }
 
-    private class NewOnItemClickListener implements AdapterView.OnItemClickListener {
+    private class NewsOnItemClickListener implements AdapterView.OnItemClickListener {
         private DisplayImageOptions option;
 
         @Override
