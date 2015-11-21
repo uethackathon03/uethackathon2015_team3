@@ -11,6 +11,15 @@
         <!--android:dividerHeight="5dp"-->
         <!-->-->
     <!--</ListView>-->
+    
+    <!--<com.unblievable.uetsupport.adapter.Fab-->
+        <!--android:id="@+id/fab"-->
+        <!--android:layout_alignParentBottom="true"-->
+        <!--android:layout_alignParentEnd="true"-->
+        <!--android:layout_alignParentRight="true"-->
+        <!--android:layout_width="wrap_content"-->
+        <!--android:layout_height="wrap_content" />-->
+
     <ListView
         android:id="@+id/newslist"
         android:layout_width="match_parent"
@@ -35,7 +44,7 @@
             android:layout_weight="1"
             android:button="@null"
             android:gravity="center"
-            android:text="Tin tức" />
+            android:text="Tin tuc" />
 
         <RadioButton
             android:id="@+id/btAnnouceSwitch"
@@ -44,7 +53,8 @@
             android:layout_weight="1"
             android:button="@null"
             android:gravity="center"
-            android:text="Thông báo" />
+            android:text="Thong bao" />
+
 
     </RadioGroup>
 
