@@ -13,7 +13,7 @@ import android.text.style.ImageSpan;
 import com.unbelievable.uetsupport.R;
 import com.unbelievable.uetsupport.common.Constant;
 import com.unbelievable.uetsupport.fragments.HelpFragment;
-import com.unbelievable.uetsupport.fragments.MenuFragment;
+import com.unbelievable.uetsupport.fragments.NotificationFragment;
 import com.unbelievable.uetsupport.fragments.NoLoginFragment;
 import com.unbelievable.uetsupport.fragments.ProfileFragment;
 import com.unbelievable.uetsupport.fragments.SocialFragment;
@@ -55,8 +55,8 @@ public class PagerAdapter extends FragmentStatePagerAdapter {
     public Fragment getItem(int position) {
         switch (position) {
             case 0:
-                NewsFragment web = new NewsFragment();
-                return web;
+                NewsFragment news = new NewsFragment();
+                return news;
             case 1:
                 SocialFragment social = new SocialFragment();
                 return social;
@@ -72,7 +72,7 @@ public class PagerAdapter extends FragmentStatePagerAdapter {
                     return personal;
                 }
             default:
-                MenuFragment menu = new MenuFragment();
+                NotificationFragment menu = new NotificationFragment();
                 return menu;
         }
     }

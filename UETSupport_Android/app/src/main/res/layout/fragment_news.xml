@@ -5,24 +5,26 @@
     android:layout_height="match_parent">
 
 
+
     <ListView
         android:id="@+id/newslist"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:divider="#A4C739"
         android:dividerHeight="1dp"
-        android:visibility="visible" />
-
+        android:visibility="visible"
+        />
     <RadioGroup
         android:id="@+id/groupNews"
         android:layout_width="match_parent"
-        android:layout_height="40dp"
-        android:layout_alignParentBottom="true"
-        android:layout_gravity="bottom"
-        android:background="#DE6A5ACD"
+        android:layout_height="@dimen/bottom_tab_height"
         android:orientation="horizontal"
+        android:background="#DE6A5ACD"
+        android:layout_gravity="bottom"
+        android:layout_alignParentBottom="true"
+        android:paddingTop="5dp"
         android:paddingBottom="5dp"
-        android:paddingTop="5dp">
+        >
 
         <RadioButton
             android:id="@+id/btNewsSwitch"
@@ -30,11 +32,11 @@
             android:layout_height="match_parent"
             android:layout_weight="1"
             android:button="@null"
+            android:textColor="@android:color/white"
             android:gravity="center"
             android:text="Tin tức"
-            android:textColor="@android:color/white"
-            android:textSize="20sp" />
-
+            android:textSize="25dp"
+            />
 
         <RadioButton
             android:id="@+id/btAnnouceSwitch"
@@ -42,12 +44,10 @@
             android:layout_height="match_parent"
             android:layout_weight="1"
             android:button="@null"
-            android:gravity="center"
-
-            android:text="Tuyển dụng"
             android:textColor="@android:color/white"
-            android:textSize="20sp" />
-
+            android:gravity="center"
+            android:textSize="25dp"
+            android:text="Tuyển dụng" />
 
     </RadioGroup>
 
@@ -61,6 +61,6 @@
         android:src="@drawable/ic_search_white_24dp"
         fab:fab_colorNormal="#FD3E80"
         fab:fab_colorPressed="#F50057"
-        fab:fab_colorRipple="#4df51e" />
+        fab:fab_colorRipple="#4df51e"/>
 
 </FrameLayout>
