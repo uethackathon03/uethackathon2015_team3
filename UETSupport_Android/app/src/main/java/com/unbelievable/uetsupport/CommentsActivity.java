@@ -3,6 +3,7 @@ package com.unbelievable.uetsupport;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.AbsListView;
 import android.widget.Button;
@@ -44,8 +45,12 @@ public class CommentsActivity extends AppCompatActivity implements View.OnClickL
         mainThread = SocialFragment.sThread;
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_comments);
-//        toolbar = (Toolbar) findViewById(R.id.toolbar);
-//        setSupportActionBar(toolbar);
+
+        toolbar = (Toolbar) findViewById(R.id.toolbar);
+        setSupportActionBar(toolbar);
+        toolbar.setTitle("Comment");
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+
         avatar = (ImageView) findViewById(R.id.imgAvatar);
         tvUserName = (TextView) findViewById(R.id.tvUserName);
         tvCreateTime = (TextView) findViewById(R.id.tvUploadedTime);
@@ -86,5 +91,15 @@ public class CommentsActivity extends AppCompatActivity implements View.OnClickL
             btnDisLike.setClickable(false);
             //TODO: Handle Dislike count
         }
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()) {
+            case android.R.id.home:
+                this.finish();
+                return true;
+        }
+        return super.onOptionsItemSelected(item);
     }
 }

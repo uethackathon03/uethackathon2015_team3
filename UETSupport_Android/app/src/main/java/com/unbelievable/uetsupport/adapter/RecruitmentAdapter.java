@@ -17,12 +17,12 @@ import java.util.ArrayList;
 /**
  * Created by huylv on 20/11/2015.
  */
-public class RecuitmentAdapter extends ArrayAdapter<News> {
+public class RecruitmentAdapter extends ArrayAdapter<News> {
 
     Context context;
     ArrayList<News> newsArrayList;
 
-    public RecuitmentAdapter(Context context, ArrayList<News> newsArrayList) {
+    public RecruitmentAdapter(Context context, ArrayList<News> newsArrayList) {
         super(context, -1, newsArrayList);
         this.context = context;
         this.newsArrayList = newsArrayList;

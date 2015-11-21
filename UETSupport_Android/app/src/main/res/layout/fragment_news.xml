@@ -17,7 +17,7 @@
     <RadioGroup
         android:id="@+id/groupNews"
         android:layout_width="match_parent"
-        android:layout_height="40dp"
+        android:layout_height="@dimen/bottom_tab_height"
         android:orientation="horizontal"
         android:background="#DE6A5ACD"
         android:layout_gravity="bottom"
