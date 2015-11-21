@@ -23,6 +23,7 @@ import com.loopj.android.http.TextHttpResponseHandler;
 import com.nostra13.universalimageloader.core.DisplayImageOptions;
 import com.nostra13.universalimageloader.core.ImageLoader;
 import com.nostra13.universalimageloader.core.assist.ImageScaleType;
+import com.unbelievable.uetsupport.MainActivity;
 import com.unbelievable.uetsupport.R;
 import com.unbelievable.uetsupport.adapter.AnnouceAdapter;
 import com.unbelievable.uetsupport.adapter.NewsAdapter;
@@ -45,10 +46,10 @@ import cz.msebera.android.httpclient.Header;
 public class NewsFragment extends Fragment implements View.OnClickListener {
 
     private ListView newsListView;
-    private ArrayList<News> newsArrayList;
     private ArrayList<News> annouceArrayList;
     private NewsAdapter newsArrayAdapter;
     private AnnouceAdapter annouceAdapter;
+    private MainActivity mainActivity;
 
     Button btNewsSwitch;
     Button btAnnouceSwitch;
@@ -73,19 +74,23 @@ public class NewsFragment extends Fragment implements View.OnClickListener {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         v = inflater.inflate(R.layout.fragment_news, container, false);
-        newsArrayList = new ArrayList<>();
+        mainActivity = (MainActivity) getActivity();
+
         newsListView = (ListView) v.findViewById(R.id.newslist);
-        newsArrayAdapter = new NewsAdapter(getActivity(), newsArrayList);
+        newsArrayAdapter = new NewsAdapter(getActivity(), mainActivity.newsArrayList);
         annouceAdapter = new AnnouceAdapter(getActivity(), annouceArrayList);
         newsListView.setAdapter(newsArrayAdapter);
-        News news = new News();
-        newsArrayList.add(news);
 
         btNewsSwitch =(Button) v.findViewById(R.id.btNewsSwitch);
         btAnnouceSwitch = (Button)v.findViewById(R.id.btAnnouceSwitch);
         btNewsSwitch.setOnClickListener(this);
         btAnnouceSwitch.setOnClickListener(this);
-        parseNewsFromServer();
+        if (mainActivity.newsArrayList.size() == 0) {
+            News news = new News();
+            mainActivity.newsArrayList.add(news);
+            parseNewsFromServer();
+        }
+
         newsListView.setOnItemClickListener(new NewOnItemClickListener());
         return v;
     }
@@ -136,7 +141,7 @@ public class NewsFragment extends Fragment implements View.OnClickListener {
                             JSONArray jarrData = new JSONArray(jObject.getString("data"));
                             for (int i = 0; i < jarrData.length(); i++) {
                                 News news = News.getNews(jarrData.getJSONObject(i));
-                                newsArrayList.add(news);
+                                mainActivity.newsArrayList.add(news);
                             }
 
                         } else {
@@ -179,15 +184,15 @@ public class NewsFragment extends Fragment implements View.OnClickListener {
 
             Dialog dialog = new Dialog(getActivity());
             dialog.setContentView(R.layout.news_dialog);
-            dialog.setTitle(newsArrayList.get(position).title);
+            dialog.setTitle(mainActivity.newsArrayList.get(position).title);
             ImageView imvDialogPhoto = (ImageView) dialog.findViewById(R.id.imvDialogPhoto);
             TextView tvDialogContent = (TextView) dialog.findViewById(R.id.tvDialogContent);
             try {
-                ImageLoader.getInstance().displayImage(newsArrayList.get(position).photo, imvDialogPhoto, option);
+                ImageLoader.getInstance().displayImage(mainActivity.newsArrayList.get(position).photo, imvDialogPhoto, option);
             } catch (Exception e) {
                 e.printStackTrace();
             }
-            tvDialogContent.setText(newsArrayList.get(position).content);
+            tvDialogContent.setText(mainActivity.newsArrayList.get(position).content);
             dialog.show();
 
         }
