@@ -9,29 +9,30 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.unbelievable.uetsupport.R;
-import com.unbelievable.uetsupport.objects.Teacher;
+import com.unbelievable.uetsupport.objects.Department;
 
 import java.util.ArrayList;
 
 /**
- * Created by Nam on 11/21/2015.
+ * Created by Nam on 11/22/2015.
  */
-public class TeacherAdapter extends ArrayAdapter<Teacher> {
+public class DepartmentAdapter extends ArrayAdapter<Department> {
     Context context;
-    ArrayList<Teacher> teacherArrayList;
+    ArrayList<Department> departmentArrayList;
+
     ImageView imgAvatar;
     TextView tvTeacherName;
     TextView tvTeacherPhone;
 
-    public TeacherAdapter(Context context,ArrayList<Teacher> teachers){
-        super(context,-1,teachers);
-        this.context =context;
-        this.teacherArrayList = teachers;
+    public DepartmentAdapter(Context context, ArrayList<Department> departments) {
+        super(context, -1, departments);
+        this.context = context;
+        departmentArrayList = departments;
     }
 
     @Override
     public int getCount() {
-        return teacherArrayList.size();
+        return departmentArrayList.size();
     }
 
     @Override
@@ -39,10 +40,11 @@ public class TeacherAdapter extends ArrayAdapter<Teacher> {
         LayoutInflater layoutInflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
         View rowView = layoutInflater.inflate(R.layout.list_teacher_item, parent, false);
         imgAvatar = (ImageView) rowView.findViewById(R.id.imgAvatar);
+        imgAvatar.setVisibility(View.GONE);
         tvTeacherName = (TextView) rowView.findViewById(R.id.tvTeacherName);
         tvTeacherPhone = (TextView) rowView.findViewById(R.id.tvTeacherPhone);
-        tvTeacherName.setText(teacherArrayList.get(position).getFullname());
-        tvTeacherPhone.setText(teacherArrayList.get(position).getPhone());
+        tvTeacherName.setText(departmentArrayList.get(position).name);
+        tvTeacherPhone.setText(departmentArrayList.get(position).description);
         return rowView;
     }
 }

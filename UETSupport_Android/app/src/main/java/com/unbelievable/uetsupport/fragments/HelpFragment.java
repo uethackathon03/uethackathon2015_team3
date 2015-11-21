@@ -4,7 +4,6 @@ import android.app.ProgressDialog;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -15,10 +14,11 @@ import android.widget.RadioButton;
 
 import com.loopj.android.http.TextHttpResponseHandler;
 import com.unbelievable.uetsupport.R;
+import com.unbelievable.uetsupport.adapter.DepartmentAdapter;
 import com.unbelievable.uetsupport.adapter.TeacherAdapter;
 import com.unbelievable.uetsupport.common.CommonUtils;
 import com.unbelievable.uetsupport.common.UETSupportUtils;
-import com.unbelievable.uetsupport.objects.Office;
+import com.unbelievable.uetsupport.objects.Department;
 import com.unbelievable.uetsupport.objects.Teacher;
 import com.unbelievable.uetsupport.service.CustomAsyncHttpClient;
 import com.unbelievable.uetsupport.service.Service;
@@ -46,8 +46,9 @@ public class HelpFragment extends Fragment implements View.OnClickListener{
     List<String> listDataHeader;
     HashMap<String, List<String>> listDataChild;
     TeacherAdapter teacherAdapter;
+    DepartmentAdapter departmentAdapter;
     ArrayList<Teacher> teacherArrayList;
-    ArrayList<Office> officeArrayList;
+    ArrayList<Department> departmentArrayList;
 
 
     @Nullable
@@ -63,11 +64,17 @@ public class HelpFragment extends Fragment implements View.OnClickListener{
         btnOffice = (RadioButton) v.findViewById(R.id.btnOffice);
         btnQA = (RadioButton) v.findViewById(R.id.btnQA);
         teacherArrayList = new ArrayList<>();
+        departmentArrayList = new ArrayList<>();
         parseTeacherFromServer();
-
+        parseDepartmentFromServer();
         listTeacher = (ListView) v.findViewById(R.id.listTeacher);
         expListView = (ExpandableListView) v.findViewById(R.id.listQA);
         teacherAdapter = new TeacherAdapter(getContext(),teacherArrayList);
+        departmentAdapter = new DepartmentAdapter(getContext(),departmentArrayList);
+        btnTeacher.setOnClickListener(this);
+        btnOffice.setOnClickListener(this);
+        btnQA.setOnClickListener(this);
+
         listTeacher.setAdapter(teacherAdapter);
     }
     public void prepareListData(){
@@ -113,13 +120,11 @@ public class HelpFragment extends Fragment implements View.OnClickListener{
         if (v == btnTeacher){
             listTeacher.setVisibility(View.VISIBLE);
             expListView.setVisibility(View.GONE);
-//            profAdapter = new TeacherAdapter(getActivity(),R.layout.list_teacher_item,teacherArrayList);
             listTeacher.setAdapter(teacherAdapter);
         }if (v == btnOffice){
-//            listProf.setVisibility(View.VISIBLE);
-//            listQA.setVisibility(View.GONE);
-//            profAdapter = new TeacherAdapter(getActivity(),teacherArrayList,officeArrayList,1);
-//            listProf.setAdapter(profAdapter);
+            listTeacher.setVisibility(View.VISIBLE);
+            expListView.setVisibility(View.GONE);
+            listTeacher.setAdapter(departmentAdapter);
         }if (v == btnQA){
             listTeacher.setVisibility(View.GONE);
             expListView.setVisibility(View.VISIBLE);
@@ -187,7 +192,7 @@ public class HelpFragment extends Fragment implements View.OnClickListener{
             return;
         }
         CustomAsyncHttpClient client = new CustomAsyncHttpClient(getActivity(), "");
-        String url = Service.ServerURL + "/data/teachers";
+        String url = Service.ServerURL + "/data/departments";
         client.get(url, new TextHttpResponseHandler() {
             private ProgressDialog progressBar;
 
@@ -218,8 +223,8 @@ public class HelpFragment extends Fragment implements View.OnClickListener{
                         if (success.equals("1")){
                             JSONArray jArray = jObject.getJSONArray("data");
                             for (int index = 0;index < jArray.length();index++){
-                                Teacher teacher = Teacher.getTeacher(jArray.getJSONObject(index));
-                                teacherArrayList.add(teacher);
+                                Department department = Department.getDepartment(jArray.getJSONObject(index));
+                                departmentArrayList.add(department);
                             }
                         }else {
                             String message = CommonUtils.getValidString(jObject.getString("message"));

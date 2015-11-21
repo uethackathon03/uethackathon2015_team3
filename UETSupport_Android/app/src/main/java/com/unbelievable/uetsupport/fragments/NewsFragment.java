@@ -60,14 +60,8 @@ public class NewsFragment extends Fragment implements View.OnClickListener {
         fakeRecruitmentList();
         recruitmentAdapter = new RecruitmentAdapter(getActivity(), recruitmentArrayList);
         newsListView.setAdapter(newsArrayAdapter);
-
-<<<<<<< HEAD
-        btNewsSwitch =(Button) v.findViewById(R.id.btNewsSwitch);
-        btRecruitmentSwitch = (Button)v.findViewById(R.id.btAnnouceSwitch);
-=======
         btNewsSwitch = (Button) v.findViewById(R.id.btNewsSwitch);
         btRecruitmentSwitch = (Button) v.findViewById(R.id.btAnnouceSwitch);
->>>>>>> b90888ada5bb48dc9b2123b3aebe18ce409a7b54
         btNewsSwitch.setOnClickListener(this);
         btRecruitmentSwitch.setOnClickListener(this);
         if (mainActivity.newsArrayList.size() == 0) {
@@ -179,7 +173,7 @@ public class NewsFragment extends Fragment implements View.OnClickListener {
                     .imageScaleType(ImageScaleType.IN_SAMPLE_POWER_OF_2)
                     .cacheInMemory(true).cacheOnDisk(true).build();
             Dialog dialog = new Dialog(getActivity());
-            dialog.setContentView(R.layout.news_dialog);
+            dialog.setContentView(R.layout.dialog_news);
             dialog.setTitle(mainActivity.newsArrayList.get(position).title);
             ImageView imvDialogPhoto = (ImageView) dialog.findViewById(R.id.imvDialogPhoto);
             TextView tvDialogContent = (TextView) dialog.findViewById(R.id.tvDialogContent);

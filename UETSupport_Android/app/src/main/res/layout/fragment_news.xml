@@ -32,13 +32,9 @@
             android:button="@null"
             android:gravity="center"
             android:text="Tin tức"
-<<<<<<< HEAD
-            android:textSize="20dp"
-            />
-=======
             android:textColor="@android:color/white"
             android:textSize="20sp" />
->>>>>>> b90888ada5bb48dc9b2123b3aebe18ce409a7b54
+
 
         <RadioButton
             android:id="@+id/btAnnouceSwitch"
@@ -47,14 +43,11 @@
             android:layout_weight="1"
             android:button="@null"
             android:gravity="center"
-<<<<<<< HEAD
-            android:textSize="20dp"
-            android:text="Tuyển dụng" />
-=======
+
             android:text="Tuyển dụng"
             android:textColor="@android:color/white"
             android:textSize="20sp" />
->>>>>>> b90888ada5bb48dc9b2123b3aebe18ce409a7b54
+
 
     </RadioGroup>
 
