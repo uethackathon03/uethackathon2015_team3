@@ -54,7 +54,6 @@ public class NewsFragment extends Fragment implements View.OnClickListener {
         recruitmentAdapter = new RecruitmentAdapter(getActivity(),recruitmentArrayList );
         newsListView.setAdapter(newsArrayAdapter);
 
-
         btNewsSwitch =(Button) v.findViewById(R.id.btNewsSwitch);
         btRecruitmentSwitch = (Button)v.findViewById(R.id.btAnnouceSwitch);
         btNewsSwitch.setOnClickListener(this);

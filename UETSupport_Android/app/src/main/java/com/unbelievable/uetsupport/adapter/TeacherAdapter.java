@@ -1,9 +1,13 @@
 package com.unbelievable.uetsupport.adapter;
 
 import android.app.Activity;
+import android.content.Context;
+import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ArrayAdapter;
 import android.widget.BaseAdapter;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.unbelievable.uetsupport.R;
@@ -16,61 +20,33 @@ import java.util.ArrayList;
 /**
  * Created by Nam on 11/21/2015.
  */
-public class TeacherAdapter extends BaseAdapter {
-    final int PROF_MODE = 0;
-    final int OFFICE_MODE = 1;
-    private Activity activity;
-    private int layoutId = R.layout.list_prof;
-    private ArrayList<Teacher> p;
-    private ArrayList<Office> o;
-    private int mode;
+public class TeacherAdapter extends ArrayAdapter<Teacher> {
+    Context context;
+    ArrayList<Teacher> teacherArrayList;
+    ImageView imgAvatar;
+    TextView tvTeacherName;
+    TextView tvTeacherPhone;
 
-    RoundedImageView imgAva;
-    TextView tvName;
-    TextView tvPhone;
-
-
-    public TeacherAdapter(Activity activity, ArrayList<Teacher> p, ArrayList<Office> o, int mode) {
-        this.activity = activity;
-        this.p = p;
-        this.o = o;
-        this.mode = mode;
+    public TeacherAdapter(Context context,ArrayList<Teacher> teachers){
+        super(context,-1,teachers);
+        this.context =context;
+        this.teacherArrayList = teachers;
     }
-
 
     @Override
     public int getCount() {
-        return p.size();
-    }
-
-    @Override
-    public Object getItem(int position) {
-        return p.get(position);
-    }
-
-    @Override
-    public long getItemId(int position) {
-        return 0;
+        return teacherArrayList.size();
     }
 
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
-        if (convertView == null) {
-            convertView = activity.getLayoutInflater().inflate(layoutId, parent, false);
-        }
-        imgAva = (RoundedImageView) convertView.findViewById(R.id.imgAva);
-        tvName = (TextView) convertView.findViewById(R.id.tvName);
-        tvPhone = (TextView) convertView.findViewById(R.id.tvPhone);
-        if (mode == PROF_MODE) {
-            imgAva.setVisibility(View.VISIBLE);
-//            imgAva.setImageResource(p.get(position).getAvatar());
-            tvName.setText(p.get(position).getFullname());
-            tvPhone.setText(p.get(position).getPhone());
-        } else if (mode == OFFICE_MODE) {
-            imgAva.setVisibility(View.GONE);
-            tvName.setText(o.get(position).getName());
-            tvPhone.setText(o.get(position).getPhone());
-        }
-        return convertView;
+        LayoutInflater layoutInflater = (LayoutInflater)context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+        View rowView = layoutInflater.inflate(R.layout.list_teacher_item,parent,false);
+        imgAvatar = (ImageView) rowView.findViewById(R.id.imgAvatar);
+        tvTeacherName = (TextView) rowView.findViewById(R.id.tvTeacherName);
+        tvTeacherPhone = (TextView) rowView.findViewById(R.id.tvTeacherPhone);
+        tvTeacherName.setText(teacherArrayList.get(position).getFullname());
+        tvTeacherPhone.setText(teacherArrayList.get(position).getPhone());
+        return rowView;
     }
 }

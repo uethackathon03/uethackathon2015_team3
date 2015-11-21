@@ -35,7 +35,7 @@
             android:textColor="@android:color/white"
             android:gravity="center"
             android:text="Tin tức"
-            android:textSize="25dp"
+            android:textSize="20dp"
             />
 
         <RadioButton
@@ -46,7 +46,7 @@
             android:button="@null"
             android:textColor="@android:color/white"
             android:gravity="center"
-            android:textSize="25dp"
+            android:textSize="20dp"
             android:text="Tuyển dụng" />
 
     </RadioGroup>

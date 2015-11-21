@@ -9,7 +9,7 @@
 
 
     <ListView
-        android:id="@+id/listProf"
+        android:id="@+id/listTeacher"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:divider="#A4C739"
@@ -38,7 +38,7 @@
         >
 
         <RadioButton
-            android:id="@+id/btnProfList"
+            android:id="@+id/btnTeacher"
             android:layout_width="0dp"
             android:layout_height="36dp"
             android:layout_weight="1"
@@ -46,11 +46,11 @@
             android:gravity="center"
             android:text="Giảng viên"
             android:textColor="#FFFFFF"
-            android:textSize="25dp"
+            android:textSize="20dp"
             />
 
         <RadioButton
-            android:id="@+id/btnOffiList"
+            android:id="@+id/btnOffice"
             android:layout_width="0dp"
             android:layout_height="36dp"
             android:layout_weight="1"
@@ -59,7 +59,7 @@
             android:text="Phòng ban"
 
             android:textColor="#FFFFFF"
-            android:textSize="25dp"
+            android:textSize="20dp"
             />
 
         <RadioButton
@@ -71,7 +71,7 @@
             android:gravity="center"
             android:textColor="#FFFFFF"
             android:text="FAQ"
-            android:textSize="25dp"
+            android:textSize="20dp"
             />
     </RadioGroup>
 
