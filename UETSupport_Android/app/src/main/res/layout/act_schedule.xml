@@ -1,370 +1,411 @@
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical">
 
-    <HorizontalScrollView
+    <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="vertical">
+        android:layout_height="50dp"
+        android:background="@color/colorPrimary">
 
-        <LinearLayout
+        <FrameLayout
+            android:layout_width="50dp"
+            android:layout_height="match_parent">
+
+            <Button
+                android:id="@+id/btnBack"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                style="?android:attr/borderlessButtonStyle" />
+
+            <ImageView
+                android:layout_width="25dp"
+                android:layout_height="25dp"
+                android:layout_gravity="center"
+                android:scaleType="fitXY"
+                android:src="@mipmap/ic_back" />
+
+
+        </FrameLayout>
+
+        <TextView
             android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:text="Thời khóa biểu"
+            android:textAllCaps="true"
+            android:textColor="@android:color/white"
+            android:textSize="20sp" />
+    </RelativeLayout>
+
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <HorizontalScrollView
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical">
 
             <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="30dp"
-                android:background="@color/title_background"
-                android:gravity="center"
-                android:orientation="horizontal">
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
 
-                <TextView
-                    android:layout_width="25dp"
-                    android:layout_height="match_parent" />
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="30dp"
+                    android:background="@color/title_background"
+                    android:gravity="center"
+                    android:orientation="horizontal">
 
-                <TextView
-                    style="@style/schedule_title"
-                    android:text="Monday" />
+                    <TextView
+                        android:layout_width="25dp"
+                        android:layout_height="match_parent" />
 
-                <TextView
-                    style="@style/schedule_title"
-                    android:text="Tuesday" />
+                    <TextView
+                        style="@style/schedule_title"
+                        android:text="Monday" />
 
-                <TextView
-                    style="@style/schedule_title"
-                    android:text="Wednesday" />
+                    <TextView
+                        style="@style/schedule_title"
+                        android:text="Tuesday" />
 
-                <TextView
-                    style="@style/schedule_title"
-                    android:text="Thursday" />
+                    <TextView
+                        style="@style/schedule_title"
+                        android:text="Wednesday" />
 
-                <TextView
-                    style="@style/schedule_title"
-                    android:text="Friday" />
+                    <TextView
+                        style="@style/schedule_title"
+                        android:text="Thursday" />
 
-                <TextView
-                    style="@style/schedule_title"
-                    android:text="Saturday" />
+                    <TextView
+                        style="@style/schedule_title"
+                        android:text="Friday" />
 
-                <TextView
-                    style="@style/schedule_title"
-                    android:text="Sunday" />
+                    <TextView
+                        style="@style/schedule_title"
+                        android:text="Saturday" />
+
+                    <TextView
+                        style="@style/schedule_title"
+                        android:text="Sunday" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="30dp"
+                    android:background="@color/title_background"
+                    android:gravity="center"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        android:layout_width="25dp"
+                        android:layout_height="match_parent" />
+
+                    <TextView style="@style/item_schedule"
+                        android:text="Giải tích 1 \n 301-G2"/>
+
+                    <TextView style="@style/item_schedule" android:text="Tiếng Anh B1\n 304-GĐ2" />
+
+                    <TextView style="@style/item_schedule" />
+
+                    <TextView style="@style/item_schedule" />
+
+                    <TextView style="@style/item_schedule" />
+
+                    <TextView style="@style/item_schedule" />
+
+                    <TextView style="@style/item_schedule" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="30dp"
+                    android:background="@color/title_background"
+                    android:gravity="center"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        android:layout_width="25dp"
+                        android:layout_height="match_parent" />
+
+                    <TextView style="@style/item_schedule"/>
+
+                    <TextView style="@style/item_schedule"  />
+
+                    <TextView style="@style/item_schedule" />
+
+                    <TextView style="@style/item_schedule" />
+
+                    <TextView style="@style/item_schedule" />
+
+                    <TextView style="@style/item_schedule" />
+
+                    <TextView style="@style/item_schedule" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="30dp"
+                    android:background="@color/title_background"
+                    android:gravity="center"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        android:layout_width="25dp"
+                        android:layout_height="match_parent" />
+
+                    <TextView style="@style/item_schedule" />
+
+                    <TextView style="@style/item_schedule" />
+
+                    <TextView style="@style/item_schedule" android:text="Tiếng Anh B1\n 304-GĐ2"/>
+
+                    <TextView style="@style/item_schedule" />
+
+                    <TextView style="@style/item_schedule" />
+
+                    <TextView style="@style/item_schedule" />
+
+                    <TextView style="@style/item_schedule" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="30dp"
+                    android:background="@color/title_background"
+                    android:gravity="center"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        android:layout_width="25dp"
+                        android:layout_height="match_parent" />
+
+                    <TextView style="@style/item_schedule" android:text="Cầu Lông"/>
+
+                    <TextView style="@style/item_schedule" />
+
+                    <TextView style="@style/item_schedule" />
+
+                    <TextView style="@style/item_schedule" />
+
+                    <TextView style="@style/item_schedule" />
+
+                    <TextView style="@style/item_schedule" />
+
+                    <TextView style="@style/item_schedule" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="30dp"
+                    android:background="@color/title_background"
+                    android:gravity="center"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        android:layout_width="25dp"
+                        android:layout_height="match_parent" />
+
+                    <TextView style="@style/item_schedule" />
+
+                    <TextView style="@style/item_schedule" />
+
+                    <TextView style="@style/item_schedule" />
+
+                    <TextView style="@style/item_schedule" />
+
+                    <TextView style="@style/item_schedule" />
+
+                    <TextView style="@style/item_schedule" />
+
+                    <TextView style="@style/item_schedule" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="30dp"
+                    android:background="@color/title_background"
+                    android:gravity="center"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        android:layout_width="25dp"
+                        android:layout_height="match_parent" />
+
+                    <TextView style="@style/item_schedule" />
+
+                    <TextView style="@style/item_schedule" android:text="Đại số\n 309-GĐ2" />
+
+                    <TextView style="@style/item_schedule" android:text="Đại số BT\n 309-GĐ2"/>
+
+                    <TextView style="@style/item_schedule" android:text="Cơ sở dữ liệu B1\n 309-G2" />
+
+                    <TextView style="@style/item_schedule" android:text="Mạng máy tính \n 304-GĐ2"/>
+
+                    <TextView style="@style/item_schedule" />
+
+                    <TextView style="@style/item_schedule" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="30dp"
+                    android:background="@color/title_background"
+                    android:gravity="center"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        android:layout_width="25dp"
+                        android:layout_height="match_parent" />
+
+                    <TextView style="@style/item_schedule" />
+
+                    <TextView style="@style/item_schedule" />
+
+                    <TextView style="@style/item_schedule" />
+
+                    <TextView style="@style/item_schedule" />
+
+                    <TextView style="@style/item_schedule" />
+
+                    <TextView style="@style/item_schedule" />
+
+                    <TextView style="@style/item_schedule" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="30dp"
+                    android:background="@color/title_background"
+                    android:gravity="center"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        android:layout_width="25dp"
+                        android:layout_height="match_parent" />
+
+                    <TextView style="@style/item_schedule" />
+
+                    <TextView style="@style/item_schedule" />
+
+                    <TextView style="@style/item_schedule" />
+
+                    <TextView style="@style/item_schedule" android:text="Cơ sở dữ liệu TH\n PM.201-G2"/>
+
+                    <TextView style="@style/item_schedule" />
+
+                    <TextView style="@style/item_schedule" />
+
+                    <TextView style="@style/item_schedule" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="30dp"
+                    android:background="@color/title_background"
+                    android:gravity="center"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        android:layout_width="25dp"
+                        android:layout_height="match_parent" />
+
+                    <TextView style="@style/item_schedule" />
+
+                    <TextView style="@style/item_schedule" />
+
+                    <TextView style="@style/item_schedule" />
+
+                    <TextView style="@style/item_schedule" />
+
+                    <TextView style="@style/item_schedule" />
+
+                    <TextView style="@style/item_schedule" />
+
+                    <TextView style="@style/item_schedule" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="30dp"
+                    android:background="@color/title_background"
+                    android:gravity="center"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        android:layout_width="25dp"
+                        android:layout_height="match_parent" />
+
+                    <TextView style="@style/item_schedule" />
+
+                    <TextView style="@style/item_schedule" />
+
+                    <TextView style="@style/item_schedule" />
+
+                    <TextView style="@style/item_schedule" />
+
+                    <TextView style="@style/item_schedule" />
+
+                    <TextView style="@style/item_schedule" />
+
+                    <TextView style="@style/item_schedule" />
+                </LinearLayout>
+
             </LinearLayout>
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="30dp"
-                android:background="@color/title_background"
-                android:gravity="center"
-                android:orientation="horizontal">
-
-                <TextView
-                    android:layout_width="25dp"
-                    android:layout_height="match_parent" />
-
-                <TextView style="@style/item_schedule" />
-
-                <TextView style="@style/item_schedule" />
-
-                <TextView style="@style/item_schedule" />
-
-                <TextView style="@style/item_schedule" />
-
-                <TextView style="@style/item_schedule" />
-
-                <TextView style="@style/item_schedule" />
-
-                <TextView style="@style/item_schedule" />
-            </LinearLayout>
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="30dp"
-                android:background="@color/title_background"
-                android:gravity="center"
-                android:orientation="horizontal">
-
-                <TextView
-                    android:layout_width="25dp"
-                    android:layout_height="match_parent" />
-
-                <TextView style="@style/item_schedule" />
-
-                <TextView style="@style/item_schedule" />
-
-                <TextView style="@style/item_schedule" />
-
-                <TextView style="@style/item_schedule" />
-
-                <TextView style="@style/item_schedule" />
-
-                <TextView style="@style/item_schedule" />
-
-                <TextView style="@style/item_schedule" />
-            </LinearLayout>
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="30dp"
-                android:background="@color/title_background"
-                android:gravity="center"
-                android:orientation="horizontal">
-
-                <TextView
-                    android:layout_width="25dp"
-                    android:layout_height="match_parent" />
-
-                <TextView style="@style/item_schedule" />
-
-                <TextView style="@style/item_schedule" />
-
-                <TextView style="@style/item_schedule" />
-
-                <TextView style="@style/item_schedule" />
-
-                <TextView style="@style/item_schedule" />
-
-                <TextView style="@style/item_schedule" />
-
-                <TextView style="@style/item_schedule" />
-            </LinearLayout>
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="30dp"
-                android:background="@color/title_background"
-                android:gravity="center"
-                android:orientation="horizontal">
-
-                <TextView
-                    android:layout_width="25dp"
-                    android:layout_height="match_parent" />
-
-                <TextView style="@style/item_schedule" />
-
-                <TextView style="@style/item_schedule" />
-
-                <TextView style="@style/item_schedule" />
-
-                <TextView style="@style/item_schedule" />
-
-                <TextView style="@style/item_schedule" />
-
-                <TextView style="@style/item_schedule" />
-
-                <TextView style="@style/item_schedule" />
-            </LinearLayout>
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="30dp"
-                android:background="@color/title_background"
-                android:gravity="center"
-                android:orientation="horizontal">
-
-                <TextView
-                    android:layout_width="25dp"
-                    android:layout_height="match_parent" />
-
-                <TextView style="@style/item_schedule" />
-
-                <TextView style="@style/item_schedule" />
-
-                <TextView style="@style/item_schedule" />
-
-                <TextView style="@style/item_schedule" />
-
-                <TextView style="@style/item_schedule" />
-
-                <TextView style="@style/item_schedule" />
-
-                <TextView style="@style/item_schedule" />
-            </LinearLayout>
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="30dp"
-                android:background="@color/title_background"
-                android:gravity="center"
-                android:orientation="horizontal">
-
-                <TextView
-                    android:layout_width="25dp"
-                    android:layout_height="match_parent" />
-
-                <TextView style="@style/item_schedule" />
-
-                <TextView style="@style/item_schedule" />
-
-                <TextView style="@style/item_schedule" />
-
-                <TextView style="@style/item_schedule" />
-
-                <TextView style="@style/item_schedule" />
-
-                <TextView style="@style/item_schedule" />
-
-                <TextView style="@style/item_schedule" />
-            </LinearLayout>
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="30dp"
-                android:background="@color/title_background"
-                android:gravity="center"
-                android:orientation="horizontal">
-
-                <TextView
-                    android:layout_width="25dp"
-                    android:layout_height="match_parent" />
-
-                <TextView style="@style/item_schedule" />
-
-                <TextView style="@style/item_schedule" />
-
-                <TextView style="@style/item_schedule" />
-
-                <TextView style="@style/item_schedule" />
-
-                <TextView style="@style/item_schedule" />
-
-                <TextView style="@style/item_schedule" />
-
-                <TextView style="@style/item_schedule" />
-            </LinearLayout>
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="30dp"
-                android:background="@color/title_background"
-                android:gravity="center"
-                android:orientation="horizontal">
-
-                <TextView
-                    android:layout_width="25dp"
-                    android:layout_height="match_parent" />
-
-                <TextView style="@style/item_schedule" />
-
-                <TextView style="@style/item_schedule" />
-
-                <TextView style="@style/item_schedule" />
-
-                <TextView style="@style/item_schedule" />
-
-                <TextView style="@style/item_schedule" />
-
-                <TextView style="@style/item_schedule" />
-
-                <TextView style="@style/item_schedule" />
-            </LinearLayout>
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="30dp"
-                android:background="@color/title_background"
-                android:gravity="center"
-                android:orientation="horizontal">
-
-                <TextView
-                    android:layout_width="25dp"
-                    android:layout_height="match_parent" />
-
-                <TextView style="@style/item_schedule" />
-
-                <TextView style="@style/item_schedule" />
-
-                <TextView style="@style/item_schedule" />
-
-                <TextView style="@style/item_schedule" />
-
-                <TextView style="@style/item_schedule" />
-
-                <TextView style="@style/item_schedule" />
-
-                <TextView style="@style/item_schedule" />
-            </LinearLayout>
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="30dp"
-                android:background="@color/title_background"
-                android:gravity="center"
-                android:orientation="horizontal">
-
-                <TextView
-                    android:layout_width="25dp"
-                    android:layout_height="match_parent" />
-
-                <TextView style="@style/item_schedule" />
-
-                <TextView style="@style/item_schedule" />
-
-                <TextView style="@style/item_schedule" />
-
-                <TextView style="@style/item_schedule" />
-
-                <TextView style="@style/item_schedule" />
-
-                <TextView style="@style/item_schedule" />
-
-                <TextView style="@style/item_schedule" />
-            </LinearLayout>
-
+        </HorizontalScrollView>
+
+        <LinearLayout
+            android:layout_width="33dp"
+            android:layout_height="wrap_content"
+            android:background="@color/title_background"
+            android:gravity="center"
+            android:orientation="vertical">
+
+            <TextView
+                android:layout_width="30dp"
+                android:layout_height="30dp" />
+
+            <TextView
+                style="@style/schedule_title_number"
+                android:text="1" />
+
+            <TextView
+                style="@style/schedule_title_number"
+                android:text="2" />
+
+            <TextView
+                style="@style/schedule_title_number"
+                android:text="3" />
+
+            <TextView
+                style="@style/schedule_title_number"
+                android:text="4" />
+
+            <TextView
+                style="@style/schedule_title_number"
+                android:text="5" />
+
+            <TextView
+                style="@style/schedule_title_number"
+                android:text="6" />
+
+            <TextView
+                style="@style/schedule_title_number"
+                android:text="7" />
+
+            <TextView
+                style="@style/schedule_title_number"
+                android:text="8" />
+
+            <TextView
+                style="@style/schedule_title_number"
+                android:text="9" />
+
+            <TextView
+                style="@style/schedule_title_number"
+                android:text="10" />
         </LinearLayout>
-    </HorizontalScrollView>
-
-    <LinearLayout
-        android:layout_width="33dp"
-        android:layout_height="wrap_content"
-        android:background="@color/title_background"
-        android:gravity="center"
-        android:orientation="vertical">
-
-        <TextView
-            android:layout_width="30dp"
-            android:layout_height="30dp" />
-
-        <TextView
-            style="@style/schedule_title_number"
-            android:text="1" />
-
-        <TextView
-            style="@style/schedule_title_number"
-            android:text="2" />
-
-        <TextView
-            style="@style/schedule_title_number"
-            android:text="3" />
-
-        <TextView
-            style="@style/schedule_title_number"
-            android:text="4" />
-
-        <TextView
-            style="@style/schedule_title_number"
-            android:text="5" />
-
-        <TextView
-            style="@style/schedule_title_number"
-            android:text="6" />
-
-        <TextView
-            style="@style/schedule_title_number"
-            android:text="7" />
-
-        <TextView
-            style="@style/schedule_title_number"
-            android:text="8" />
-
-        <TextView
-            style="@style/schedule_title_number"
-            android:text="9" />
-
-        <TextView
-            style="@style/schedule_title_number"
-            android:text="10" />
-    </LinearLayout>
-</FrameLayout>
+    </FrameLayout>
+</LinearLayout>

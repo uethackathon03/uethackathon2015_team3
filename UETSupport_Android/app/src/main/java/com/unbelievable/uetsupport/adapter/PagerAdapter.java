@@ -1,6 +1,7 @@
 package com.unbelievable.uetsupport.adapter;
 
 import android.app.Activity;
+import android.content.Context;
 import android.graphics.drawable.Drawable;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
@@ -10,8 +11,10 @@ import android.text.Spanned;
 import android.text.style.ImageSpan;
 
 import com.unbelievable.uetsupport.R;
+import com.unbelievable.uetsupport.common.Constant;
 import com.unbelievable.uetsupport.fragments.HelpFragment;
 import com.unbelievable.uetsupport.fragments.MenuFragment;
+import com.unbelievable.uetsupport.fragments.NoLoginFragment;
 import com.unbelievable.uetsupport.fragments.ProfileFragment;
 import com.unbelievable.uetsupport.fragments.SocialFragment;
 import com.unbelievable.uetsupport.fragments.NewsFragment;
@@ -61,8 +64,13 @@ public class PagerAdapter extends FragmentStatePagerAdapter {
                 HelpFragment help = new HelpFragment();
                 return help;
             case 4:
-                ProfileFragment personal = new ProfileFragment();
-                return personal;
+                if (activity.getSharedPreferences(Constant.nameSharedPreferences, Context.MODE_PRIVATE).getString(Constant.token, "").equals("")) {
+                    NoLoginFragment loginFragment = new NoLoginFragment();
+                    return loginFragment;
+                } else {
+                    ProfileFragment personal = new ProfileFragment();
+                    return personal;
+                }
             default:
                 MenuFragment menu = new MenuFragment();
                 return menu;

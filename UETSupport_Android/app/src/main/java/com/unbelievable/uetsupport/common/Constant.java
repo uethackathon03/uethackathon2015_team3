@@ -9,4 +9,5 @@ public class Constant {
     public static final String username = "username";
     public static final String fullname = "fullname";
     public static final String email = "email";
+    public static final String photo = "photo";
 }
