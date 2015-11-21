@@ -49,11 +49,11 @@ public class ProfileFragment extends Fragment implements AdapterView.OnItemClick
         tvVNUMail =(TextView)v.findViewById(R.id.tvVNUMail);
 
         profileArrayList = new ArrayList<String>();
-        profileArrayList.add("TKB");
-        profileArrayList.add("Lich thi");
-        profileArrayList.add("KQHT");
-        profileArrayList.add("Nhac nho");
-        profileArrayList.add("Cau hoi");
+        profileArrayList.add("Thời khóa biểu");
+        profileArrayList.add("Lịch thi");
+        profileArrayList.add("Kết quả học tập");
+        profileArrayList.add("Nhắc nhở");
+        profileArrayList.add("Câu hỏi");
 
         profileListView = (ListView)v.findViewById(R.id.profileListView);
         profileAdapter = new ProfileAdapter(getContext(),profileArrayList);
