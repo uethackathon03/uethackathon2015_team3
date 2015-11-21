@@ -14,6 +14,7 @@ public class MainActivity extends FragmentActivity {
     private SlidingTabLayout tabs;
 
 
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
