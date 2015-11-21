@@ -13,11 +13,11 @@ public class Thread {
     public long userId;
 
     public String content;
-    public int[] photos = {R.mipmap.logo_uet};
+    public int[] photos;
     public Integer like;
     public Integer disLike;
     public Integer comment;
-    public boolean isAnonimous;
+    public boolean isAnonimous = Boolean.FALSE;
 
     public Date createdTime;
     public Date modifiedTime;
@@ -33,6 +33,22 @@ public class Thread {
         this.disLike = disLike;
         this.comment = comment;
         this.createdTime = createdTime;
+        this.userName = userName;
+        this.avatar = avatar;
+    }
+
+    public Thread(long threadId, String content, int[] photos, Integer like, Integer disLike, Integer comment, Date createdTime, boolean isAnonimous, String userName, int avatar) {
+        this.threadId = threadId;
+        this.content = content;
+        this.photos = new int[photos.length];
+        for (int i = 0;i < photos.length;i++){
+            this.photos[i] = new Integer(photos[i]);
+        }
+        this.like = like;
+        this.disLike = disLike;
+        this.comment = comment;
+        this.createdTime = createdTime;
+        this.isAnonimous = isAnonimous;
         this.userName = userName;
         this.avatar = avatar;
     }
@@ -72,5 +88,8 @@ public class Thread {
 
     public int getAvatar() {
         return avatar;
+    }
+    public boolean isAnonimous(){
+        return isAnonimous;
     }
 }

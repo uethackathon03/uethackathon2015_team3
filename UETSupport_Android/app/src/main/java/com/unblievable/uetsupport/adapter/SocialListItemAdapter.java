@@ -59,14 +59,18 @@ public class SocialListItemAdapter extends BaseAdapter {
         }
         initView(view);
         com.unblievable.uetsupport.objects.Thread thread = threads.get(i);
-        avatar.setImageResource(thread.getAvatar());
-        tvUserName.setText(thread.getUserName());
+        if (thread.isAnonimous) {
+            avatar.setImageResource(R.mipmap.down);
+            tvUserName.setText("Anonimous");
+        } else {
+            avatar.setImageResource(thread.getAvatar());
+            tvUserName.setText(thread.getUserName());
+        }
         tvUploadedTime.setText(format.format(thread.getCreatedTime()));
         tvContent.setText(thread.getContent());
-        if (thread.getPhotos().length != 0) {
+        if (thread.getPhotos()!= null) {
             photo.setImageResource(thread.getPhotos()[0]);
-        }
-        else photo.setVisibility(View.GONE);
+        } else photo.setVisibility(View.GONE);
         btnLike.setText(thread.getLike() + "");
         btnDisLike.setText(thread.getDisLike() + "");
         btnComment.setText(thread.getComment() + "");

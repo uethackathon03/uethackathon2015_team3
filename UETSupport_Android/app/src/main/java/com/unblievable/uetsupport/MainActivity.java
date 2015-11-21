@@ -30,9 +30,8 @@ public class MainActivity extends FragmentActivity {
                 return getResources().getColor(R.color.tabsScrollColor);
             }
         });
-        tabs.setCustomTabView(R.layout.custom_tab_view,R.id.tabText);
+        tabs.setCustomTabView(R.layout.custom_tab_view, R.id.tabText);
         tabs.setViewPager(pagers);
-
     }
 
     @Override
