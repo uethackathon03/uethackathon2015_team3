@@ -74,7 +74,7 @@ public class CommentListAdapter extends BaseAdapter {
     public void initView(View v) {
         imgUserAvatar = (ImageView) v.findViewById(R.id.imgUserAvatar);
         tvUserName = (TextView) v.findViewById(R.id.tvUserName);
-        btnCommentLike = (Button) v.findViewById(R.id.btnLike);
+        btnCommentLike = (Button) v.findViewById(R.id.btnCommentLike);
         btnCommentDislike = (Button) v.findViewById(R.id.btnCommentDislike);
         btnUserRank = (Button) v.findViewById(R.id.btnUserRank);
         tvCommentContent = (TextView) v.findViewById(R.id.tvCommentContent);
