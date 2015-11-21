@@ -37,7 +37,7 @@ public class SocialFragment extends Fragment{
             threads.add(new Thread(2*i+1,"Có ai làm hộ mình bài này với",1,3,4,new Date(System.currentTimeMillis()),"bboy",R.mipmap.user));
             threads.add(new Thread(2*i+2,"Tìm nội suy của hàm số sau:",photos,5,1,2,new Date(System.currentTimeMillis()),true,"Stupid boy",R.mipmap.user));
         }
-        itemAdapter = new SocialListAdapter(this.getActivity(),R.layout.social_item_list,threads);
+        itemAdapter = new SocialListAdapter(this.getActivity(),R.layout.social_item_list, threads);
         socialListItem.setAdapter(itemAdapter);
         socialListItem.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
