@@ -22,7 +22,13 @@ public class Thread {
     public Date createdTime;
     public Date modifiedTime;
 
-    public ArrayList<Comment> comments;
+    public ArrayList<Comment> comments = new ArrayList<>();
+    public void fakeComment(int comment){
+        for (int i = 0;i < comment;i++){
+            Comment c = new Comment(i,"Ai code hộ tao cái",3,3,createdTime,new Date(System.currentTimeMillis()),avatar,userName);
+            comments.add(c);
+        }
+    }
     public String userName;
     public int avatar;
 
@@ -35,6 +41,7 @@ public class Thread {
         this.createdTime = createdTime;
         this.userName = userName;
         this.avatar = avatar;
+        fakeComment(comment);
     }
 
     public Thread(long threadId, String content, int[] photos, Integer like, Integer disLike, Integer comment, Date createdTime, boolean isAnonimous, String userName, int avatar) {
@@ -51,6 +58,7 @@ public class Thread {
         this.isAnonimous = isAnonimous;
         this.userName = userName;
         this.avatar = avatar;
+        fakeComment(comment);
     }
 
     public int[] getPhotos() {
@@ -91,5 +99,9 @@ public class Thread {
     }
     public boolean isAnonimous(){
         return isAnonimous;
+    }
+
+    public ArrayList<Comment> getComments() {
+        return comments;
     }
 }

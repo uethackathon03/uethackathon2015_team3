@@ -18,6 +18,7 @@ import com.pkmmte.view.CircularImageView;
 import com.unbelievable.uetsupport.MainActivity;
 import com.unbelievable.uetsupport.R;
 import com.unbelievable.uetsupport.ReminderActivity;
+import com.unbelievable.uetsupport.ScheduleActivity;
 
 import java.util.ArrayList;
 
@@ -64,6 +65,10 @@ public class ProfileFragment extends Fragment implements AdapterView.OnItemClick
     @Override
     public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
         switch (position){
+            case 0:
+                Intent intent = new Intent(getActivity(), ScheduleActivity.class);
+                startActivity(intent);
+                break;
             case 3:
                 Intent i = new Intent(getActivity(), ReminderActivity.class);
                 startActivity(i);
