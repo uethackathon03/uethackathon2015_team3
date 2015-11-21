@@ -37,16 +37,15 @@
 		destroy-method="close">
 		<property name="driverClassName" value="com.mysql.jdbc.Driver" />
 
-		<property name="url"
-			value="jdbc:mysql://localhost:3306/uetsupport?characterEncoding=UTF-8" />
-		<property name="username" value="root" />
-		<property name="password" value="root" />
+<!-- 		<property name="url" -->
+<!-- 			value="jdbc:mysql://localhost:3306/uetsupport?characterEncoding=UTF-8" /> -->
+<!-- 		<property name="username" value="root" /> -->
+<!-- 		<property name="password" value="root" /> -->
 
-		<!-- <property name="url" -->
-		<!-- value="jdbc:mysql://127.8.111.130:3306/uetsupport?characterEncoding=UTF-8" 
-			/> -->
-		<!-- <property name="username" value="adminJptfTfk" /> -->
-		<!-- <property name="password" value="RAGhPNJnaE7D" /> -->
+		<property name="url"
+			value="jdbc:mysql://127.8.111.130:3306/uetsupport?characterEncoding=UTF-8" />
+		<property name="username" value="adminJptfTfk" />
+		<property name="password" value="RAGhPNJnaE7D" />
 
 	</bean>
 
@@ -62,7 +61,7 @@
 		<property name="sessionFactory" ref="sessionFactory" />
 	</bean>
 
-	<bean id="tokenManagerSingle" class="com.unblievable.uetsupport.secimpl.TokenManagerSingle">
+	<bean id="tokenManagerSingle" class="com.unbelievable.uetsupport.secimpl.TokenManagerSingle">
 		<constructor-arg>
 			<ref bean="sessionFactory" />
 		</constructor-arg>
@@ -75,17 +74,22 @@
 		<property name="maxUploadSize" value="30000000" />
 	</bean>
 
-	<bean id="studentDao" class="com.unblievable.uetsupport.daoimpl.StudentDaoImpl">
+	<bean id="studentDao" class="com.unbelievable.uetsupport.daoimpl.StudentDaoImpl">
+		<constructor-arg>
+			<ref bean="sessionFactory" />
+		</constructor-arg>
+	</bean>
+	
+	<bean id="threadDao" class="com.unbelievable.uetsupport.daoimpl.ThreadDaoImpl">
+		<constructor-arg>
+			<ref bean="sessionFactory" />
+		</constructor-arg>
+	</bean>
+	
+	<bean id="commentDao" class="com.unbelievable.uetsupport.daoimpl.CommentDaoImpl">
 		<constructor-arg>
 			<ref bean="sessionFactory" />
 		</constructor-arg>
 	</bean>
 
-	<bean id="teacherDao" class="com.unblievable.uetsupport.daoimpl.TeacherDaoImpl">
-		<constructor-arg>
-			<ref bean="sessionFactory" />
-		</constructor-arg>
-	</bean>
-	
-	
 </beans>

@@ -6,11 +6,14 @@
 		<property name="hibernate.dialect">org.hibernate.dialect.MySQLDialect</property>
 		<property name="hibernate.show_sql">true</property>
 		<property name="hibernate.hbm2ddl.auto">update</property>
-		<mapping class="com.unblievable.uetsupport.respsec.TokenInfo" />
-		<mapping class="com.unblievable.uetsupport.models.ClassRoom" />
-		<mapping class="com.unblievable.uetsupport.models.Course" />
-		<mapping class="com.unblievable.uetsupport.models.Faculty" />
-		<mapping class="com.unblievable.uetsupport.models.Student" />
-		<mapping class="com.unblievable.uetsupport.models.Teacher" />
+		<mapping class="com.unbelievable.uetsupport.respsec.TokenInfo" />
+		<mapping class="com.unbelievable.uetsupport.models.Student" />
+		<mapping class="com.unbelievable.uetsupport.models.Teacher" />
+		<mapping class="com.unbelievable.uetsupport.models.Department" />
+		<mapping class="com.unbelievable.uetsupport.models.Information" />
+		<mapping class="com.unbelievable.uetsupport.models.Anwser" />
+		<mapping class="com.unbelievable.uetsupport.models.Thread" />
+		<mapping class="com.unbelievable.uetsupport.models.Comment" />
+		<mapping class="com.unbelievable.uetsupport.models.Like" />
 	</session-factory>
 </hibernate-configuration>

@@ -32,30 +32,30 @@
 
 		<custom-filter ref="restAuthenticationFilter" position="FORM_LOGIN_FILTER" />
 			
-<!-- 		<intercept-url pattern="/api/**" access="hasRole('ROLE_NORMAL')" /> -->
+		<intercept-url pattern="/api/**" access="hasRole('ROLE_NORMAL')" />
 		<intercept-url pattern="/**" access="permitAll" />
 		<intercept-url pattern="/" access="permitAll" />
 		<http-basic />
 	</http>
 
 	<bean:bean id="unauthorizedEntryPoint"
-		class="com.unblievable.uetsupport.respsec.UnauthorizedEntryPoint" />
+		class="com.unbelievable.uetsupport.respsec.UnauthorizedEntryPoint" />
 
 	<authentication-manager id="restAuthenticationManager">
 		<authentication-provider>
 			<user-service>
-				<user name="unblievable" password="123456" authorities="ROLE_NORMAL" /> 
+				<user name="unbelievable" password="123456" authorities="ROLE_NORMAL" /> 
 			</user-service>
 		</authentication-provider>
 	</authentication-manager>
 
 
 	<bean:bean id="authenticationService"
-		class="com.unblievable.uetsupport.secimpl.AuthenticationServiceDefault"
+		class="com.unbelievable.uetsupport.secimpl.AuthenticationServiceDefault"
 		c:authenticationManager-ref="restAuthenticationManager" />
 
 	<bean:bean id="restAuthenticationFilter"
-		class="com.unblievable.uetsupport.respsec.TokenAuthenticationFilter"
+		class="com.unbelievable.uetsupport.respsec.TokenAuthenticationFilter"
 		c:authenticationService-ref="authenticationService" />
 
 </bean:beans>

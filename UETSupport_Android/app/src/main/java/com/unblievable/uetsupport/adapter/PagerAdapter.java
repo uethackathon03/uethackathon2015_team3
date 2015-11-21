@@ -12,9 +12,9 @@ import android.text.style.ImageSpan;
 import com.unblievable.uetsupport.R;
 import com.unblievable.uetsupport.fragments.HelpFragment;
 import com.unblievable.uetsupport.fragments.MenuFragment;
-import com.unblievable.uetsupport.fragments.PersonalFragment;
+import com.unblievable.uetsupport.fragments.ProfileFragment;
 import com.unblievable.uetsupport.fragments.SocialFragment;
-import com.unblievable.uetsupport.fragments.WebFragment;
+import com.unblievable.uetsupport.fragments.NewsFragment;
 
 /**
  * Created by Nam on 11/20/2015.
@@ -49,10 +49,10 @@ public class PagerAdapter extends FragmentStatePagerAdapter {
     public Fragment getItem(int position) {
         switch (position){
             case 0:
-                WebFragment web = new WebFragment();
+                NewsFragment web = new NewsFragment();
                 return web;
             case 1:
-                PersonalFragment personal = new PersonalFragment();
+                ProfileFragment personal = new ProfileFragment();
                 return personal;
             case 2:
                 SocialFragment social = new SocialFragment();
