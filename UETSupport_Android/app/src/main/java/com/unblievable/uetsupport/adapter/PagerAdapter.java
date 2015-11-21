@@ -21,6 +21,7 @@ import com.unblievable.uetsupport.fragments.NewsFragment;
  */
 public class PagerAdapter extends FragmentStatePagerAdapter {
     private Activity activity;
+    private int tab_icon_size;
     private int[] icon = {
             R.mipmap.ic_web_white_24dp,
             R.mipmap.ic_school_white_24dp,
@@ -32,13 +33,14 @@ public class PagerAdapter extends FragmentStatePagerAdapter {
     public PagerAdapter(FragmentManager fm, Activity activity) {
         super(fm);
         this.activity = activity;
+        tab_icon_size = (int)activity.getResources().getDimension(R.dimen.tab_icon_size);
     }
 
     private final int numbOfTabs = 5;
     @Override
     public CharSequence getPageTitle(int position) {
         Drawable drawable = activity.getResources().getDrawable(icon[position]);
-//        drawable.setBounds(0,0,36,36);
+        drawable.setBounds(0,0,tab_icon_size,tab_icon_size);
         ImageSpan imageSpan = new ImageSpan(drawable);
         SpannableString spannableString = new SpannableString(" ");
         spannableString.setSpan(imageSpan,0,spannableString.length(), Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);

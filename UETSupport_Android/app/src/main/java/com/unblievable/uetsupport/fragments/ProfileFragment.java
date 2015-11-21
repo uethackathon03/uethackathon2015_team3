@@ -1,27 +1,31 @@
 package com.unblievable.uetsupport.fragments;
 
 import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
 
 import com.pkmmte.view.CircularImageView;
+import com.unblievable.uetsupport.MainActivity;
 import com.unblievable.uetsupport.R;
+import com.unblievable.uetsupport.ReminderActivity;
 
 import java.util.ArrayList;
 
 /**
  * Created by Nam on 11/20/2015.
  */
-public class ProfileFragment extends Fragment {
-    
+public class ProfileFragment extends Fragment implements AdapterView.OnItemClickListener{
+
     CircularImageView profilePicture;
     ImageView coverPhoto;
     TextView tvName;
@@ -53,7 +57,18 @@ public class ProfileFragment extends Fragment {
         profileListView = (ListView)v.findViewById(R.id.profileListView);
         profileAdapter = new ProfileAdapter(getContext(),profileArrayList);
         profileListView.setAdapter(profileAdapter);
+        profileListView.setOnItemClickListener(this);
         return v;
+    }
+
+    @Override
+    public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+        switch (position){
+            case 3:
+                Intent i = new Intent(getActivity(), ReminderActivity.class);
+                startActivity(i);
+                break;
+        }
     }
 
     private class ProfileAdapter extends ArrayAdapter<String> {
@@ -76,16 +91,16 @@ public class ProfileFragment extends Fragment {
                     ivNews.setImageResource(R.mipmap.tkb);
                     break;
                 case 1:
-                    ivNews.setImageResource(R.mipmap.lich_thi);
+                    ivNews.setImageResource(R.mipmap.lichthi);
                     break;
                 case 2:
-                    ivNews.setImageResource(R.mipmap.bang_diem);
+                    ivNews.setImageResource(R.mipmap.bangdiem);
                     break;
                 case 3:
-                    ivNews.setImageResource(R.mipmap.nhac_nho);
+                    ivNews.setImageResource(R.mipmap.nhacnho);
                     break;
                 case 4:
-                    ivNews.setImageResource(R.mipmap.question);
+                    ivNews.setImageResource(R.mipmap.cauhoi);
                     break;
             }
             tvNews.setText(list.get(position));
