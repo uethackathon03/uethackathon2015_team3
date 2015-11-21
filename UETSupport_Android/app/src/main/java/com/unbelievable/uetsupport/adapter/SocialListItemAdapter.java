@@ -9,6 +9,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.unbelievable.uetsupport.R;
+import com.unbelievable.uetsupport.objects.*;
 
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -62,6 +63,7 @@ public class SocialListItemAdapter extends BaseAdapter {
         com.unbelievable.uetsupport.objects.Thread thread = threads.get(i);
         avatar.setImageResource(thread.getAvatar());
         tvUserName.setText(thread.getUserName());
+
         tvUploadedTime.setText(format.format(thread.getCreatedTime()));
         tvContent.setText(thread.getContent());
         if (thread.getPhotos()!= null) {
