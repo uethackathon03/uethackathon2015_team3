@@ -11,6 +11,7 @@ public class Reminder {
     public Integer numberOfReminder;
     public String title;
     public String note;
+    public boolean isActivated;
 
     public Reminder(Long reminderId, Long timeReminder, Long beforeReminder, Integer numberOfReminder, String title, String note) {
         this.reminderId = reminderId;
@@ -19,6 +20,7 @@ public class Reminder {
         this.numberOfReminder = numberOfReminder;
         this.title = title;
         this.note = note;
+        isActivated = true;
     }
 
     public Long getReminderId() {

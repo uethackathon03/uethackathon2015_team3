@@ -9,6 +9,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.unbelievable.uetsupport.R;
+import com.unbelievable.uetsupport.objects.*;
 
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -58,8 +59,7 @@ public class SocialListItemAdapter extends BaseAdapter {
             view = activity.getLayoutInflater().inflate(layoutId, viewGroup, false);
         }
         initView(view);
-<<<<<<< HEAD:UETSupport_Android/app/src/main/java/com/unblievable/uetsupport/adapter/SocialListItemAdapter.java
-        com.unblievable.uetsupport.objects.Thread thread = threads.get(i);
+        com.unbelievable.uetsupport.objects.Thread thread = threads.get(i);
         if (thread.isAnonimous) {
             avatar.setImageResource(R.mipmap.down);
             tvUserName.setText("Anonimous");
@@ -67,11 +67,6 @@ public class SocialListItemAdapter extends BaseAdapter {
             avatar.setImageResource(thread.getAvatar());
             tvUserName.setText(thread.getUserName());
         }
-=======
-        com.unbelievable.uetsupport.objects.Thread thread = threads.get(i);
-        avatar.setImageResource(thread.getAvatar());
-        tvUserName.setText(thread.getUserName());
->>>>>>> 79bf37e702c6741ff0530aee2b46a7d9e171ee75:UETSupport_Android/app/src/main/java/com/unbelievable/uetsupport/adapter/SocialListItemAdapter.java
         tvUploadedTime.setText(format.format(thread.getCreatedTime()));
         tvContent.setText(thread.getContent());
         if (thread.getPhotos()!= null) {

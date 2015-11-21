@@ -4,14 +4,20 @@ import android.content.Context;
 import android.os.Bundle;
 import android.os.PersistableBundle;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
 import android.widget.BaseAdapter;
+import android.widget.CompoundButton;
 import android.widget.ImageView;
 import android.widget.ListView;
+import android.widget.Switch;
 import android.widget.TextView;
+import android.widget.ToggleButton;
 
+import com.unbelievable.uetsupport.dialog.ReminderDialog;
 import com.unbelievable.uetsupport.objects.Reminder;
 
 import java.util.ArrayList;
@@ -19,7 +25,7 @@ import java.util.ArrayList;
 /**
  * Created by huylv on 21/11/2015.
  */
-public class ReminderActivity extends AppCompatActivity {
+public class ReminderActivity extends AppCompatActivity implements AdapterView.OnItemClickListener{
 
     ListView reminderListView;
     ArrayList<Reminder> reminderArrayList;
@@ -38,6 +44,7 @@ public class ReminderActivity extends AppCompatActivity {
         reminderListView = (ListView) findViewById(R.id.reminderListView);
         reminderAdapter = new ReminderAdapter(this,R.layout.list_reminder_item,reminderArrayList);
         reminderListView.setAdapter(reminderAdapter);
+        reminderListView.setOnItemClickListener(this);
 
         setTitle("Reminder");
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
@@ -77,9 +84,13 @@ public class ReminderActivity extends AppCompatActivity {
             ImageView imgReminderItem = (ImageView) convertView.findViewById(R.id.ivReminderItem);
             TextView tvReminderTitle = (TextView) convertView.findViewById(R.id.tvReminderTitle);
             TextView tvReminderTime = (TextView) convertView.findViewById(R.id.tvReminderTime);
+            Switch btnActivate = (Switch) convertView.findViewById(R.id.btnActivate);
 
             tvReminderTitle.setText(reminders.get(position).getTitle());
             tvReminderTime.setText(reminders.get(position).getTimeReminder() + "");
+            Reminder reminder = reminders.get(position);
+            btnActivate.setChecked(reminder.isActivated);
+            reminder.isActivated = btnActivate.isChecked();
             return convertView;
         }
         //        @Override
@@ -98,5 +109,10 @@ public class ReminderActivity extends AppCompatActivity {
 //
     }
 
-
+    @Override
+    public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+        Reminder reminder = reminderArrayList.get(position);
+        ReminderDialog dialog = new ReminderDialog(ReminderActivity.this,reminder);
+        dialog.show();
+    }
 }
