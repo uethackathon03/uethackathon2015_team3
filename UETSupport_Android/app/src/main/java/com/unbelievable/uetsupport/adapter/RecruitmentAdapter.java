@@ -11,21 +11,22 @@ import android.widget.TextView;
 
 import com.unbelievable.uetsupport.R;
 import com.unbelievable.uetsupport.objects.News;
+import com.unbelievable.uetsupport.objects.Recruitment;
 
 import java.util.ArrayList;
 
 /**
  * Created by huylv on 20/11/2015.
  */
-public class RecruitmentAdapter extends ArrayAdapter<News> {
+public class RecruitmentAdapter extends ArrayAdapter<Recruitment> {
 
     Context context;
-    ArrayList<News> newsArrayList;
+    ArrayList<Recruitment> recruitmentArrayList;
 
-    public RecruitmentAdapter(Context context, ArrayList<News> newsArrayList) {
-        super(context, -1, newsArrayList);
+    public RecruitmentAdapter(Context context, ArrayList<Recruitment> recruitments) {
+        super(context, -1, recruitments);
         this.context = context;
-        this.newsArrayList = newsArrayList;
+        this.recruitmentArrayList = recruitments;
     }
 
 
@@ -43,16 +44,16 @@ public class RecruitmentAdapter extends ArrayAdapter<News> {
             tvNews.setVisibility(View.GONE);
         } else {
             ivNews.setImageResource(R.drawable.e1);
-            tvNews.setText(newsArrayList.get(position).title);
+            tvNews.setText(recruitmentArrayList.get(position).title);
         }
         ivNews.setVisibility(View.GONE);
-        tvNews.setText(newsArrayList.get(position).title);
+        tvNews.setText(recruitmentArrayList.get(position).title);
 
         return rowView;
     }
 
     @Override
     public int getCount() {
-        return newsArrayList.size();
+        return recruitmentArrayList.size();
     }
 }
