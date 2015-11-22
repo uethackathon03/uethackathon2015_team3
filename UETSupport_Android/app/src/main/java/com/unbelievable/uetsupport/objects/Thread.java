@@ -27,7 +27,7 @@ public class Thread {
     public String totalUnlike;
     public String comment;
     public String userName;
-    public Integer avatar;
+    public String avatar;
     public ArrayList<Comment> comments;
     public String createdTime;
     public String modifiedTime;
