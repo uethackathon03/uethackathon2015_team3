@@ -1,6 +1,13 @@
 package com.unbelievable.uetsupport.objects;
 
+import android.util.Log;
+
 import com.unbelievable.uetsupport.R;
+import com.unbelievable.uetsupport.common.CommonUtils;
+
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
 
 import java.util.ArrayList;
 import java.util.Date;
@@ -12,96 +19,43 @@ public class Thread {
     public long threadId;
     public long userId;
 
+    public String title;
     public String content;
-    public int[] photos;
-    public Integer like;
-    public Integer disLike;
-    public Integer comment;
-    public boolean isAnonimous = Boolean.FALSE;
-
-    public Date createdTime;
-    public Date modifiedTime;
-
-    public ArrayList<Comment> comments = new ArrayList<>();
-    public void fakeComment(int comment){
-        for (int i = 0;i < comment;i++){
-            Comment c = new Comment(i,"Ai code hộ tao cái",3,3,createdTime,new Date(System.currentTimeMillis()),avatar,userName);
-            comments.add(c);
-        }
-    }
+    public String status;
+    public Photo[] photos;
+    public String totalLike;
+    public String totalUnlike;
+    public String comment;
     public String userName;
-    public int avatar;
+    public Integer avatar;
+    public ArrayList<Comment> comments;
+    public String createdTime;
+    public String modifiedTime;
 
-    public Thread(long threadId, String content, Integer like, Integer disLike, Integer comment, Date createdTime, String userName, int avatar) {
-        this.threadId = threadId;
-        this.content = content;
-        this.like = like;
-        this.disLike = disLike;
-        this.comment = comment;
-        this.createdTime = createdTime;
-        this.userName = userName;
-        this.avatar = avatar;
-        fakeComment(comment);
-    }
-
-    public Thread(long threadId, String content, int[] photos, Integer like, Integer disLike, Integer comment, Date createdTime, boolean isAnonimous, String userName, int avatar) {
-        this.threadId = threadId;
-        this.content = content;
-        this.photos = new int[photos.length];
-        for (int i = 0;i < photos.length;i++){
-            this.photos[i] = new Integer(photos[i]);
+    public Thread() {}
+    public static Thread getThread(JSONObject jData){
+        try {
+            Thread thread = new Thread();
+            thread.threadId = jData.getLong("threadId");
+            thread.title = CommonUtils.getValidString(jData.getString("title"));
+            thread.content = CommonUtils.getValidString(jData.getString("content"));
+            thread.status = CommonUtils.getValidString(jData.getString("status"));
+                JSONArray jArray = jData.getJSONArray("photos");
+                thread.photos = new Photo[jArray.length()];
+                for (int i = 0; i < jArray.length(); i++) {
+                    thread.photos[i] = Photo.getPhoto(jArray.getJSONObject(i));
+                }
+            thread.totalLike = jData.getString("totalLike");
+            thread.totalUnlike =  jData.getString("totalUnlike");
+            thread.userName = CommonUtils.getValidString(jData.getString("username"));
+            Log.d("hbc",thread.userName);
+//            thread.avatar = jData.("avatar");
+            thread.createdTime = CommonUtils.getValidString(jData.getString("createdTime"));
+            thread.modifiedTime = CommonUtils.getValidString(jData.getString("modifiedTime"));
+            return thread;
+        }catch (JSONException e){
+            e.printStackTrace();
         }
-        this.like = like;
-        this.disLike = disLike;
-        this.comment = comment;
-        this.createdTime = createdTime;
-        this.isAnonimous = isAnonimous;
-        this.userName = userName;
-        this.avatar = avatar;
-        fakeComment(comment);
-    }
-
-    public int[] getPhotos() {
-        return photos;
-    }
-
-    public long getThreadId() {
-
-        return threadId;
-    }
-
-    public String getContent() {
-        return content;
-    }
-
-    public Integer getLike() {
-        return like;
-    }
-
-    public Integer getDisLike() {
-        return disLike;
-    }
-
-    public Integer getComment() {
-        return comment;
-    }
-
-    public Date getCreatedTime() {
-        return createdTime;
-    }
-
-    public String getUserName() {
-        return userName;
-    }
-
-    public int getAvatar() {
-        return avatar;
-    }
-    public boolean isAnonimous(){
-        return isAnonimous;
-    }
-
-    public ArrayList<Comment> getComments() {
-        return comments;
+        return null;
     }
 }

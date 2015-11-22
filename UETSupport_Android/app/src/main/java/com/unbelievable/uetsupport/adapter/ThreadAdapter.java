@@ -8,6 +8,9 @@ import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.nostra13.universalimageloader.core.DisplayImageOptions;
+import com.nostra13.universalimageloader.core.ImageLoader;
+import com.nostra13.universalimageloader.core.assist.ImageScaleType;
 import com.unbelievable.uetsupport.R;
 import com.unbelievable.uetsupport.objects.*;
 
@@ -26,7 +29,15 @@ public class ThreadAdapter extends BaseAdapter {
         this.activity = activity;
         this.layoutId = layoutId;
         this.threads = threads;
+        option = new DisplayImageOptions.Builder()
+                .showImageForEmptyUri(R.mipmap.ic_launcher)
+                .showImageOnFail(R.mipmap.ic_launcher)
+                .showImageOnLoading(R.mipmap.ic_launcher)
+                .imageScaleType(ImageScaleType.IN_SAMPLE_POWER_OF_2)
+                .cacheInMemory(true).cacheOnDisk(true).build();
+
     }
+    private DisplayImageOptions option;
 
     ImageView avatar;
     TextView tvUserName;
@@ -36,7 +47,6 @@ public class ThreadAdapter extends BaseAdapter {
     Button btnLike;
     Button btnDisLike;
     Button btnComment;
-    SimpleDateFormat format = new SimpleDateFormat("hh:mm dd:MM:yyyy");
 
     @Override
     public int getCount() {
@@ -50,7 +60,7 @@ public class ThreadAdapter extends BaseAdapter {
 
     @Override
     public long getItemId(int i) {
-        return threads.get(i).getThreadId();
+        return threads.get(i).threadId;
     }
 
     @Override
@@ -61,17 +71,21 @@ public class ThreadAdapter extends BaseAdapter {
         initView(view);
 
         com.unbelievable.uetsupport.objects.Thread thread = threads.get(i);
-        avatar.setImageResource(thread.getAvatar());
-        tvUserName.setText(thread.getUserName());
+//        if (thread.avatar != null) avatar.setImageResource(thread.avatar);
+        tvUserName.setText(thread.userName);
 
-        tvUploadedTime.setText(format.format(thread.getCreatedTime()));
-        tvContent.setText(thread.getContent());
-        if (thread.getPhotos()!= null) {
-            photo.setImageResource(thread.getPhotos()[0]);
+        tvUploadedTime.setText(thread.createdTime);
+        tvContent.setText(thread.content);
+        if (thread.photos!= null && thread.photos.length != 0) {
+            try {
+                ImageLoader.getInstance().displayImage(threads.get(i).photos[0].photoUrl, photo, option);
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
         } else photo.setVisibility(View.GONE);
-        btnLike.setText(thread.getLike() + "");
-        btnDisLike.setText(thread.getDisLike() + "");
-        btnComment.setText(thread.getComment() + "");
+        btnLike.setText(thread.totalLike + "");
+        btnDisLike.setText(thread.totalUnlike + "");
+        btnComment.setText(thread.comment + "");
         return view;
     }
 

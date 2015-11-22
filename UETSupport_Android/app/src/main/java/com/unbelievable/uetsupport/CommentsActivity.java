@@ -12,6 +12,9 @@ import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.TextView;
 
+import com.nostra13.universalimageloader.core.DisplayImageOptions;
+import com.nostra13.universalimageloader.core.ImageLoader;
+import com.nostra13.universalimageloader.core.assist.ImageScaleType;
 import com.unbelievable.uetsupport.adapter.CommentListAdapter;
 import com.unbelievable.uetsupport.fragments.ProfileFragment;
 import com.unbelievable.uetsupport.fragments.SocialFragment;
@@ -38,13 +41,19 @@ public class CommentsActivity extends AppCompatActivity implements View.OnClickL
     Button btnLike;
     Button btnDisLike;
     Button btnComment;
-    SimpleDateFormat format = new SimpleDateFormat("hh:mm dd:MM:yyyy");
+    private DisplayImageOptions option;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         mainThread = SocialFragment.sThread;
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_comments);
+        option = new DisplayImageOptions.Builder()
+                .showImageForEmptyUri(R.mipmap.ic_launcher)
+                .showImageOnFail(R.mipmap.ic_launcher)
+                .showImageOnLoading(R.mipmap.ic_launcher)
+                .imageScaleType(ImageScaleType.IN_SAMPLE_POWER_OF_2)
+                .cacheInMemory(true).cacheOnDisk(true).build();
 
         toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
@@ -61,22 +70,26 @@ public class CommentsActivity extends AppCompatActivity implements View.OnClickL
         btnDisLike = (Button) findViewById(R.id.btnDislike);
         btnComment = (Button) findViewById(R.id.btnAnswer);
         commentList = (ListView) findViewById(R.id.listComment);
-        avatar.setImageResource(mainThread.getAvatar());
-        tvUserName.setText(mainThread.getUserName());
-        tvCreateTime.setText(format.format(mainThread.getCreatedTime()));
-        tvContent.setText(mainThread.getContent());
-        btnLike.setText(mainThread.getLike() + "");
-        btnDisLike.setText(mainThread.disLike + "");
-        btnComment.setText(mainThread.getComment() + "");
+        if (mainThread.avatar != null)avatar.setImageResource(mainThread.avatar);
+        tvUserName.setText(mainThread.userName);
+        tvCreateTime.setText(mainThread.createdTime);
+        tvContent.setText(mainThread.content);
+        btnLike.setText(mainThread.totalLike);
+        btnDisLike.setText(mainThread.totalUnlike);
+        btnComment.setText(mainThread.comment);
         btnLike.setOnClickListener(this);
         btnDisLike.setOnClickListener(this);
         btnComment.setOnClickListener(this);
-        if (mainThread.getPhotos() != null){
-            photo.setImageResource(mainThread.getPhotos()[0]);
+        if (mainThread.photos != null && mainThread.photos.length!= 0){
+            try {
+                ImageLoader.getInstance().displayImage(mainThread.photos[0].photoUrl, photo, option);
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
         }
         else photo.setVisibility(View.GONE);
         comments = new ArrayList<>();
-        commentAdapter = new CommentListAdapter(this, mainThread.getComments(), R.layout.comment_item_list);
+        commentAdapter = new CommentListAdapter(this, comments, R.layout.comment_item_list);
         commentList.setAdapter(commentAdapter);
     }
 
