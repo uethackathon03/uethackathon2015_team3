@@ -187,9 +187,9 @@ public class CommentsActivity extends AppCompatActivity implements View.OnClickL
         CustomAsyncHttpClient client = new CustomAsyncHttpClient(this, this.getSharedPreferences(Constant.nameSharedPreferences, MODE_PRIVATE).getString(Constant.token, ""));
         String url = Service.ServerURL + "/thread/comment/create";
         RequestParams params = new RequestParams();
-        params.put("threadId", 1);
-        params.put("content", "abc");
-        etComment.setText("");
+        params.put("threadId", mainThread.threadId);
+        params.put("content", etComment.getText().toString());
+                etComment.setText("");
         client.post(url, params, new TextHttpResponseHandler() {
             @Override
             public void onFailure(int i, Header[] headers, String s, Throwable throwable) {
