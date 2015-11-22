@@ -24,6 +24,7 @@
         <activity android:name=".CommentsActivity"/>
         <activity android:name=".LoginActivity"/>
         <activity android:name=".CreateThreadActivity"/>
+        <activity android:name=".SearchNewsActivity"/>
     </application>
 
 </manifest>
