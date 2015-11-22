@@ -8,6 +8,9 @@ import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.nostra13.universalimageloader.core.DisplayImageOptions;
+import com.nostra13.universalimageloader.core.ImageLoader;
+import com.nostra13.universalimageloader.core.assist.ImageScaleType;
 import com.unbelievable.uetsupport.R;
 import com.unbelievable.uetsupport.objects.Comment;
 
@@ -28,7 +31,8 @@ public class CommentListAdapter extends BaseAdapter {
     Button btnCommentDislike;
     TextView tvCommentContent;
     TextView tvCommentCreateTime;
-    SimpleDateFormat format = new SimpleDateFormat("hh:mm dd/MM/yyyy");
+    private DisplayImageOptions option;
+
 
 
     public CommentListAdapter(Activity activity, ArrayList<Comment> comments, int layoutId) {
@@ -36,6 +40,12 @@ public class CommentListAdapter extends BaseAdapter {
         this.activity = activity;
         this.comments = comments;
         this.layoutId = layoutId;
+        option = new DisplayImageOptions.Builder()
+                .showImageForEmptyUri(R.mipmap.ic_launcher)
+                .showImageOnFail(R.mipmap.ic_launcher)
+                .showImageOnLoading(R.mipmap.ic_launcher)
+                .imageScaleType(ImageScaleType.IN_SAMPLE_POWER_OF_2)
+                .cacheInMemory(true).cacheOnDisk(true).build();
     }
 
     @Override
@@ -60,12 +70,16 @@ public class CommentListAdapter extends BaseAdapter {
         }
         initView(convertView);
         Comment comment = comments.get(position);
-//        imgUserAvatar.setImageResource(comment.avatar);
+        try {
+            ImageLoader.getInstance().displayImage(comments.get(position).avatar, imgUserAvatar, option);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
         tvUserName.setText(comment.username);
 //        btnCommentLike.setText(comment.like + "");
 //        btnCommentDislike.setText(comment.dislike + "");
         tvCommentContent.setText(comment.content);
-        tvCommentCreateTime.setText(format.format(comment.createdTime));
+        tvCommentCreateTime.setText(comment.createdTime);
         return convertView;
     }
 

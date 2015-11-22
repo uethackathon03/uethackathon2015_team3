@@ -90,7 +90,7 @@ public class ApiDataController extends BaseController {
 		.addData("message", message)
 		.build();
 		List<String> androidTargets = new ArrayList<String>();
-		androidTargets = getSession().createCriteria(Device.class).add(Restrictions.eq("deviceType", "1")).setProjection(Projections.property("registrationId")).list();
+		androidTargets = getSession().createCriteria(Device.class).add(Restrictions.eq("loginType", 1)).setProjection(Projections.property("registrationId")).list();
 			try {
 				// use this for multicast messages.  The second parameter
 				// of sender.send() will need to be an array of register ids.
@@ -108,6 +108,7 @@ public class ApiDataController extends BaseController {
 	        	return new ResponseObjectDetail<Object>(false, "IO Exception" + e.getMessage(), null);
 	        }
 	}
+	
 	@RequestMapping(value = "/register", method = RequestMethod.POST)
 	public @ResponseBody ResponseObjectDetail<Object> testNotification(HttpSession httpSession,
 			@RequestParam(value = "registrationId", required = false, defaultValue = "") String registrationId) {

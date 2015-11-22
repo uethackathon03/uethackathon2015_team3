@@ -231,6 +231,8 @@ public class ApiThreadController extends BaseController {
 		return new ResponseObjectDetail<Object>(false, "", commentDao.listAllCommentByThread(comment.threadId));
 	}
 	
+	
+
 	@RequestMapping(value = "/comment/delete", method = RequestMethod.POST)
 	public @ResponseBody ResponseObjectDetail<Object> deleteComment(HttpSession httpSession,
 			@RequestParam(value = "commentId", required = true) Long commentId) {

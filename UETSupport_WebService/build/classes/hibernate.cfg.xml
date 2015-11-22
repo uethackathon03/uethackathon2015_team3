@@ -15,5 +15,6 @@
 		<mapping class="com.unbelievable.uetsupport.models.Thread" />
 		<mapping class="com.unbelievable.uetsupport.models.Comment" />
 		<mapping class="com.unbelievable.uetsupport.models.LikeThread" />
+		<mapping class="com.unbelievable.uetsupport.models.Device" />
 	</session-factory>
 </hibernate-configuration>

@@ -6,8 +6,10 @@ import android.app.PendingIntent;
 import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
+import android.provider.Settings;
 import android.support.v4.app.NotificationCompat;
 import android.support.v4.app.TaskStackBuilder;
+import android.view.SoundEffectConstants;
 
 import com.unbelievable.uetsupport.common.Constant;
 
@@ -38,6 +40,8 @@ public class UETBroadcastReceiver extends BroadcastReceiver {
                 PendingIntent.FLAG_UPDATE_CURRENT);
         android.app.Notification notification = new NotificationCompat.Builder(context)
                 .setContentTitle("UETSupport Thông Báo")
+                .setVibrate(new long[]{1000})
+                .setSound(Settings.System.DEFAULT_NOTIFICATION_URI)
                 .setContentText(message)
                 .setSmallIcon(R.mipmap.ic_launcher)
                 .setAutoCancel(true).setContentIntent(pendingIntent)
