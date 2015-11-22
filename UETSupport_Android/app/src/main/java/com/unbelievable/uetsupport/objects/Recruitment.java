@@ -39,4 +39,32 @@ public class Recruitment {
 //        }
 //        return null;
 //    }
+
+    public String getTitle() {
+        return title;
+    }
+
+    public String getContent() {
+        return content;
+    }
+
+    public int getLogo() {
+        return logo;
+    }
+
+    public String getJobType() {
+        return jobType;
+    }
+
+    public int getQuantity() {
+        return quantity;
+    }
+
+    public String getSalary() {
+        return salary;
+    }
+
+    public String getCreatedTime() {
+        return createdTime;
+    }
 }

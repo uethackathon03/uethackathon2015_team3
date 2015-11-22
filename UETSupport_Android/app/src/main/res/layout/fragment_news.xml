@@ -13,6 +13,7 @@
         android:divider="#A4C739"
         android:dividerHeight="1dp"
         android:visibility="visible"
+        android:padding="4dp"
         />
     <RadioGroup
         android:id="@+id/groupNews"

@@ -58,6 +58,7 @@ public class NewsFragment extends Fragment implements View.OnClickListener {
         newsListView = (ListView) v.findViewById(R.id.newslist);
         newsArrayAdapter = new NewsAdapter(getActivity(), mainActivity.newsArrayList);
         recruitmentArrayList = new ArrayList<>();
+        fakeData();
         recruitmentAdapter = new RecruitmentAdapter(getActivity(),recruitmentArrayList );
         newsListView.setAdapter(newsArrayAdapter);
 
@@ -73,6 +74,15 @@ public class NewsFragment extends Fragment implements View.OnClickListener {
         }
 
         return v;
+    }
+
+    private void fakeData() {
+        recruitmentArrayList.add(new Recruitment("Tuyển dụng vị trí lập trình viên PHP - Chương trình Tiếng Anh TOPICA Native ",1,"Lập trình viên PHP",5,"$1000"));
+        recruitmentArrayList.add(new Recruitment("Công ty Cổ phần Công nghệ DTT tuyển gấp Lập trình viên JAVA",1,"Lập trình viên JAVA",5,"$1000"));
+        recruitmentArrayList.add(new Recruitment("THỰC TẬP VỊ TRÍ DEVELOPER – TT.STUDIO",1,"Phát triển game nền tảng Unity",5,"$1000"));
+        recruitmentArrayList.add(new Recruitment("EGAME Tuyển dụng vị trí lập trình viên JAVA",1,"Lập trình viên JAVA",5,"$1000"));
+        recruitmentArrayList.add(new Recruitment("TUYỂN DỤNG 20 NHÂN VIÊN TƯ VẤN VÀ HỖ TRỢ KHÁCH HÀNG SỬ DỤNG SẢN PHẨM MISA",1,"Nhân viên tư vấn",5,"$1000"));
+
     }
 
     @Override

@@ -33,22 +33,38 @@ public class RecruitmentAdapter extends ArrayAdapter<Recruitment> {
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
         LayoutInflater inflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-        View rowView = inflater.inflate(R.layout.list_news_item, parent, false);
-        ImageView ivNews = (ImageView) rowView.findViewById(R.id.imNews);
-        TextView tvNews = (TextView) rowView.findViewById(R.id.tvNews);
-        LinearLayout ll = (LinearLayout) rowView.findViewById(R.id.pageView);
+        View rowView = inflater.inflate(R.layout.list_recruiment_item, parent, false);
+        ImageView imCompanyLogo = (ImageView) rowView.findViewById(R.id.imCompanyLogo);
+        TextView tvRecruitmentTitle = (TextView)rowView.findViewById(R.id.tvRecruitmentTitle);
+        TextView tvRecruitmentJobType = (TextView)rowView.findViewById(R.id.tvRecruitmentJobType);
+        TextView tvRecruitmentQuantity = (TextView) rowView.findViewById(R.id.tvRecruitmentQuantity);
+        TextView tvRecruitmentSalary = (TextView) rowView.findViewById(R.id.tvRecruitmentSalary);
 
-        if (position == 0) {
-            ll.setVisibility(View.VISIBLE);
-            ivNews.setVisibility(View.GONE);
-            tvNews.setVisibility(View.GONE);
-        } else {
-            ivNews.setImageResource(R.drawable.e1);
-            tvNews.setText(recruitmentArrayList.get(position).title);
+        tvRecruitmentTitle.setText(recruitmentArrayList.get(position).getTitle());
+        tvRecruitmentJobType.setText("Vị trí: "+recruitmentArrayList.get(position).getJobType());
+        tvRecruitmentQuantity.setText("Số lượng: "+recruitmentArrayList.get(position).getQuantity()+"");
+        tvRecruitmentSalary.setText("Mức lương: "+recruitmentArrayList.get(position).getSalary());
+
+
+        switch (position){
+            case 0:
+                imCompanyLogo.setImageResource(R.mipmap.topica);
+                break;
+            case 1:
+                imCompanyLogo.setImageResource(R.mipmap.dtt);
+                break;
+
+            case 2:
+                imCompanyLogo.setImageResource(R.mipmap.vtc);
+                break;
+
+            case 3:
+                imCompanyLogo.setImageResource(R.mipmap.egame);
+                break;
+            case 4:
+                imCompanyLogo.setImageResource(R.mipmap.misa);
+                break;
         }
-        ivNews.setVisibility(View.GONE);
-        tvNews.setText(recruitmentArrayList.get(position).title);
-
         return rowView;
     }
 
