@@ -5,7 +5,6 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.MenuItem;
 import android.view.View;
-import android.widget.AbsListView;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
@@ -13,7 +12,6 @@ import android.widget.ListView;
 import android.widget.TextView;
 
 import com.unbelievable.uetsupport.adapter.CommentListAdapter;
-import com.unbelievable.uetsupport.fragments.ProfileFragment;
 import com.unbelievable.uetsupport.fragments.SocialFragment;
 import com.unbelievable.uetsupport.objects.Comment;
 
@@ -102,4 +100,6 @@ public class CommentsActivity extends AppCompatActivity implements View.OnClickL
         }
         return super.onOptionsItemSelected(item);
     }
+
+
 }
