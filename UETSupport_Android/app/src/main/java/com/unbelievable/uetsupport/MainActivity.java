@@ -6,6 +6,7 @@ import android.support.v4.view.ViewPager;
 import android.view.Menu;
 import android.view.MenuItem;
 
+import com.google.android.gcm.GCMRegistrar;
 import com.nostra13.universalimageloader.core.ImageLoader;
 import com.nostra13.universalimageloader.core.ImageLoaderConfiguration;
 import com.unbelievable.uetsupport.common.SlidingTabLayout;
@@ -71,5 +72,32 @@ public class MainActivity extends FragmentActivity {
         }
 
         return super.onOptionsItemSelected(item);
+    }
+
+    /**
+     * This registerClient() method checks the current device, checks the
+     * manifest for the appropriate rights, and then retrieves a registration id
+     * from the GCM cloud. If there is no registration id, GCMRegistrar will
+     * register this device for the specified project, which will return a
+     */
+    public void registerClient() {
+        try {
+            // Check that the device support GCM (should be in a try/catch)
+            GCMRegistrar.checkDevice(this);
+
+            // Check the manifest to be sure this app has all the required
+            // permissions.
+            GCMRegistrar.checkManifest(this);
+
+            // Get the existing registration id, if it exists.
+            String regId = GCMRegistrar.getRegistrationId(this);
+            if (regId.equals("")) {
+                GCMRegistrar.register(this, "610765904940");
+                regId = GCMRegistrar.getRegistrationId(this);
+            } else {
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 }

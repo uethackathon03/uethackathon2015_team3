@@ -12,9 +12,7 @@ import com.nostra13.universalimageloader.core.DisplayImageOptions;
 import com.nostra13.universalimageloader.core.ImageLoader;
 import com.nostra13.universalimageloader.core.assist.ImageScaleType;
 import com.unbelievable.uetsupport.R;
-import com.unbelievable.uetsupport.objects.*;
 
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 
 /**
@@ -76,13 +74,13 @@ public class ThreadAdapter extends BaseAdapter {
 
         tvUploadedTime.setText(thread.createdTime);
         tvContent.setText(thread.content);
-        if (thread.photos!= null && thread.photos.length != 0) {
+        if (thread.photos!= null && thread.photos.length > 0) {
             try {
                 ImageLoader.getInstance().displayImage(threads.get(i).photos[0].photoUrl, photo, option);
             } catch (Exception e) {
                 e.printStackTrace();
             }
-        } else photo.setVisibility(View.GONE);
+        }
         btnLike.setText(thread.totalLike + "");
         btnDisLike.setText(thread.totalUnlike + "");
         btnComment.setText((thread.comment == null)? "0":thread.comment);

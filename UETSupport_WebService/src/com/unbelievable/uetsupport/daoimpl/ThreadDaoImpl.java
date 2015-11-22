@@ -13,7 +13,7 @@ import com.unbelievable.uetsupport.dao.AbstractDao;
 import com.unbelievable.uetsupport.dao.CommentDao;
 import com.unbelievable.uetsupport.dao.StudentDao;
 import com.unbelievable.uetsupport.dao.ThreadDao;
-import com.unbelievable.uetsupport.models.Like;
+import com.unbelievable.uetsupport.models.LikeThread;
 import com.unbelievable.uetsupport.models.Student;
 import com.unbelievable.uetsupport.models.Thread;
 
@@ -47,11 +47,11 @@ public class ThreadDaoImpl extends AbstractDao implements ThreadDao {
 			return null;
 		}
 		thread.comments = commentDao.listAllCommentByThread(threadId);
-		thread.totalLike = getSession().createCriteria(Like.class)
+		thread.totalLike = getSession().createCriteria(LikeThread.class)
 				.add(Restrictions
 						.and(Restrictions.eq("threadId", threadId), Restrictions.eq("like", 1)))
 				.list().size();
-		thread.totalLike = getSession().createCriteria(Like.class)
+		thread.totalLike = getSession().createCriteria(LikeThread.class)
 				.add(Restrictions
 						.and(Restrictions.eq("threadId", threadId), Restrictions.eq("like", 0)))
 				.list().size();
@@ -77,6 +77,32 @@ public class ThreadDaoImpl extends AbstractDao implements ThreadDao {
 	public List<Thread> listThreadsByDate() {
 		Criteria criteria = getSession().createCriteria(Thread.class);
 		criteria.addOrder(Order.desc("createdTime"));
+		List<Thread> listThreads = criteria.list();
+		for (int i = 0; i < listThreads.size(); i++) {
+			listThreads.get(i).totalLike = getSession().createCriteria(LikeThread.class)
+					.add(Restrictions
+							.and(Restrictions.eq("threadId", listThreads.get(i).threadId), Restrictions.eq("like", 1)))
+					.list().size();
+			listThreads.get(i).totalLike = getSession().createCriteria(LikeThread.class)
+					.add(Restrictions
+							.and(Restrictions.eq("threadId", listThreads.get(i).threadId), Restrictions.eq("like", 0)))
+					.list().size();
+					
+			Student student = studentDao.findStudentById(listThreads.get(i).userId);
+			if (1 == listThreads.get(i).status) {
+				if (CommonUtils.stringIsValid(student.fullname)) {
+					listThreads.get(i).username = student.fullname;
+				} else {
+					listThreads.get(i).username = student.email;
+				}
+			} else {
+				listThreads.get(i).username = "Anonymous";
+			}
+			if (CommonUtils.stringIsValid(student.address)) {
+				listThreads.get(i).avatar = student.avatar;
+			}
+		}
+		
 		return criteria.list();
 	}
 
@@ -86,6 +112,31 @@ public class ThreadDaoImpl extends AbstractDao implements ThreadDao {
 		Criteria criteria = getSession().createCriteria(Thread.class);
 		criteria.addOrder(Order.desc("totalLike"));
 		criteria.addOrder(Order.asc("totalUnlike"));
+		List<Thread> listThreads = criteria.list();
+		for (int i = 0; i < listThreads.size(); i++) {
+			listThreads.get(i).totalLike = getSession().createCriteria(LikeThread.class)
+					.add(Restrictions
+							.and(Restrictions.eq("threadId", listThreads.get(i).threadId), Restrictions.eq("like", 1)))
+					.list().size();
+			listThreads.get(i).totalLike = getSession().createCriteria(LikeThread.class)
+					.add(Restrictions
+							.and(Restrictions.eq("threadId", listThreads.get(i).threadId), Restrictions.eq("like", 0)))
+					.list().size();
+					
+			Student student = studentDao.findStudentById(listThreads.get(i).userId);
+			if ("1".equals(listThreads.get(i).status)) {
+				if (CommonUtils.stringIsValid(student.fullname)) {
+					listThreads.get(i).username = student.fullname;
+				} else {
+					listThreads.get(i).username = student.email;
+				}
+			} else {
+				listThreads.get(i).username = "Anonymous";
+			}
+			if (CommonUtils.stringIsValid(student.address)) {
+				listThreads.get(i).avatar = student.avatar;
+			}
+		}
 		return criteria.list();
 	}
 

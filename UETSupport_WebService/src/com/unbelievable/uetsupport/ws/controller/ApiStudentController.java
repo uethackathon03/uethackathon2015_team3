@@ -42,7 +42,7 @@ import com.unbelievable.uetsupport.ws.response.ResponseObjectDetail;
 
 @RestController
 @Transactional
-@RequestMapping("/api/student")
+@RequestMapping(value = "/api/student")
 public class ApiStudentController extends BaseController {
 	
 	@Autowired
@@ -404,8 +404,4 @@ public class ApiStudentController extends BaseController {
 		studentDao.update(student);
 		return new ResponseObjectDetail<Object>(true, getMessage(Constant.msgSuccess, httpSession), student);
 	}
-	
-//	@RequestMapping(value = "/list", method = RequestMethod.GET)
-//	public
-		//TODO
 }

@@ -32,7 +32,7 @@
 
 		<custom-filter ref="restAuthenticationFilter" position="FORM_LOGIN_FILTER" />
 			
-		<intercept-url pattern="/api/**" access="hasRole('ROLE_NORMAL')" />
+<!-- 		<intercept-url pattern="/api/**" access="hasRole('ROLE_NORMAL')" /> -->
 		<intercept-url pattern="/**" access="permitAll" />
 		<intercept-url pattern="/" access="permitAll" />
 		<http-basic />

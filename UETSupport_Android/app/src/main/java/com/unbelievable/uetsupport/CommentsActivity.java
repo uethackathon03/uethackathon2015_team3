@@ -87,6 +87,7 @@ public class CommentsActivity extends AppCompatActivity implements View.OnClickL
         btnDisLike = (Button) findViewById(R.id.btnDislike);
         btnComment = (Button) findViewById(R.id.btnAnswer);
         commentList = (ListView) findViewById(R.id.listComment);
+
         comments = new ArrayList<>();
         imgLike = (ImageView) findViewById(R.id.imgLike);
         imgDislike = (ImageView) findViewById(R.id.imgDislike);

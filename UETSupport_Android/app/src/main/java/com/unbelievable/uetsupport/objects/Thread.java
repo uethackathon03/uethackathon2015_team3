@@ -48,8 +48,7 @@ public class Thread {
             thread.totalLike = (jData.getString("totalLike").equals("null"))? "0": jData.getString("totalLike");
             thread.totalUnlike = (jData.getString("totalUnlike").equals("null"))? "0":jData.getString("totalUnlike");
             thread.userName = CommonUtils.getValidString(jData.getString("username"));
-            Log.d("hbc",thread.userName);
-//            thread.avatar = jData.("avatar");
+            thread.avatar = CommonUtils.getValidString(jData.getString("avatar"));
             thread.createdTime = CommonUtils.getValidString(jData.getString("createdTime"));
             thread.modifiedTime = CommonUtils.getValidString(jData.getString("modifiedTime"));
             return thread;
