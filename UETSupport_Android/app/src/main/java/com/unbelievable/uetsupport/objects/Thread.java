@@ -45,8 +45,8 @@ public class Thread {
                 for (int i = 0; i < jArray.length(); i++) {
                     thread.photos[i] = Photo.getPhoto(jArray.getJSONObject(i));
                 }
-            thread.totalLike = jData.getString("totalLike");
-            thread.totalUnlike =  jData.getString("totalUnlike");
+            thread.totalLike = (jData.getString("totalLike").equals("null"))? "0": jData.getString("totalLike");
+            thread.totalUnlike = (jData.getString("totalUnlike").equals("null"))? "0":jData.getString("totalUnlike");
             thread.userName = CommonUtils.getValidString(jData.getString("username"));
             Log.d("hbc",thread.userName);
 //            thread.avatar = jData.("avatar");
