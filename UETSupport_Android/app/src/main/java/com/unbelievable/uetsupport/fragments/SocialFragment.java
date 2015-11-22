@@ -1,5 +1,6 @@
 package com.unbelievable.uetsupport.fragments;
 
+import android.app.ProgressDialog;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
@@ -11,44 +12,50 @@ import android.widget.AdapterView;
 import android.widget.ListView;
 
 import com.github.clans.fab.FloatingActionButton;
+import com.loopj.android.http.TextHttpResponseHandler;
 import com.unbelievable.uetsupport.CommentsActivity;
 import com.unbelievable.uetsupport.CreateThreadActivity;
 import com.unbelievable.uetsupport.R;
 import com.unbelievable.uetsupport.adapter.ThreadAdapter;
+import com.unbelievable.uetsupport.common.CommonUtils;
+import com.unbelievable.uetsupport.common.UETSupportUtils;
 import com.unbelievable.uetsupport.objects.Thread;
+import com.unbelievable.uetsupport.service.CustomAsyncHttpClient;
+import com.unbelievable.uetsupport.service.Service;
+
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
 
 import java.util.ArrayList;
-import java.util.Date;
+
+import cz.msebera.android.httpclient.Header;
 
 /**
  * Created by Nam on 11/20/2015.
  */
-public class SocialFragment extends Fragment implements View.OnClickListener  {
+public class SocialFragment extends Fragment implements View.OnClickListener {
     ListView socialListItem;
-    ArrayList<com.unbelievable.uetsupport.objects.Thread> threads;
+    ArrayList<com.unbelievable.uetsupport.objects.Thread> threadArrayList;
     ThreadAdapter itemAdapter;
-    int[] photos = {R.mipmap.logo_uet};
     public static Thread sThread;
     private FloatingActionButton btnCreateThread;
 
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        View v = inflater.inflate(R.layout.fragment_social,container,false);
+        View v = inflater.inflate(R.layout.fragment_social, container, false);
         socialListItem = (ListView) v.findViewById(R.id.list_item);
         btnCreateThread = (FloatingActionButton) v.findViewById(R.id.btnCreateThread);
         btnCreateThread.setOnClickListener(this);
-        threads = new ArrayList<>();
-        for (int i = 0;i < 5;i++){
-            threads.add(new Thread(2*i+1,"Có ai làm hộ mình bài này với",1,3,4,new Date(System.currentTimeMillis()),"bboy",R.mipmap.user));
-            threads.add(new Thread(2*i+2,"Tìm nội suy của hàm số sau:",photos,5,1,2,new Date(System.currentTimeMillis()),true,"Stupid boy",R.mipmap.user));
-        }
-        itemAdapter = new ThreadAdapter(this.getActivity(),R.layout.list_thread_item, threads);
+        threadArrayList = new ArrayList<>();
+        parseThreadFromServer();
+        itemAdapter = new ThreadAdapter(this.getActivity(), R.layout.list_thread_item, threadArrayList);
         socialListItem.setAdapter(itemAdapter);
         socialListItem.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                sThread = threads.get(position);
+                sThread = threadArrayList.get(position);
                 Intent i = new Intent(getActivity(), CommentsActivity.class);
                 startActivity(i);
             }
@@ -62,5 +69,65 @@ public class SocialFragment extends Fragment implements View.OnClickListener  {
             Intent intent = new Intent(getActivity(), CreateThreadActivity.class);
             startActivity(intent);
         }
+    }
+
+    public void parseThreadFromServer() {
+        if (!UETSupportUtils.networkConnected(getActivity())) {
+            return;
+        }
+
+        CustomAsyncHttpClient client = new CustomAsyncHttpClient(getActivity(), "");
+        String url = Service.ServerURL + "/thread/list";
+        client.get(url, new TextHttpResponseHandler() {
+            private ProgressDialog progressBar;
+
+            @Override
+            public void onStart() {
+                super.onStart();
+                try {
+                    progressBar = new ProgressDialog(getActivity());
+                    progressBar.setCancelable(true);
+                    progressBar.setMessage("Loading ...");
+                    progressBar.setProgressStyle(ProgressDialog.STYLE_SPINNER);
+                    progressBar.show();
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+            }
+
+            @Override
+            public void onFailure(int statusCode, Header[] headers, String responseString, Throwable throwable) {
+                CommonUtils.showOkDialog(getActivity(), getResources().getString(R.string.dialog_title_common), statusCode + "\n" + responseString, null);
+            }
+
+            @Override
+            public void onSuccess(int statusCode, Header[] headers, String responseString) {
+                if (statusCode == 200) {
+                    try {
+                        JSONObject jObject = new JSONObject(responseString);
+                        String success = CommonUtils.getValidString(jObject.getString("success"));
+                        if (success.equals("1")) {
+                            JSONArray jArray = jObject.getJSONArray("data");
+                            for (int index = 0; index < jArray.length(); index++) {
+                                threadArrayList.add(Thread.getThread(jArray.getJSONObject(index)));
+                            }
+                        } else {
+                            String message = CommonUtils.getValidString(jObject.getString("message"));
+                            CommonUtils.showOkDialog(getActivity(), getResources().getString(R.string.dialog_title_common), message, null);
+                        }
+                    } catch (JSONException e) {
+                        e.printStackTrace();
+                    }
+                }
+            }
+
+            @Override
+            public void onFinish() {
+                super.onFinish();
+                itemAdapter.notifyDataSetChanged();
+                progressBar.dismiss();
+            }
+        });
+
     }
 }
