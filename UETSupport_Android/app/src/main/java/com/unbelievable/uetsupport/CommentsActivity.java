@@ -84,12 +84,7 @@ public class CommentsActivity extends AppCompatActivity implements View.OnClickL
         btnDisLike = (Button) findViewById(R.id.btnDislike);
         btnComment = (Button) findViewById(R.id.btnAnswer);
         commentList = (ListView) findViewById(R.id.listComment);
-        tvUserName.setText(mainThread.userName);
-        tvCreateTime.setText(mainThread.createdTime);
-        tvContent.setText(mainThread.content);
-        btnLike.setText(mainThread.totalLike);
-        btnDisLike.setText(mainThread.totalUnlike);
-        btnComment.setText(mainThread.comment);
+
         comments = new ArrayList<>();
         etComment = (EditText) findViewById(R.id.etComment);
         btnPost = (ImageView) findViewById(R.id.btnPost);
@@ -155,18 +150,13 @@ public class CommentsActivity extends AppCompatActivity implements View.OnClickL
     }
 
     void postComment(){
-        CustomAsyncHttpClient client = new CustomAsyncHttpClient(this, this.getSharedPreferences(Constant.nameSharedPreferences, MODE_PRIVATE).getString(Constant.token, ""));
+        CustomAsyncHttpClient client = new CustomAsyncHttpClient(this, getSharedPreferences(Constant.nameSharedPreferences, MODE_PRIVATE).getString(Constant.token, ""));
         String url = Service.ServerURL + "/thread/comment/create";
         RequestParams params = new RequestParams();
         params.put("threadId", mainThread.threadId + "");
         params.put("content", etComment.getText().toString());
         etComment.setText("");
         client.post(url, params, new TextHttpResponseHandler() {
-            @Override
-                public void onFailure(int i, Header[] headers, String s, Throwable throwable) {
-                    CommonUtils.showOkDialog(CommentsActivity.this, getString(R.string.dialog_content_server_problem), s, null);
-
-                }
 
             @Override
             public void onSuccess(int statusCode, Header[] headers, String responseString) {
@@ -190,7 +180,15 @@ public class CommentsActivity extends AppCompatActivity implements View.OnClickL
                     CommonUtils.showOkDialog(getApplication(), getResources().getString(R.string.dialog_title_common), statusCode + "", null);
                 }
             }
+
+            @Override
+            public void onFailure(int i, Header[] headers, String s, Throwable throwable) {
+                CommonUtils.showOkDialog(CommentsActivity.this, getString(R.string.dialog_content_server_problem), s, null);
+
+            }
         });
+
+
     }
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {

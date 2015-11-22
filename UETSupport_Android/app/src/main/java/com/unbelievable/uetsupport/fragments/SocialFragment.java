@@ -84,9 +84,6 @@ public class SocialFragment extends Fragment implements View.OnClickListener {
     }
 
     public void parseThreadFromServer() {
-        if (!UETSupportUtils.networkConnected(getActivity())) {
-            return;
-        }
 
         CustomAsyncHttpClient client = new CustomAsyncHttpClient(getActivity(), "");
         String url = Service.ServerURL + "/thread/list";

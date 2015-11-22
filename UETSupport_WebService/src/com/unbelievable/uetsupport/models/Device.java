@@ -7,14 +7,11 @@ import javax.persistence.Id;
 import javax.persistence.Table;
 
 @Entity
-@Table(name = "department")
-public class Department {		
+@Table(name = "device")
+public class Device {
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
-	public Long departmentId;
-	
-	public String name;
-	public String description;
-	public String address;
-	
+	public Long Id;
+	public Integer loginType;
+	public String registrationId;
 }

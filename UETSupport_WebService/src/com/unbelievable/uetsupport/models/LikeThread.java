@@ -7,14 +7,12 @@ import javax.persistence.Id;
 import javax.persistence.Table;
 
 @Entity
-@Table(name = "department")
-public class Department {		
+@Table(name = "like_thread")
+public class LikeThread {
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
-	public Long departmentId;
-	
-	public String name;
-	public String description;
-	public String address;
-	
+	public Long likeId;
+	public Long userId;
+	public Long threadId;
+	public Integer like;	// 1: like, 0:unlike
 }
