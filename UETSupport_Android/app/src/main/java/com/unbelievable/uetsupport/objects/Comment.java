@@ -1,5 +1,8 @@
 package com.unbelievable.uetsupport.objects;
 
+import org.json.JSONException;
+import org.json.JSONObject;
+
 import java.util.Date;
 
 /**
@@ -8,26 +11,32 @@ import java.util.Date;
 public class Comment {
     public long commentId;
     public long threadId;
-    public long userId;
+    public long userID;
 
     public String content;
-    public Integer like;
-    public Integer dislike;
+    public String photo;
+    public boolean isCorrect;
+    public String  username;
+    public String avatar;
+    public String createdTime;
+    public String modifiedTime;
 
-    public Date createdTime;
-    public Date modifiedTime;
+    public Comment() {}
 
-    public int avatar;
-    public String userName;
-
-    public Comment(long commentId, String content, Integer like, Integer dislike, Date createdTime, Date modifiedTime, int avatar, String userName) {
-        this.commentId = commentId;
-        this.content = content;
-        this.like = like;
-        this.dislike = dislike;
-        this.createdTime = createdTime;
-        this.modifiedTime = modifiedTime;
-        this.avatar = avatar;
-        this.userName = userName;
+    public static Comment getComment(JSONObject jData){
+        try {
+            Comment comment = new Comment();
+            comment.commentId = jData.getLong("commentId");
+            comment.content = jData.getString("contend");
+            comment.photo = jData.getString("photo");
+            comment.username = jData.getString("username");
+            comment.avatar = jData.getString("avatar");
+            comment.createdTime = jData.getString("createdTime");
+            comment.modifiedTime = jData.getString("modifiedTime");
+            return comment;
+        }catch (JSONException e){
+            e.printStackTrace();
+        }
+        return null;
     }
 }

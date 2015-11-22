@@ -59,6 +59,7 @@
         <activity android:name=".CommentsActivity"/>
         <activity android:name=".LoginActivity"/>
         <activity android:name=".CreateThreadActivity"/>
+        <activity android:name=".SearchNewsActivity"/>
 
         <receiver android:name="com.google.android.gcm.GCMBroadcastReceiver"
             android:permission="com.google.android.c2dm.permission.SEND">
@@ -79,6 +80,7 @@
                 <action android:name="UET_GCM_RECEIVED_ACTION" />
             </intent-filter>
         </receiver>
+
     </application>
 
 </manifest>

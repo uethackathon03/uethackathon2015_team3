@@ -83,7 +83,7 @@ public class ThreadAdapter extends BaseAdapter {
         }
         btnLike.setText(thread.totalLike + "");
         btnDisLike.setText(thread.totalUnlike + "");
-        btnComment.setText(thread.comment + "");
+        btnComment.setText((thread.comment == null)? "0":thread.comment);
         return view;
     }
 

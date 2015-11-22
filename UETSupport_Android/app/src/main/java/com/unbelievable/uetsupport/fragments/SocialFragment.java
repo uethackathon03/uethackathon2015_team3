@@ -42,7 +42,6 @@ public class SocialFragment extends Fragment implements View.OnClickListener {
     ListView socialListItem;
     ArrayList<com.unbelievable.uetsupport.objects.Thread> threadArrayList;
     ThreadAdapter itemAdapter;
-    public static Thread sThread;
     private FloatingActionButton btnCreateThread;
 
     @Nullable
@@ -59,9 +58,9 @@ public class SocialFragment extends Fragment implements View.OnClickListener {
         socialListItem.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                sThread = threadArrayList.get(position);
-                Intent i = new Intent(getActivity(), CommentsActivity.class);
-                startActivity(i);
+                Intent intent = new Intent(getActivity(), CommentsActivity.class);
+                intent.putExtra("url","/thread/list/" + threadArrayList.get(position).threadId);
+                startActivity(intent);
             }
         });
         IntentFilter filter = new IntentFilter("restartThreads");

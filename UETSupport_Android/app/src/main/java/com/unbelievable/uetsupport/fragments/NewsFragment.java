@@ -2,6 +2,7 @@ package com.unbelievable.uetsupport.fragments;
 
 import android.app.Dialog;
 import android.app.ProgressDialog;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
@@ -13,13 +14,17 @@ import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
+import android.widget.Toast;
 
+import com.github.clans.fab.FloatingActionButton;
 import com.loopj.android.http.TextHttpResponseHandler;
 import com.nostra13.universalimageloader.core.DisplayImageOptions;
 import com.nostra13.universalimageloader.core.ImageLoader;
 import com.nostra13.universalimageloader.core.assist.ImageScaleType;
 import com.unbelievable.uetsupport.MainActivity;
 import com.unbelievable.uetsupport.R;
+import com.unbelievable.uetsupport.ReminderActivity;
+import com.unbelievable.uetsupport.SearchNewsActivity;
 import com.unbelievable.uetsupport.adapter.RecruitmentAdapter;
 import com.unbelievable.uetsupport.adapter.NewsAdapter;
 import com.unbelievable.uetsupport.common.CommonUtils;
@@ -46,9 +51,11 @@ public class NewsFragment extends Fragment implements View.OnClickListener {
     private NewsAdapter newsArrayAdapter;
     private RecruitmentAdapter recruitmentAdapter;
     private MainActivity mainActivity;
+    private static boolean onFirstTab;
 
     private Button btNewsSwitch;
     private Button btrecruitmentSwitch;
+    private FloatingActionButton fabNews;
 
     @Nullable
     @Override
@@ -58,8 +65,10 @@ public class NewsFragment extends Fragment implements View.OnClickListener {
         newsListView = (ListView) v.findViewById(R.id.newslist);
         newsArrayAdapter = new NewsAdapter(getActivity(), mainActivity.newsArrayList);
         recruitmentArrayList = new ArrayList<>();
+        fakeData();
         recruitmentAdapter = new RecruitmentAdapter(getActivity(),recruitmentArrayList );
         newsListView.setAdapter(newsArrayAdapter);
+        onFirstTab=true;
 
         btNewsSwitch = (Button) v.findViewById(R.id.btNewsSwitch);
         btrecruitmentSwitch = (Button) v.findViewById(R.id.btAnnouceSwitch);
@@ -72,7 +81,19 @@ public class NewsFragment extends Fragment implements View.OnClickListener {
             parseNewsFromServer();
         }
 
+
+        fabNews = (FloatingActionButton)v.findViewById(R.id.fabNews);
+        fabNews.setOnClickListener(this);
         return v;
+    }
+
+    private void fakeData() {
+        recruitmentArrayList.add(new Recruitment("Tuyển dụng vị trí lập trình viên PHP - Chương trình Tiếng Anh TOPICA Native ",1,"Lập trình viên PHP",5,"$1000"));
+        recruitmentArrayList.add(new Recruitment("Công ty Cổ phần Công nghệ DTT tuyển gấp Lập trình viên JAVA",1,"Lập trình viên JAVA",5,"$1000"));
+        recruitmentArrayList.add(new Recruitment("THỰC TẬP VỊ TRÍ DEVELOPER – TT.STUDIO",1,"Phát triển game nền tảng Unity",5,"$1000"));
+        recruitmentArrayList.add(new Recruitment("EGAME Tuyển dụng vị trí lập trình viên JAVA",1,"Lập trình viên JAVA",5,"$1000"));
+        recruitmentArrayList.add(new Recruitment("TUYỂN DỤNG 20 NHÂN VIÊN TƯ VẤN VÀ HỖ TRỢ KHÁCH HÀNG SỬ DỤNG SẢN PHẨM MISA",1,"Nhân viên tư vấn",5,"$1000"));
+
     }
 
     @Override
@@ -80,9 +101,20 @@ public class NewsFragment extends Fragment implements View.OnClickListener {
         switch (v.getId()) {
             case R.id.btNewsSwitch:
                 newsListView.setAdapter(newsArrayAdapter);
+                onFirstTab=true;
                 break;
             case R.id.btAnnouceSwitch:
+                onFirstTab=false;
                 newsListView.setAdapter(recruitmentAdapter);
+                break;
+            case R.id.fabNews:
+                if(onFirstTab){
+                    Toast.makeText(getActivity(), "sssssssss", Toast.LENGTH_LONG).show();
+                    Intent i = new Intent(getActivity(), SearchNewsActivity.class);
+                    startActivity(i);
+                }else{
+
+                }
                 break;
         }
     }

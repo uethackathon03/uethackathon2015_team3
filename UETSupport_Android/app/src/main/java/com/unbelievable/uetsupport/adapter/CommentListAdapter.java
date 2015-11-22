@@ -60,8 +60,8 @@ public class CommentListAdapter extends BaseAdapter {
         }
         initView(convertView);
         Comment comment = comments.get(position);
-        imgUserAvatar.setImageResource(comment.avatar);
-        tvUserName.setText(comment.userName);
+//        imgUserAvatar.setImageResource(comment.avatar);
+        tvUserName.setText(comment.username);
 //        btnCommentLike.setText(comment.like + "");
 //        btnCommentDislike.setText(comment.dislike + "");
         tvCommentContent.setText(comment.content);
