@@ -55,7 +55,6 @@ public class SocialFragment extends Fragment implements View.OnClickListener {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 Intent intent = new Intent(getActivity(), CommentsActivity.class);
-                Bundle bundle = new Bundle();
                 intent.putExtra("url","/thread/list/" + threadArrayList.get(position).threadId);
                 startActivity(intent);
             }
