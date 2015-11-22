@@ -4,8 +4,10 @@ import android.content.Context;
 import android.os.Bundle;
 import android.os.PersistableBundle;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.LayoutInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
@@ -30,25 +32,26 @@ public class ReminderActivity extends AppCompatActivity implements AdapterView.O
     ListView reminderListView;
     ArrayList<Reminder> reminderArrayList;
     ReminderAdapter reminderAdapter;
-    private Button btnBackReminder;
+    Toolbar toolbar;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_remider);
-        btnBackReminder = (Button) findViewById(R.id.btnBackReminder);
         reminderArrayList = new ArrayList<>();
-        reminderArrayList.add(new Reminder(new Long(1), 1000l, 1000l, 3, "title", "note"));
-        reminderArrayList.add(new Reminder(new Long(2), 1000l, 1000l, 3, "title", "note"));
-        reminderArrayList.add(new Reminder(new Long(3), 1000l, 1000l, 3, "title", "note"));
+        reminderArrayList.add(new Reminder(new Long(1), 1000l, 1000l, 3, "Cầu lông 1", "note"));
+        reminderArrayList.add(new Reminder(new Long(2), 1000l, 1000l, 3, "Học thêm tiếng anh", "note"));
+        reminderArrayList.add(new Reminder(new Long(3), 1000l, 1000l, 3, "Giải trí cuối tuần", "note"));
 
         reminderListView = (ListView) findViewById(R.id.reminderListView);
         reminderAdapter = new ReminderAdapter(this,R.layout.list_reminder_item,reminderArrayList);
         reminderListView.setAdapter(reminderAdapter);
         reminderListView.setOnItemClickListener(this);
 
-        setTitle("Reminder");
-//        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        toolbar = (Toolbar) findViewById(R.id.toolbar);
+        setSupportActionBar(toolbar);
+        setTitle("Nhắc nhở");
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
     }
 
     private class ReminderAdapter extends BaseAdapter {
@@ -115,5 +118,15 @@ public class ReminderActivity extends AppCompatActivity implements AdapterView.O
         Reminder reminder = reminderArrayList.get(position);
         ReminderDialog dialog = new ReminderDialog(ReminderActivity.this,reminder);
         dialog.show();
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()) {
+            case android.R.id.home:
+                this.finish();
+                return true;
+        }
+        return super.onOptionsItemSelected(item);
     }
 }

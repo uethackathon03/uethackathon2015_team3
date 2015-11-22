@@ -48,7 +48,7 @@ public class CommentsActivity extends AppCompatActivity implements View.OnClickL
 
         toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
-        toolbar.setTitle("Comment");
+        setTitle("Comment");
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
         avatar = (ImageView) findViewById(R.id.imgAvatar);
