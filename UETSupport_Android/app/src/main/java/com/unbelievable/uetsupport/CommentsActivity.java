@@ -11,15 +11,24 @@ import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.TextView;
 
+import com.loopj.android.http.TextHttpResponseHandler;
 import com.nostra13.universalimageloader.core.DisplayImageOptions;
 import com.nostra13.universalimageloader.core.ImageLoader;
 import com.nostra13.universalimageloader.core.assist.ImageScaleType;
 import com.unbelievable.uetsupport.adapter.CommentListAdapter;
 import com.unbelievable.uetsupport.fragments.SocialFragment;
-import com.unbelievable.uetsupport.objects.Comment;
+import com.unbelievable.uetsupport.objects.*;
+import com.unbelievable.uetsupport.service.CustomAsyncHttpClient;
+import com.unbelievable.uetsupport.service.Service;
+
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
 
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+
+import cz.msebera.android.httpclient.Header;
 
 /**
  * Created by Nam on 11/21/2015.
@@ -41,9 +50,9 @@ public class CommentsActivity extends AppCompatActivity implements View.OnClickL
     Button btnComment;
     private DisplayImageOptions option;
 
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-        mainThread = SocialFragment.sThread;
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_comments);
         option = new DisplayImageOptions.Builder()
@@ -52,12 +61,12 @@ public class CommentsActivity extends AppCompatActivity implements View.OnClickL
                 .showImageOnLoading(R.mipmap.ic_launcher)
                 .imageScaleType(ImageScaleType.IN_SAMPLE_POWER_OF_2)
                 .cacheInMemory(true).cacheOnDisk(true).build();
-
         toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
         setTitle("Comment");
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-
+        CustomAsyncHttpClient client = new CustomAsyncHttpClient(this, "");
+        String url = Service.ServerURL + getIntent().getExtras().getString("url");
         avatar = (ImageView) findViewById(R.id.imgAvatar);
         tvUserName = (TextView) findViewById(R.id.tvUserName);
         tvCreateTime = (TextView) findViewById(R.id.tvUploadedTime);
@@ -68,25 +77,48 @@ public class CommentsActivity extends AppCompatActivity implements View.OnClickL
         btnDisLike = (Button) findViewById(R.id.btnDislike);
         btnComment = (Button) findViewById(R.id.btnAnswer);
         commentList = (ListView) findViewById(R.id.listComment);
-        if (mainThread.avatar != null)avatar.setImageResource(mainThread.avatar);
-        tvUserName.setText(mainThread.userName);
-        tvCreateTime.setText(mainThread.createdTime);
-        tvContent.setText(mainThread.content);
-        btnLike.setText(mainThread.totalLike);
-        btnDisLike.setText(mainThread.totalUnlike);
-        btnComment.setText(mainThread.comment);
+        comments = new ArrayList<>();
+        client.get(url, new TextHttpResponseHandler() {
+            @Override
+            public void onFailure(int statusCode, Header[] headers, String responseString, Throwable throwable) {
+
+            }
+
+            @Override
+            public void onSuccess(int statusCode, Header[] headers, String responseString) {
+                if (statusCode == 200) {
+                    try {
+                        JSONObject jObject = new JSONObject(responseString);
+//                        JSONArray jArray = jObject.getJSONArray("comments");
+//                        for (int i = 0; i < jArray.length(); i++) {
+//                            Comment comment = Comment.getComment(jArray.getJSONObject(i));
+//                            comments.add(comment);
+//                        }
+                        mainThread = com.unbelievable.uetsupport.objects.Thread.getThread(jObject.getJSONObject("data"));
+                        tvUserName.setText(mainThread.userName);
+                        tvCreateTime.setText(mainThread.createdTime);
+                        tvContent.setText(mainThread.content);
+                        btnLike.setText(mainThread.totalLike);
+                        btnDisLike.setText(mainThread.totalUnlike.equals("null") ? "0" : mainThread.totalUnlike);
+                        btnComment.setText((mainThread.comment == null)? "0" : mainThread.comment);
+
+                        if (mainThread.photos != null && mainThread.photos.length != 0) {
+                            try {
+                                ImageLoader.getInstance().displayImage(mainThread.photos[0].photoUrl, photo, option);
+                            } catch (Exception e) {
+                                e.printStackTrace();
+                            }
+                        } else photo.setVisibility(View.GONE);
+                    } catch (JSONException e) {
+                        e.printStackTrace();
+                    }
+                    commentAdapter.notifyDataSetChanged();
+                }
+            }
+        });
         btnLike.setOnClickListener(this);
         btnDisLike.setOnClickListener(this);
-        btnComment.setOnClickListener(this);
-        if (mainThread.photos != null && mainThread.photos.length!= 0){
-            try {
-                ImageLoader.getInstance().displayImage(mainThread.photos[0].photoUrl, photo, option);
-            } catch (Exception e) {
-                e.printStackTrace();
-            }
-        }
-        else photo.setVisibility(View.GONE);
-        comments = new ArrayList<>();
+
         commentAdapter = new CommentListAdapter(this, comments, R.layout.comment_item_list);
         commentList.setAdapter(commentAdapter);
     }
