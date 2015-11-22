@@ -13,7 +13,12 @@ import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.ListView;
+import android.widget.Switch;
 import android.widget.TextView;
+
+import com.unbelievable.uetsupport.objects.Course;
+
+import org.w3c.dom.Text;
 
 import java.util.ArrayList;
 
@@ -23,7 +28,7 @@ import java.util.ArrayList;
 public class ScheduleActivity extends AppCompatActivity {
     Toolbar toolbar;
     ListView scheduleListView;
-    ArrayList<String> scheduleArrayList;
+    ArrayList<Course> scheduleArrayList;
     ScheduleAdapter scheduleAdapter;
 
     @Override
@@ -56,7 +61,7 @@ public class ScheduleActivity extends AppCompatActivity {
     }
 
 
-    private class ScheduleAdapter extends ArrayAdapter<String>{
+    private class ScheduleAdapter extends ArrayAdapter<Course>{
 
         public ScheduleAdapter(Context context) {
             super(context, -1);
@@ -66,10 +71,14 @@ public class ScheduleActivity extends AppCompatActivity {
         public View getView(int position, View convertView, ViewGroup parent) {
 
             LayoutInflater inflater = (LayoutInflater)getContext().getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-            View rowView = inflater.inflate(android.R.layout.simple_list_item_1,parent,false);
-            TextView tv = (TextView)rowView.findViewById(android.R.id.text1);
+            View rowView = inflater.inflate(R.layout.list_schedule_item,parent,false);
+            TextView tvScheduleStt = (TextView)rowView.findViewById(R.id.tvScheduleStt);
+            TextView tvScheduleCourseName = (TextView)rowView.findViewById(R.id.tvScheduleCourseName);
+            Switch btScheduleSwitch = (Switch)rowView.findViewById(R.id.btScheduleSwitch);
 
-            tv.setText(scheduleArrayList.get(position));
+            tvScheduleStt.setText(position+1+"");
+            tvScheduleCourseName.setText(scheduleArrayList.get(position).getName());
+            btScheduleSwitch.setChecked(scheduleArrayList.get(position).isTurnedOnRemind());
             return rowView;
         }
 
@@ -81,15 +90,15 @@ public class ScheduleActivity extends AppCompatActivity {
 
     void prepareList(){
         scheduleArrayList = new ArrayList<>();
-        scheduleArrayList.add("1. Giải tích 1 - 301-G2");
-        scheduleArrayList.add("2. Cầu lông");
-        scheduleArrayList.add("3. Tiếng Anh B1 - 304-GĐ2");
-        scheduleArrayList.add("4. Đại số - 309-GĐ2");
-        scheduleArrayList.add("5. Tiếng Anh B1 - 304-GĐ2");
-        scheduleArrayList.add("6. Đại số BT - 309-GĐ2");
-        scheduleArrayList.add("8. Cơ sở dữ liệu B1 - 309-G2");
-        scheduleArrayList.add("9. Cơ sở dữ liệu TH - 201-G2");
-        scheduleArrayList.add("10. Mạng máy tính - 304-GĐ2");
+        scheduleArrayList.add(new Course("Giải tích 1 - 301-G2",true));
+        scheduleArrayList.add(new Course("Cầu lông",true));
+        scheduleArrayList.add(new Course("Tiếng Anh B1 - 304-GĐ2",true));
+        scheduleArrayList.add(new Course("Đại số - 309-GĐ2",true));
+        scheduleArrayList.add(new Course("Tiếng Anh B1 - 304-GĐ2",true));
+        scheduleArrayList.add(new Course("Đại số BT - 309-GĐ2",true));
+        scheduleArrayList.add(new Course("Cơ sở dữ liệu B1 - 309-G2",true));
+        scheduleArrayList.add(new Course("Cơ sở dữ liệu TH - 201-G2",true));
+        scheduleArrayList.add(new Course("Mạng máy tính - 304-GĐ2",true));
 
     }
 }
