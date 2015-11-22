@@ -68,7 +68,6 @@ public class CommentsActivity extends AppCompatActivity implements View.OnClickL
         btnDisLike = (Button) findViewById(R.id.btnDislike);
         btnComment = (Button) findViewById(R.id.btnAnswer);
         commentList = (ListView) findViewById(R.id.listComment);
-        if (mainThread.avatar != null)avatar.setImageResource(mainThread.avatar);
         tvUserName.setText(mainThread.userName);
         tvCreateTime.setText(mainThread.createdTime);
         tvContent.setText(mainThread.content);
