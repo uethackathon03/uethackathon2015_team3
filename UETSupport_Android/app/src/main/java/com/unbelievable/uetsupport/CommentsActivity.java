@@ -150,11 +150,12 @@ public class CommentsActivity extends AppCompatActivity implements View.OnClickL
     }
 
     void postComment(){
+        String content = etComment.getText().toString();
         CustomAsyncHttpClient client = new CustomAsyncHttpClient(this, getSharedPreferences(Constant.nameSharedPreferences, MODE_PRIVATE).getString(Constant.token, ""));
         String url = Service.ServerURL + "/thread/comment/create";
         RequestParams params = new RequestParams();
-        params.put("threadId", mainThread.threadId + "");
-        params.put("content", etComment.getText().toString());
+        params.put("threadId", 1);
+        params.put("content", "abc");
         etComment.setText("");
         client.post(url, params, new TextHttpResponseHandler() {
 
@@ -165,10 +166,9 @@ public class CommentsActivity extends AppCompatActivity implements View.OnClickL
                         JSONObject jObject = new JSONObject(responseString);
                         String success = CommonUtils.getValidString(jObject.getString("success"));
                         if ("1".equals(success)) {
-                            finish();
+                            //TODO ->
                         } else {
                             String message = CommonUtils.getValidString(jObject.getString("message"));
-
                             CommonUtils.showOkDialog(getApplication(), getResources().getString(R.string.dialog_title_common), message, null);
                         }
 

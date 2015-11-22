@@ -24,7 +24,7 @@ public class UETBroadcastReceiver extends BroadcastReceiver {
         if (intent.getAction().equals(Constant.GCM_RECEIVED_ACTION)) {
             // Handle notification
             notificationManager.notify(0,
-                    notificationFromServer(context, "Nội dung thông báo !" ));
+                    notificationFromServer(context, intent.getExtras().getString("msg", "") ));
 
         }
     }

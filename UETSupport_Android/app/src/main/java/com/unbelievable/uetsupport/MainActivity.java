@@ -40,7 +40,7 @@ public class MainActivity extends FragmentActivity {
         teacherArrayList = new ArrayList<>();
         departmentArrayList = new ArrayList<>();
         listDataChild = new ArrayList<>();
-
+        registerClient();
         tabs.setDistributeEvenly(true);
         tabs.setCustomTabColorizer(new SlidingTabLayout.TabColorizer() {
             @Override

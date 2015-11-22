@@ -5,6 +5,7 @@ import org.json.JSONObject;
 
 import android.content.Context;
 import android.content.Intent;
+import android.os.Bundle;
 import android.telephony.TelephonyManager;
 import android.util.Log;
 
@@ -41,6 +42,10 @@ public class GCMIntentService extends GCMBaseIntentService {
     protected void onMessage(Context ctx, Intent intent) {
         Intent broadcastIntent = new Intent();
         broadcastIntent.setAction(Constant.GCM_RECEIVED_ACTION);
+        String message = intent.getExtras().getString("message");
+        Bundle bundle = new Bundle();
+        bundle.putString("msg", message);
+        broadcastIntent.putExtras(bundle);
         ctx.sendBroadcast(broadcastIntent);
     }
 
