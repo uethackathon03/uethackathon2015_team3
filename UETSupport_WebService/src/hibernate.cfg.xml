@@ -11,9 +11,10 @@
 		<mapping class="com.unbelievable.uetsupport.models.Teacher" />
 		<mapping class="com.unbelievable.uetsupport.models.Department" />
 		<mapping class="com.unbelievable.uetsupport.models.Information" />
-		<mapping class="com.unbelievable.uetsupport.models.Anwser" />
+		<mapping class="com.unbelievable.uetsupport.models.Answer" />
 		<mapping class="com.unbelievable.uetsupport.models.Thread" />
 		<mapping class="com.unbelievable.uetsupport.models.Comment" />
-		<mapping class="com.unbelievable.uetsupport.models.Like" />
+		<mapping class="com.unbelievable.uetsupport.models.LikeThread" />
+		<mapping class="com.unbelievable.uetsupport.models.Device" />
 	</session-factory>
 </hibernate-configuration>

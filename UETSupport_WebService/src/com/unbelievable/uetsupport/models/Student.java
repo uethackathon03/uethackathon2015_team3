@@ -15,6 +15,7 @@ import org.hibernate.annotations.LazyCollection;
 import org.hibernate.annotations.LazyCollectionOption;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonFormat.Shape;
 
 @Entity
@@ -26,6 +27,7 @@ public class Student  {
 	public Long studentId;
 	@Column(unique = true)
 	public String username;
+	@JsonIgnore
 	public String password;
 	public String fullname;
 	public String gender;

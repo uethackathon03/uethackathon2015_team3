@@ -1,5 +1,7 @@
 package com.unbelievable.uetsupport.objects;
 
+import com.unbelievable.uetsupport.common.CommonUtils;
+
 import org.json.JSONException;
 import org.json.JSONObject;
 
@@ -27,9 +29,10 @@ public class Comment {
         try {
             Comment comment = new Comment();
             comment.commentId = jData.getLong("commentId");
-            comment.content = jData.getString("contend");
+            comment.content = CommonUtils.getValidString(jData.getString("content"));
             comment.photo = jData.getString("photo");
             comment.username = jData.getString("username");
+            comment.isCorrect = jData.getBoolean("isCorrect");
             comment.avatar = jData.getString("avatar");
             comment.createdTime = jData.getString("createdTime");
             comment.modifiedTime = jData.getString("modifiedTime");

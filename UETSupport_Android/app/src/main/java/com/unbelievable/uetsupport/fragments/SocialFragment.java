@@ -1,7 +1,10 @@
 package com.unbelievable.uetsupport.fragments;
 
 import android.app.ProgressDialog;
+import android.content.BroadcastReceiver;
+import android.content.Context;
 import android.content.Intent;
+import android.content.IntentFilter;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
@@ -10,6 +13,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ListView;
+import android.widget.Toast;
 
 import com.github.clans.fab.FloatingActionButton;
 import com.loopj.android.http.TextHttpResponseHandler;
@@ -59,6 +63,15 @@ public class SocialFragment extends Fragment implements View.OnClickListener {
                 startActivity(intent);
             }
         });
+        IntentFilter filter = new IntentFilter("restartThreads");
+        BroadcastReceiver broadcastReceiver = new BroadcastReceiver() {
+
+            @Override
+            public void onReceive(Context context, Intent intent) {
+                parseThreadFromServer();
+            }
+        };
+        getActivity().registerReceiver(broadcastReceiver, filter);
         return v;
     }
 
@@ -71,28 +84,11 @@ public class SocialFragment extends Fragment implements View.OnClickListener {
     }
 
     public void parseThreadFromServer() {
-        if (!UETSupportUtils.networkConnected(getActivity())) {
-            return;
-        }
 
         CustomAsyncHttpClient client = new CustomAsyncHttpClient(getActivity(), "");
         String url = Service.ServerURL + "/thread/list";
         client.get(url, new TextHttpResponseHandler() {
-            private ProgressDialog progressBar;
 
-            @Override
-            public void onStart() {
-                super.onStart();
-                try {
-                    progressBar = new ProgressDialog(getActivity());
-                    progressBar.setCancelable(true);
-                    progressBar.setMessage("Loading ...");
-                    progressBar.setProgressStyle(ProgressDialog.STYLE_SPINNER);
-                    progressBar.show();
-                } catch (Exception e) {
-                    e.printStackTrace();
-                }
-            }
 
             @Override
             public void onFailure(int statusCode, Header[] headers, String responseString, Throwable throwable) {
@@ -107,9 +103,12 @@ public class SocialFragment extends Fragment implements View.OnClickListener {
                         String success = CommonUtils.getValidString(jObject.getString("success"));
                         if (success.equals("1")) {
                             JSONArray jArray = jObject.getJSONArray("data");
+                            threadArrayList = new ArrayList<>();
                             for (int index = 0; index < jArray.length(); index++) {
                                 threadArrayList.add(Thread.getThread(jArray.getJSONObject(index)));
                             }
+                            itemAdapter = new ThreadAdapter(getActivity(), R.layout.list_thread_item, threadArrayList);
+                            socialListItem.setAdapter(itemAdapter);
                         } else {
                             String message = CommonUtils.getValidString(jObject.getString("message"));
                             CommonUtils.showOkDialog(getActivity(), getResources().getString(R.string.dialog_title_common), message, null);
@@ -123,10 +122,10 @@ public class SocialFragment extends Fragment implements View.OnClickListener {
             @Override
             public void onFinish() {
                 super.onFinish();
-                itemAdapter.notifyDataSetChanged();
-                progressBar.dismiss();
             }
         });
 
     }
+
+
 }

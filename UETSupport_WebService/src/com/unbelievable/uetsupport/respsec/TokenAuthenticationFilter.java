@@ -48,7 +48,7 @@ public class TokenAuthenticationFilter extends GenericFilterBean {
 		checkLogin(httpRequest, httpResponse);
 		HttpSession session = httpRequest.getSession();
 		session.setAttribute("token", httpRequest.getHeader(HEADER_TOKEN));
-		session.setAttribute("language", httpRequest.getHeader("Accept-Language"));
+		session.setAttribute("language", "vi");
 		
 		chain.doFilter(request, response);
 		

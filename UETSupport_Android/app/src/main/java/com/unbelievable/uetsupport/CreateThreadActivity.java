@@ -147,8 +147,9 @@ public class CreateThreadActivity extends FragmentActivity implements View.OnCli
         } catch (FileNotFoundException e) {
             e.printStackTrace();
         }
-//        params.setHttpEntityIsRepeatable(true);
-//        params.setUseJsonStreamer(false);
+
+        params.setHttpEntityIsRepeatable(true);
+        params.setUseJsonStreamer(false);
         params.setForceMultipartEntityContentType(true);
         client.post(url, params, new TextHttpResponseHandler() {
             private ProgressDialog progressBar;
@@ -179,10 +180,12 @@ public class CreateThreadActivity extends FragmentActivity implements View.OnCli
                         JSONObject jObject = new JSONObject(s);
                         String success = CommonUtils.getValidString(jObject.getString("success"));
                         if ("1".equals(success)) {
+                            Intent intent = new Intent("restartThreads");
+                            CreateThreadActivity.this.sendBroadcast(intent);
                             finish();
                         } else {
                             String message = CommonUtils.getValidString(jObject.getString("message"));
-                            CommonUtils.showOkDialog(getApplication(), getResources().getString(R.string.dialog_title_common), message, null);
+                            CommonUtils.showOkDialog(CreateThreadActivity.this, getResources().getString(R.string.dialog_title_common), message, null);
                         }
 
                     } catch (Exception e) {
@@ -190,7 +193,7 @@ public class CreateThreadActivity extends FragmentActivity implements View.OnCli
                     }
 
                 } else {
-                    CommonUtils.showOkDialog(getApplication(), getResources().getString(R.string.dialog_title_common), i + "", null);
+                    CommonUtils.showOkDialog(CreateThreadActivity.this, getResources().getString(R.string.dialog_title_common), i + "", null);
                 }
             }
 

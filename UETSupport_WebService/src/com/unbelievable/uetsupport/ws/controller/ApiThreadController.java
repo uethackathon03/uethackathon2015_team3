@@ -3,6 +3,7 @@ package com.unbelievable.uetsupport.ws.controller;
 import java.io.BufferedOutputStream;
 import java.io.File;
 import java.io.FileOutputStream;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
@@ -13,6 +14,7 @@ import org.apache.commons.io.FilenameUtils;
 import org.hibernate.Query;
 import org.hibernate.criterion.Restrictions;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -26,7 +28,7 @@ import com.unbelievable.uetsupport.common.Constant;
 import com.unbelievable.uetsupport.dao.CommentDao;
 import com.unbelievable.uetsupport.dao.ThreadDao;
 import com.unbelievable.uetsupport.models.Comment;
-import com.unbelievable.uetsupport.models.Like;
+import com.unbelievable.uetsupport.models.LikeThread;
 import com.unbelievable.uetsupport.models.Photo;
 import com.unbelievable.uetsupport.models.Student;
 import com.unbelievable.uetsupport.models.Thread;
@@ -34,7 +36,8 @@ import com.unbelievable.uetsupport.ws.response.ResponseListObjects;
 import com.unbelievable.uetsupport.ws.response.ResponseObjectDetail;
 
 @RestController
-@RequestMapping("/api/thread")
+@RequestMapping(value = "/api/thread")
+@Transactional
 public class ApiThreadController extends BaseController {
 	
 	@Autowired
@@ -44,8 +47,8 @@ public class ApiThreadController extends BaseController {
 	CommentDao commentDao;
 	
 	@RequestMapping(value = "/create", method = RequestMethod.POST)
-	public @ResponseBody ResponseObjectDetail<Object> createThread(HttpSession httpSession
-			, HttpServletRequest request,
+	public @ResponseBody ResponseObjectDetail<Object> createThread(HttpSession httpSession,
+			HttpServletRequest request,
 			@RequestParam(value = "title", required = true) String title,
 			@RequestParam(value = "content", required = true) String content,
 			@RequestParam(value = "status", required = true) Integer status,
@@ -58,6 +61,7 @@ public class ApiThreadController extends BaseController {
 		thread.content = content;
 		thread.status = status;
 		thread.userId = token.userId;
+		thread.photos = new ArrayList<Photo>();
 		thread.createdTime = thread.modifiedTime = new Date(System.currentTimeMillis());
 		Long autoId = threadDao.save(thread);
 		if (autoId > 0) {
@@ -72,13 +76,12 @@ public class ApiThreadController extends BaseController {
 											+ String.valueOf(System.currentTimeMillis())
 											+ "."
 											+ FilenameUtils.getExtension(files[i].getOriginalFilename());
-							File dir = new File(Constant.AVATAR_FOLDER);
+							File dir = new File(Constant.THREAD_FOLDER);
 							if (!dir.exists()) {
 								dir.mkdirs();
 							}
 							File serverFile = new File(dir, nameThreadPhoto);
 							BufferedOutputStream stream = new BufferedOutputStream(new FileOutputStream(serverFile));
-							
 							stream.write(bytes);
 							stream.close();
 
@@ -89,7 +92,7 @@ public class ApiThreadController extends BaseController {
 							return new ResponseObjectDetail<Object>(false, "File is not image", null);
 						}
 					} catch (Exception e) {
-						return new ResponseObjectDetail<Object>(false, e.getMessage(), null);
+						return new ResponseObjectDetail<Object>(false, "Exception: " + e.getMessage(), null);
 					}
 				}
 			}
@@ -202,7 +205,7 @@ public class ApiThreadController extends BaseController {
 		comment.createdTime = comment.modifiedTime = new Date(System.currentTimeMillis());
 		commentDao.save(comment);
 		getSession().flush();
-		return new ResponseObjectDetail<Object>(true, getMessage(content, httpSession), commentDao.listAllCommentByThread(threadId));
+		return new ResponseObjectDetail<Object>(true, getMessage(Constant.msgSuccess, httpSession), commentDao.listAllCommentByThread(threadId));
 	}
 	
 	@RequestMapping(value = "/comment/edit", method = RequestMethod.POST)
@@ -228,6 +231,8 @@ public class ApiThreadController extends BaseController {
 		return new ResponseObjectDetail<Object>(false, "", commentDao.listAllCommentByThread(comment.threadId));
 	}
 	
+	
+
 	@RequestMapping(value = "/comment/delete", method = RequestMethod.POST)
 	public @ResponseBody ResponseObjectDetail<Object> deleteComment(HttpSession httpSession,
 			@RequestParam(value = "commentId", required = true) Long commentId) {
@@ -265,14 +270,14 @@ public class ApiThreadController extends BaseController {
 		if (thread == null) {
 			return new ResponseObjectDetail<Object>(false, "thread not found", null);
 		}
-		Like likeObj = (Like) getSession().createCriteria(Like.class)
+		LikeThread likeObj = (LikeThread) getSession().createCriteria(LikeThread.class)
 				.add(Restrictions.and(Restrictions.eq("threadId", thread),Restrictions.eq("userId", token.userId)))
 				.uniqueResult();
 		if (likeObj != null) {
 			likeObj.like = like;
 			getSession().update(likeObj);
 		} else {
-			likeObj = new Like();
+			likeObj = new LikeThread();
 			likeObj.like = like;
 			likeObj.threadId = threadId;
 			likeObj.userId = token.userId;
