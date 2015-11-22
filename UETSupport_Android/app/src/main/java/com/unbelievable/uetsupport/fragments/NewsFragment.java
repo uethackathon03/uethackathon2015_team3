@@ -109,7 +109,6 @@ public class NewsFragment extends Fragment implements View.OnClickListener {
                 break;
             case R.id.fabNews:
                 if(onFirstTab){
-                    Toast.makeText(getActivity(), "sssssssss", Toast.LENGTH_LONG).show();
                     Intent i = new Intent(getActivity(), SearchNewsActivity.class);
                     startActivity(i);
                 }else{

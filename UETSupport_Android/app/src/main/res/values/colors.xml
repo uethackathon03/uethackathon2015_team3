@@ -8,4 +8,5 @@
     <color name="bg_login">#04579b</color>
     <color name="bg_btn_login">#0267ab</color>
     <color name="title_background">#e9ebec</color>
+    <color name="splashColor">#08589D</color>
 </resources>
