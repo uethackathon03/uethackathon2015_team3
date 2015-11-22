@@ -121,6 +121,7 @@ public class HelpFragment extends Fragment implements View.OnClickListener{
             @Override
             public void onSuccess(int statusCode, Header[] headers, String responseString) {
                 if (statusCode == 200) {
+                    mainActivity.teacherArrayList.clear();
                     try {
                         JSONObject jObject = new JSONObject(responseString);
                         String success = CommonUtils.getValidString(jObject.getString("success"));
@@ -163,6 +164,7 @@ public class HelpFragment extends Fragment implements View.OnClickListener{
             @Override
             public void onSuccess(int statusCode, Header[] headers, String responseString) {
                 if (statusCode == 200) {
+                    mainActivity.departmentArrayList.clear();
                     try {
                         JSONObject jObject = new JSONObject(responseString);
                         String success = CommonUtils.getValidString(jObject.getString("success"));
